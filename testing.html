@@ -314,120 +314,98 @@ public class AwardControllerImplTest {
       </div>
     </div>
   </article>
-  <article id="test-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — Service-Test (reines Mockito, ohne Spring)</h3>
+    <article id="test-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — @BeforeEach + Helper-Methoden</h3>
     <div class="exercise" data-id="test-bonus2">
       <h5>Aufgabenstellung</h5>
-      <p>Bisher haben wir Controller mit <code>@WebMvcTest</code> getestet. Jetzt ein <em>echter</em> Unit-Test des Service-Layers — ohne Spring zu starten:</p>
+      <p>Die Folien empfehlen explizit, wiederholten Test-Setup-Code in <code>@BeforeEach</code> / <code>@BeforeAll</code> + Helper-Methoden auszulagern. Refactor des <code>MovieControllerImplTest</code>:</p>
 <ol>
-<li>Test ohne <code>@SpringBootTest</code> oder <code>@WebMvcTest</code> — pures JUnit + Mockito.</li>
-<li>Mock <code>MovieRepository</code> per <code>@Mock</code>.</li>
-<li>Erstelle den Service per <code>@InjectMocks</code> mit dem gemockten Repo.</li>
-<li>Tests: <code>getAllMovies</code> mappt korrekt vom Repo zur DTO-Liste.</li>
-<li>Test: <code>removeMovieById</code> wirft <code>NoSuchElementException</code>, wenn <code>existsById</code> false.</li>
+<li>Erstelle die Test-Movies in einer privaten Helper-Methode <code>makeMovie(id, title, rating)</code>.</li>
+<li>Verschiebe das Setup in <code>@BeforeEach setUp()</code> — frische Objekte vor jedem Test.</li>
+<li>Wenn ein Setup teuer wäre (z.B. Datei laden): <code>@BeforeAll static</code> nutzen, einmalig.</li>
+<li>Erkläre, warum <code>@BeforeAll</code> als <code>static</code> deklariert werden muss.</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">@ExtendWith(MockitoExtension.class)
-class MovieServiceImplTest {
+<pre><code class="language-java">@WebMvcTest(controllers = MovieControllerImpl.class)
+class MovieControllerImplTest {
 
-    @Mock        MovieRepository repo;
-    @Mock        MovieMapper     mapper;
-    @InjectMocks MovieServiceImpl service;
+    @MockBean    private MovieService movieService;
+    @Autowired   private MockMvc      mockMvc;
+    @Autowired   private ObjectMapper objectMapper;
 
-    @Test
-    void shouldReturnAllMovies() {
-        Movie m = new Movie(); m.setTitle("Dune");
-        MovieDTO dto = new MovieDTO(); dto.setTitle("Dune");
+    private MovieDTO movie_1;
+    private MovieDTO movie_2;
+    private List&lt;MovieDTO&gt; movieList;
 
-        when(repo.findAll()).thenReturn(List.of(m));
-        when(mapper.movieToDto(m)).thenReturn(dto);
+    @BeforeEach
+    void setUp() {
+        movie_1 = makeMovie(1L, "Interstellar",   8.6);
+        movie_2 = makeMovie(2L, "The Dark Knight", 9.0);
+        movieList = List.of(movie_1, movie_2);
+    }
 
-        List&lt;MovieDTO&gt; result = service.getAllMovies();
-
-        assertEquals(1, result.size());
-        assertEquals("Dune", result.get(0).getTitle());
+    private MovieDTO makeMovie(Long id, String title, double rating) {
+        MovieDTO m = new MovieDTO();
+        m.setId(id);
+        m.setTitle(title);
+        m.setImdbRating(rating);
+        m.setTrailerUrl("https://example/" + id);
+        return m;
     }
 
     @Test
-    void shouldThrowOnRemoveUnknownId() {
-        when(repo.existsById(99L)).thenReturn(false);
-
-        assertThrows(NoSuchElementException.class,
-            () -&gt; service.removeMovieById(99L));
-
-        verify(repo, never()).deleteById(any());
-    }
-
-    @Test
-    void shouldDeleteWhenExists() {
-        when(repo.existsById(1L)).thenReturn(true);
-
-        service.removeMovieById(1L);
-
-        verify(repo).deleteById(1L);
+    void shouldReturnAllMovies() throws Exception {
+        when(movieService.getAllMovies()).thenReturn(movieList);
+        mockMvc.perform(get("/api/v1/movies"))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.*", hasSize(2)));
     }
 }</code></pre>
-<p><strong>Vorteile:</strong> ms-schnelle Tests (kein Spring-Kontext), klare Isolation der Service-Logik. <strong>Nachteil:</strong> testet nicht die Integration mit echten Spring-Beans (z.B. Validation auf DTOs).</p>
+<p><strong>Warum static bei @BeforeAll?</strong> Weil die Methode <em>vor</em> der Instanziierung der Testklasse läuft — es gibt also noch kein <code>this</code>. Spring/JUnit ruft sie als Klassenmethode auf.</p>
+<p><strong>Lehre aus den Folien:</strong> "Beim Verfassen der Testmethoden ist darauf zu achten, dass sich wiederholender Code bezüglich des Aufbaus der zu testenden Objekte in Hilfsmethoden ausgelagert wird."</p>
       </div>
     </div>
   </article>
-  <article id="test-bonus3" class="aufgabe">
-    <h3>⚙ Bonus 3 — @DataJpaTest gegen H2</h3>
+    <article id="test-bonus3" class="aufgabe">
+    <h3>⚙ Bonus 3 — Stub vs. Mock am MovieService</h3>
     <div class="exercise" data-id="test-bonus3">
       <h5>Aufgabenstellung</h5>
-      <p>Repository-Methoden testet man am besten gegen eine echte DB. Mit <code>@DataJpaTest</code> startet Spring nur den JPA-Layer mit einer In-Memory H2-DB:</p>
+      <p>Die Folien stellen den Unterschied zwischen Stub und Mock am Banking-Beispiel dar: <em>Stub bildet Antwortverhalten nach (Stand 100€ → 80€), Mock prüft nur den Aufruf.</em> Übertrage diese Unterscheidung auf den MovieService:</p>
 <ol>
-<li><code>@DataJpaTest</code> auf der Test-Klasse.</li>
-<li><code>@Autowired TestEntityManager entityManager</code> + <code>@Autowired MovieRepository repo</code>.</li>
-<li>Test: persistiere 3 Filme, rufe <code>findByImdbRatingGreaterThan(7.5)</code>, prüfe Anzahl + Inhalte.</li>
-<li>Test: lege Movie + verknüpften Award an, prüfe Cascade.</li>
+<li><strong>Stub-Stil:</strong> simuliere <code>movieService.getMovieById(1L) → movie_1</code> und prüfe den Rückgabewert (Fokus: Zustand/Ergebnis).</li>
+<li><strong>Mock-Stil:</strong> simuliere <code>removeMovieById(1L)</code> ohne Rückgabe und verifiziere <em>nur</em>, dass die Methode aufgerufen wurde (Fokus: Aufruf-Verhalten).</li>
+<li>Schreibe beides als Test-Methoden im selben <code>MovieControllerImplTest</code>.</li>
+<li>Erkläre, warum der Stub-Stil <code>jsonPath</code>-Assertions hat, der Mock-Stil aber nur <code>verify()</code>.</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">@DataJpaTest
-class MovieRepositoryTest {
+<p><strong>Stub-Stil — Fokus: Ergebnis</strong></p>
+<pre><code class="language-java">@Test
+void stubStyle_returnsCorrectMovie() throws Exception {
+    // Stub: vorbereitetes Antwortverhalten
+    when(movieService.getMovieById(1L)).thenReturn(movie_1);
 
-    @Autowired private TestEntityManager em;
-    @Autowired private MovieRepository repo;
-
-    @Test
-    void shouldFindHighRatedMovies() {
-        Movie a = movie("A", 8.0);
-        Movie b = movie("B", 6.5);
-        Movie c = movie("C", 9.1);
-        em.persist(a); em.persist(b); em.persist(c);
-        em.flush();
-
-        List&lt;Movie&gt; result = repo.findByImdbRatingGreaterThan(7.5);
-
-        assertEquals(2, result.size());
-        assertThat(result).extracting(Movie::getTitle).containsExactlyInAnyOrder("A", "C");
-    }
-
-    @Test
-    void shouldCascadeAwardOnSave() {
-        Movie m = movie("Interstellar", 8.6);
-        Award oscar = new Award("Oscar", "Visual Effects", 2015);
-        oscar.setMovie(m);
-        m.setAwards(List.of(oscar));
-
-        Movie saved = repo.save(m);
-        em.flush(); em.clear();
-
-        Movie reloaded = repo.findById(saved.getId()).orElseThrow();
-        assertEquals(1, reloaded.getAwards().size());
-        assertEquals("Oscar", reloaded.getAwards().get(0).getAcademy());
-    }
-
-    private Movie movie(String title, double rating) {
-        Movie m = new Movie();
-        m.setTitle(title);
-        m.setImdbRating(rating);
-        return m;
-    }
+    // Evaluiert den ZUSTAND der Response (=Stub-Fokus laut Folie)
+    mockMvc.perform(get("/api/v1/movies/1"))
+           .andExpect(status().isOk())
+           .andExpect(jsonPath("$.title",   is("Interstellar")))
+           .andExpect(jsonPath("$.imdbRating", is(8.6)));
 }</code></pre>
-<p><strong>Was startet @DataJpaTest:</strong> JPA-Beans (EntityManager, Repos) + In-Memory-DB (H2). Kein Web-Layer, kein Service-Bean — fokussierter und schneller als <code>@SpringBootTest</code>.</p>
+<p><strong>Mock-Stil — Fokus: Aufruf</strong></p>
+<pre><code class="language-java">@Test
+void mockStyle_deleteCallsService() throws Exception {
+    // Kein when() — wir interessieren uns nicht für eine Rückgabe.
+    doNothing().when(movieService).removeMovieById(1L);
+
+    mockMvc.perform(delete("/api/v1/movies/1"))
+           .andExpect(status().isOk());
+
+    // Evaluiert das AUFRUF-VERHALTEN (=Mock-Fokus laut Folie)
+    verify(movieService, times(1)).removeMovieById(1L);
+    verify(movieService, never()).addMovie(any());
+}</code></pre>
+<p><strong>Warum die unterschiedlichen Assertions?</strong> Beim Stub ist die Antwort interessant — also prüfen wir per <code>jsonPath</code> das JSON. Beim Mock ist die Antwort egal (z.B. void-Methode) — wir prüfen nur, dass die Komponente überhaupt korrekt aufgerufen wurde.</p>
       </div>
     </div>
   </article>

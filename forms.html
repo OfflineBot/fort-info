@@ -34,6 +34,7 @@
     <a href="#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
     <a href="#forms-bonus1">⚙ Bonus 1 — Movie-Edit-Form</a>
     <a href="#forms-bonus2">⚙ Bonus 2 — Director-Form mit Custom Validation</a>
+    <a href="#forms-bonus3">⚙ Bonus 3 — Ternary + th:classappend</a>
     <a href="#forms-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -288,6 +289,45 @@ public class DirectorFormController {
 <p><code>messages.properties</code>:</p>
 <pre><code class="language-bash">director.name.required=Bitte den Namen eingeben.</code></pre>
 <p><strong>Lerneffekt:</strong> Validation-Messages können entweder hartcodiert in der Annotation oder via <code>{key}</code>-Referenz aus <code>messages.properties</code> geladen werden — letzteres ist i18n-fähig.</p>
+      </div>
+    </div>
+  </article>
+    <article id="forms-bonus3" class="aufgabe">
+    <h3>⚙ Bonus 3 — Ternary-Operator + th:classappend</h3>
+    <div class="exercise" data-id="forms-bonus3">
+      <h5>Aufgabenstellung</h5>
+      <p>Die Folien zeigen den Ternary-Operator (<code>Bedingung ? Then : Else</code>) explizit als Kurzschreibweise für If-Then-Else in Thymeleaf-Attributen. Setze ihn ein, um Conditionals knapp zu formulieren:</p>
+<ol>
+<li>Zeige in der Movie-Card das Rating mit Label „adult"/„kid" via <code>th:text="${(movie.imdbRating &gt; 8) ? 'TOP' : 'OK'}"</code>.</li>
+<li>Setze die CSS-Klasse einer Tabellenzeile abhängig vom Iter-Status via <code>th:classappend</code>.</li>
+<li>Style einen Award-Badge nach Jahrzehnt unterschiedlich.</li>
+<li>Erkläre, wann Ternary besser ist als <code>th:if</code>.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-xml">&lt;!-- Beispiel 1: Text per Ternary --&gt;
+&lt;span th:text="${(movie.imdbRating &gt; 8) ? 'TOP' : 'OK'}"&gt;OK&lt;/span&gt;
+
+&lt;!-- Beispiel 2: Klasse per th:classappend mit Iter-Status --&gt;
+&lt;table&gt;
+  &lt;tr th:each="m, stat : ${movies}"
+      th:classappend="${stat.even} ? 'gerade' : 'ungerade'"&gt;
+    &lt;td th:text="${m.title}"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;!-- Beispiel 3: Badge nach Jahrzehnt --&gt;
+&lt;span th:text="${a.academy}"
+      th:classappend="${a.celebrationYear &gt;= 2020}
+                       ? 'badge bg-success'
+                       : 'badge bg-secondary'"&gt;
+&lt;/span&gt;</code></pre>
+<p><strong>Ternary vs <code>th:if</code>:</strong></p>
+<ul>
+<li><code>th:if</code> versteckt/zeigt das gesamte Element. Nutze es, wenn das Element ganz fehlen soll.</li>
+<li>Ternary entscheidet nur den Wert <em>innerhalb</em> eines Attributs. Nutze es, wenn das Element immer da ist, aber Text/Klasse/Style variieren soll.</li>
+</ul>
+<p><strong>Folien-Hinweis:</strong> "Der Ternary-Operator wird innerhalb des Evaluationsbereichs <code>${…}</code> geschrieben."</p>
       </div>
     </div>
   </article>

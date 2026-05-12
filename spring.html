@@ -223,37 +223,52 @@ public class MovieControllerImpl implements MovieController {
       </div>
     </div>
   </article>
-  <article id="spring-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — @Configuration / @Bean</h3>
+    <article id="spring-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — Drei Injection-Typen vergleichen</h3>
     <div class="exercise" data-id="spring-bonus2">
       <h5>Aufgabenstellung</h5>
-      <p>Manchmal willst du eine Bean registrieren, deren Klasse du <em>nicht</em> selbst geschrieben hast (3rd-party-Lib) — dann geht das nicht über <code>@Component</code>. Lösung: eine Klasse mit <code>@Configuration</code> und einer <code>@Bean</code>-Methode.</p>
+      <p>Die Folien zeigen drei Wege der Dependency Injection: <em>Constructor Injection</em>, <em>Setter Injection</em> und <em>Field Injection</em>. Implementiere jede einmal und beschreibe die Trade-offs.</p>
 <ol>
-<li>Lege <code>AppConfig</code> mit <code>@Configuration</code> an.</li>
-<li>Definiere eine <code>@Bean</code>-Methode <code>appName()</code>, die <code>"MyMovieDatabase"</code> zurückgibt.</li>
-<li>Inject das Ergebnis (Typ <code>String</code>) per Konstruktor + <code>@Qualifier("appName")</code> in den <code>MovieController</code>.</li>
-<li>Logge den App-Namen in <code>ManualTestBean</code>.</li>
+<li>Variante A: Constructor Injection (aktuell in Aufgabe 1).</li>
+<li>Variante B: Setter Injection mit <code>@Autowired</code> über dem Setter.</li>
+<li>Variante C: Field Injection mit <code>@Autowired</code> direkt am Feld.</li>
+<li>Diskutiere: Welche Variante erlaubt <code>final</code>-Felder? Welche ist test-freundlich? Welche kann zur Laufzeit eine Komponente wechseln?</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">@Configuration
-public class AppConfig {
-    @Bean
-    public String appName() {
-        return "MyMovieDatabase";
-    }
-}
-
-@Controller
+<p><strong>A — Constructor Injection</strong> (Best-Practice laut Spring 3.5+):</p>
+<pre><code class="language-java">@Controller
 public class MovieControllerImpl implements MovieController {
-    private final String appName;
+    private final MovieService movieService;
 
-    public MovieControllerImpl(@Qualifier("appName") String appName, /* andere */) {
-        this.appName = appName;
+    public MovieControllerImpl(MovieService movieService) {
+        this.movieService = movieService;
     }
-    public String getAppName() { return appName; }
 }</code></pre>
-<p><strong>Lerneffekt:</strong> <code>@Bean</code> wird genutzt, wenn die Bean-Erzeugung Logik braucht (Properties lesen, Driver bauen, etc.). <code>@Component</code> reicht nur für eigene Klassen, die du frei annotieren kannst.</p>
+<p><strong>B — Setter Injection:</strong></p>
+<pre><code class="language-java">@Controller
+public class MovieControllerImpl implements MovieController {
+    private MovieService movieService;
+
+    @Autowired
+    public void setMovieService(MovieService movieService) {
+        this.movieService = movieService;
+    }
+}</code></pre>
+<p><strong>C — Field Injection:</strong></p>
+<pre><code class="language-java">@Controller
+public class MovieControllerImpl implements MovieController {
+    @Autowired
+    private MovieService movieService;
+}</code></pre>
+<table>
+<tr><th></th><th>Constructor</th><th>Setter</th><th>Field</th></tr>
+<tr><td><code>final</code> möglich?</td><td>Ja</td><td>Nein</td><td>Nein</td></tr>
+<tr><td>Test ohne Spring?</td><td>Trivial (<code>new …</code>)</td><td>Setter aufrufen</td><td>Reflection nötig</td></tr>
+<tr><td>Pflicht-Abhängigkeit erzwungen?</td><td>Ja (Konstruktor)</td><td>Nein</td><td>Nein</td></tr>
+<tr><td>Zur Laufzeit wechselbar?</td><td>Nein</td><td>Ja</td><td>Nein</td></tr>
+</table>
+<p>→ Folien-Empfehlung: <strong>Constructor Injection</strong>. Setter Injection nur für optional/wechselbar.</p>
       </div>
     </div>
   </article>

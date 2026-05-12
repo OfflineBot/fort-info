@@ -334,49 +334,57 @@ public class DirectorControllerImpl implements DirectorController {
       </div>
     </div>
   </article>
-  <article id="rest-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — @ExceptionHandler + ResponseEntity</h3>
+    <article id="rest-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — @Valid + Validation auf AwardDTO</h3>
     <div class="exercise" data-id="rest-bonus2">
       <h5>Aufgabenstellung</h5>
-      <p>Bisher liefert ein nicht-gefundener Award den Default-500-Fehler. Implementiere globales Exception-Handling:</p>
+      <p>Die Folien listen die Validierungs-Annotationen <code>@NotBlank</code>, <code>@NotNull</code>, <code>@Size</code>, <code>@Pattern</code>, <code>@Min</code>, <code>@Max</code> + <code>@Valid</code>. Erweitere den <code>AwardDTO</code> um vollständige Validierung:</p>
 <ol>
-<li><code>@ControllerAdvice</code>-Klasse <code>GlobalExceptionHandler</code>.</li>
-<li>Methode für <code>NoSuchElementException</code> → <code>ResponseEntity</code> mit Status 404 und JSON-Fehlerobjekt.</li>
-<li>Methode für <code>MethodArgumentNotValidException</code> (Validation-Fehler) → 400 mit Liste der Fehler.</li>
-<li>Im Service throw <code>NoSuchElementException</code> wenn Repository <code>findById(...).isEmpty()</code>.</li>
+<li><code>category</code>: nicht blank, max. 60 Zeichen.</li>
+<li><code>academy</code>: nicht null, max. 40 Zeichen.</li>
+<li><code>celebrationYear</code>: zwischen 1900 und 2100.</li>
+<li><code>id</code>: optional (darf null sein, wird beim POST gesetzt).</li>
+<li>Im Controller: <code>@Valid</code> vor <code>@RequestBody</code> — fehlerhafte Requests landen automatisch bei 400.</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">record ApiError(int status, String message, Instant timestamp) {}
+<pre><code class="language-java">@Getter @Setter @NoArgsConstructor
+public class AwardDTO {
+    private Long id;
 
-@ControllerAdvice
-public class GlobalExceptionHandler {
+    @NotNull
+    @Size(max = 40)
+    private String academy;
 
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity&lt;ApiError&gt; handleNotFound(NoSuchElementException e) {
-        return ResponseEntity
-            .status(HttpStatus.NOT_FOUND)
-            .body(new ApiError(404, e.getMessage(), Instant.now()));
+    @NotBlank
+    @Size(max = 60)
+    private String category;
+
+    @Min(1900)
+    @Max(2100)
+    private int celebrationYear;
+
+    public AwardDTO(Long id, String academy, String category, int celebrationYear) {
+        this.id = id;
+        this.academy = academy;
+        this.category = category;
+        this.celebrationYear = celebrationYear;
     }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleValidation(
-            MethodArgumentNotValidException e) {
-        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
-        e.getBindingResult().getFieldErrors().forEach(fe -&gt;
-            errors.put(fe.getField(), fe.getDefaultMessage())
-        );
-        return ResponseEntity.badRequest().body(errors);
-    }
+}</code></pre>
+<p>Im Controller — <code>@Valid</code> aktiviert die Prüfung:</p>
+<pre><code class="language-java">@PostMapping
+@ResponseStatus(HttpStatus.CREATED)
+public AwardDTO addAward(@Valid @RequestBody AwardDTO award) {
+    return awardService.addAward(award);
 }
 
-// im Service:
-public AwardDTO getById(Long id) {
-    Award a = repo.findById(id).orElseThrow(
-        () -&gt; new NoSuchElementException("Award " + id + " not found"));
-    return mapper.awardToDto(a);
+@PutMapping("/{id}")
+public AwardDTO updateAward(@PathVariable Long id,
+                            @Valid @RequestBody AwardDTO award) {
+    award.setId(id);
+    return awardService.updateAward(award);
 }</code></pre>
-<p><strong>Vorteil:</strong> der Controller bleibt schlank — kein <code>try/catch</code> in jeder Methode. Spring routet Exceptions automatisch zum passenden Handler.</p>
+<p>Wenn Spring eine Constraint-Violation entdeckt, beantwortet es den Request automatisch mit <strong>400 Bad Request</strong> — der Service-Call passiert gar nicht. Das ist genau das Verhalten, das auch in Aufgabe 6 mit <code>verify(service, never()).addMovie(any())</code> getestet wird.</p>
       </div>
     </div>
   </article>

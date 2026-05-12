@@ -38,6 +38,7 @@
     <a href="#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
     <a href="#jpa-bonus1">⚙ Bonus 1 — Director bidirektional</a>
     <a href="#jpa-bonus2">⚙ Bonus 2 — komplexe @Query mit JOIN</a>
+    <a href="#jpa-bonus3">⚙ Bonus 3 — Lazy/Eager + @Transactional</a>
     <a href="#jpa-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -343,6 +344,43 @@ List&lt;Movie&gt; findByDirectorAndMinRating(
 <pre><code class="language-java">List&lt;Movie&gt; findByDirector_NameAndImdbRatingGreaterThanOrderByPremiereDateDesc(
     String directorName, double minRating);</code></pre>
 <p>Lesbarkeits-Trade-off: Der Methodenname wird sehr lang. Ab einer gewissen Komplexität wechselt man auf <code>@Query</code>.</p>
+      </div>
+    </div>
+  </article>
+    <article id="jpa-bonus3" class="aufgabe">
+    <h3>⚙ Bonus 3 — Lazy/Eager Fetching + @Transactional</h3>
+    <div class="exercise" data-id="jpa-bonus3">
+      <h5>Aufgabenstellung</h5>
+      <p>Die Folien behandeln Ladestrategien (FetchType) und <code>@Transactional</code>. Setze Folgendes um:</p>
+<ol>
+<li>Schalte die Beziehung <code>Movie → MovieCast</code> auf <code>FetchType.LAZY</code>.</li>
+<li>Schreibe im <code>MovieServiceImpl</code> eine Methode <code>getCastOfMovie(Long id)</code>, die Movie lädt und die Cast-Liste zurückgibt.</li>
+<li>Ohne <code>@Transactional</code> sollte beim Zugriff auf die Cast-Liste eine <code>LazyInitializationException</code> fliegen — warum?</li>
+<li>Mit <code>@Transactional</code> über der Methode funktioniert es. Erkläre, warum die Annotation laut Folie <em>mit Bedacht</em> gesetzt werden soll.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Entity
+public class Movie {
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "movie_moviecast", /* ... */)
+    private List&lt;MovieCast&gt; involvedMovieCast;
+}
+
+@Service
+public class MovieServiceImpl implements MovieService {
+
+    private final MovieRepository repo;
+    public MovieServiceImpl(MovieRepository r) { this.repo = r; }
+
+    @Transactional   // Pflicht für LAZY-Auflösung
+    public List&lt;MovieCast&gt; getCastOfMovie(Long id) {
+        Movie m = repo.findById(id).orElseThrow();
+        return m.getInvolvedMovieCast();  // Triggert die LAZY-Query
+    }
+}</code></pre>
+<p><strong>Warum LazyInitializationException?</strong> Lazy-Loaded Beziehungen werden erst beim Zugriff geladen — dafür braucht es eine offene Datenbank-Transaktion. Ohne <code>@Transactional</code> ist die Session schon geschlossen, wenn der Controller die Liste serialisieren will.</p>
+<p><strong>Folien-Warnung:</strong> "Niemals @Transactional verwenden, wenn nicht unbedingt eine Transaktion benötigt wird" — der Transaktionskontext hat Folgen für den Programmfluss (Rollback-Verhalten, Verschachtelung, etc.). Außerdem: <em>Transaktionen können nur von außerhalb einer Bean initiiert werden</em> — interne Methodenaufrufe in derselben Bean umgehen die Annotation.</p>
       </div>
     </div>
   </article>

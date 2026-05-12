@@ -3,8 +3,8 @@
 
 const STORAGE_KEY = "fortinfo-progress";
 
-// Total exercises across the whole site: 12 Moodle-Aufgaben + 15 Bonus = 27.
-const TOTAL_EXERCISES = 27;
+// Total exercises: 12 Moodle-Aufgaben + 17 Bonus (folien-treu) = 29.
+const TOTAL_EXERCISES = 29;
 
 document.addEventListener("DOMContentLoaded", () => {
   if (window.hljs) window.hljs.highlightAll();
@@ -125,12 +125,13 @@ function save(state) {
 }
 
 function updateProgress() {
-  // Count *all* completed exercises across the site from localStorage,
-  // not just the ones rendered on this page.
+  // Count completed exercises across all pages (official + bonus).
+  // IDs: official Moodle = aufgN, bonus = {chapter}-bonusN.
   const state = load();
   let done = 0;
   for (const k in state) {
-    if (k.startsWith("aufg") && state[k] === true) done++;
+    if (state[k] !== true) continue;
+    if (k.startsWith("aufg") || k.includes("-bonus")) done++;
   }
   document.getElementById("progress-done").textContent = done;
   document.getElementById("progress-fill").style.width =
