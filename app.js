@@ -3,8 +3,8 @@
 
 const STORAGE_KEY = "fortinfo-progress";
 
-// Total exercises: 12 Moodle-Aufgaben + 17 Bonus (folien-treu) = 29.
-const TOTAL_EXERCISES = 29;
+// Total exercises: 12 Moodle-Aufgaben + 19 Bonus (folien-treu) = 31.
+const TOTAL_EXERCISES = 31;
 
 document.addEventListener("DOMContentLoaded", () => {
   if (window.hljs) window.hljs.highlightAll();

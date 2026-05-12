@@ -27,6 +27,7 @@
   </div>
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <div class="chapter-title">3 · REST</div>
     <a href="#rest-was">3.1 REST & HTTP</a>
     <a href="#rest-controller">3.2 @RestController</a>
@@ -44,6 +45,13 @@
 <main>
 <section id="rest" class="chapter">
   <h2>3 · REST</h2>
+  <div class="resource-banner">
+    <a class="resource-link pdf" href="resources/slides/3-REST-Grundlagen.pdf" target="_blank">
+      📄 Folien-PDF anzeigen / herunterladen
+      <span class="resource-meta">3-REST-Grundlagen.pdf</span>
+    </a>
+  </div>
+
 
   <article id="rest-was">
     <h3>3.1 REST-Grundlagen &amp; HTTP</h3>
@@ -201,6 +209,10 @@ public interface AwardMapper {
     <h3>⚙ Aufgabe 4 — AwardController</h3>
     <div class="exercise" data-id="aufg4">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_4.zip">📦 Starter-ZIP</a>
+      <a class="resource-link zip-sol" href="resources/aufgaben/Aufgabe_4_L%C3%B6sung.zip">✅ Lösungs-ZIP</a>
+      </div>
       <p>Lege analog zum bestehenden <code>MovieController</code> einen <strong>AwardController</strong> an, der CRUD-Operationen über <code>/api/v1/awards</code> anbietet:</p>
       <ul>
         <li><code>GET    /api/v1/awards</code> — alle Awards</li>
@@ -237,6 +249,10 @@ Content-Type: application/json
     <h3>⚙ Aufgabe 5 — DTO + Mapper</h3>
     <div class="exercise" data-id="aufg5">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_5.zip">📦 Starter-ZIP</a>
+      <a class="resource-link zip-sol" href="resources/aufgaben/Aufgabe_5_L%C3%B6sung.zip">✅ Lösungs-ZIP</a>
+      </div>
       <p>Trenne die API-Sicht von der Entity:</p>
       <ol>
         <li>Lege einen <code>AwardDTO</code> an. Das Feld <code>yearAwarded</code> aus der Entity soll im DTO <strong>celebrationYear</strong> heißen (Renaming-Mapping).</li>
@@ -275,62 +291,134 @@ public class AwardServiceImpl implements AwardService {
   </article>
 
   
-  <article id="rest-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — DirectorController CRUD + Sub-Resource</h3>
+    <article id="rest-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — DirectorController CRUD + DTO + Mapper</h3>
     <div class="exercise" data-id="rest-bonus1">
       <h5>Aufgabenstellung</h5>
-      <p>Baue analog zum <code>AwardController</code> einen <strong>DirectorController</strong>:</p>
+      <p>Baue einen vollständigen <strong>DirectorController</strong> analog zur Kombi aus Aufgabe 4 (Award-CRUD) und Aufgabe 5 (DTO + MapStruct):</p>
 <ol>
-<li>Standard-CRUD über <code>/api/v1/directors</code>: GET-Liste, GET-by-ID, POST, PUT, DELETE.</li>
-<li><strong>Sub-Resource</strong>: <code>GET /api/v1/directors/{id}/movies</code> liefert die Filmografie eines Directors.</li>
-<li>DTOs trennen: <code>DirectorDTO</code> (mit ID, Name, Geburtsjahr, Nationalität, <code>List&lt;Long&gt; movieIds</code>).</li>
-<li>POST gibt Status 201 zurück.</li>
+<li>Interface <code>DirectorController</code> + <code>DirectorControllerImpl</code> mit Endpoint-Annotationen.</li>
+<li><code>DirectorDTO</code> mit Validierung (<code>@NotBlank</code> auf <code>name</code>, <code>@Min</code>/<code>@Max</code> auf Geburtsjahr).</li>
+<li><code>DirectorMapper</code> mit MapStruct (<code>componentModel = "spring"</code>).</li>
+<li>Sub-Resource <code>GET /api/v1/directors/{id}/movies</code> — alle Filme eines Directors.</li>
+<li>POST gibt 201 zurück, Updates per PUT.</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">@RestController
+<pre><code class="language-java">// DirectorDTO.java
+package de.dhbw.ravensburg.wp.mymoviedatabase.dto;
+
+import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.util.List;
+
+@Getter @Setter @NoArgsConstructor
+public class DirectorDTO {
+
+    private Long id;
+
+    @NotBlank
+    @Size(max = 60)
+    private String name;
+
+    @Min(1850)
+    @Max(2030)
+    private int geburtsjahr;
+
+    @NotBlank
+    @Size(min = 2, max = 30)
+    private String nationality;
+
+    private List&lt;Long&gt; movieIds;
+}</code></pre>
+<pre><code class="language-java">// DirectorMapper.java
+package de.dhbw.ravensburg.wp.mymoviedatabase.mapper;
+
+import de.dhbw.ravensburg.wp.mymoviedatabase.dto.DirectorDTO;
+import de.dhbw.ravensburg.wp.mymoviedatabase.model.Director;
+import de.dhbw.ravensburg.wp.mymoviedatabase.model.Movie;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import java.util.List;
+
+@Mapper(componentModel = "spring")
+public interface DirectorMapper {
+
+    @Mapping(source = "filmography", target = "movieIds", qualifiedByName = "moviesToIds")
+    DirectorDTO directorToDirectorDTO(Director director);
+
+    List&lt;DirectorDTO&gt; directorsToDirectorDTOs(List&lt;Director&gt; directors);
+
+    @InheritInverseConfiguration
+    @Mapping(target = "filmography", ignore = true)
+    Director directorDTOToDirector(DirectorDTO dto);
+
+    @Named("moviesToIds")
+    default List&lt;Long&gt; moviesToIds(List&lt;Movie&gt; movies) {
+        return movies == null ? List.of()
+            : movies.stream().map(Movie::getId).toList();
+    }
+}</code></pre>
+<pre><code class="language-java">// DirectorController.java (Interface)
+public interface DirectorController {
+    List&lt;DirectorDTO&gt; getAllDirectors();
+    DirectorDTO       getDirectorById(@PathVariable("directorId") Long id);
+    List&lt;MovieDTO&gt;    getMoviesOfDirector(@PathVariable("directorId") Long id);
+    void              removeDirectorById(@PathVariable("directorId") Long id);
+    DirectorDTO       addDirector(@RequestBody DirectorDTO director);
+    DirectorDTO       updateDirector(@PathVariable("directorId") Long id,
+                                     @RequestBody DirectorDTO director);
+}</code></pre>
+<pre><code class="language-java">// DirectorControllerImpl.java
+@RestController
 @RequestMapping("/api/v1/directors")
 public class DirectorControllerImpl implements DirectorController {
 
-    private final DirectorService service;
+    private final DirectorService directorService;
 
-    public DirectorControllerImpl(DirectorService service) {
-        this.service = service;
+    public DirectorControllerImpl(DirectorService s) {
+        this.directorService = s;
     }
 
     @GetMapping
-    public List&lt;DirectorDTO&gt; getAll() {
-        return service.getAll();
+    public List&lt;DirectorDTO&gt; getAllDirectors() {
+        return directorService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public DirectorDTO getById(@PathVariable Long id) {
-        return service.getById(id);
+    @GetMapping("/{directorId}")
+    public DirectorDTO getDirectorById(@PathVariable("directorId") Long id) {
+        return directorService.getById(id);
     }
 
-    // Sub-Resource: Filmografie eines Directors
-    @GetMapping("/{id}/movies")
-    public List&lt;MovieDTO&gt; getMovies(@PathVariable Long id) {
-        return service.getMoviesOfDirector(id);
+    // Sub-Resource: Filme dieses Directors
+    @GetMapping("/{directorId}/movies")
+    public List&lt;MovieDTO&gt; getMoviesOfDirector(@PathVariable("directorId") Long id) {
+        return directorService.getMovies(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DirectorDTO add(@Valid @RequestBody DirectorDTO dto) {
-        return service.add(dto);
+    public DirectorDTO addDirector(@Valid @RequestBody DirectorDTO d) {
+        return directorService.add(d);
     }
 
-    @PutMapping("/{id}")
-    public DirectorDTO update(@PathVariable Long id,
-                              @Valid @RequestBody DirectorDTO dto) {
-        dto.setId(id);
-        return service.update(dto);
+    @PutMapping("/{directorId}")
+    public DirectorDTO updateDirector(@PathVariable("directorId") Long id,
+                                      @Valid @RequestBody DirectorDTO d) {
+        d.setId(id);
+        return directorService.update(d);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    @DeleteMapping("/{directorId}")
+    public void removeDirectorById(@PathVariable("directorId") Long id) {
+        directorService.removeById(id);
+    }
 }</code></pre>
-<p><strong>Sub-Resource-Pattern:</strong> Wenn eine Ressource <em>gehört zu</em> einer anderen, wird sie als Pfadkomponente eingehängt: <code>/parents/{id}/children</code>. Saubere REST-Konvention statt <code>/movies?directorId=5</code>.</p>
+<p><strong>Sub-Resource-Pattern:</strong> <code>/parents/{id}/children</code> ist die REST-Konvention für eine 1:n-Beziehung von außen — sauberer als <code>/movies?directorId=5</code>.</p>
       </div>
     </div>
   </article>

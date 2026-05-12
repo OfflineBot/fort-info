@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ressourcen — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+  <nav>
+    <a href="index.html" class="back">← Übersicht</a>
+    <div class="chapter-title">Ressourcen</div>
+    <a href="#slides">Folien (PDF)</a>
+    <a href="#aufgaben">Aufgaben (ZIP)</a>
+  </nav>
+</aside>
+<main>
+<header id="overview">
+  <h1>📥 Ressourcen — alle Originaldateien aus Moodle</h1>
+  <p class="lead">Alles, was du sonst aus Moodle ziehen müsstest — hier direkt.</p>
+</header>
+
+<section id="slides" class="chapter">
+  <h2>Folien-PDFs</h2>
+  <div class="resource-grid">
+    <a class="resource-card" href="resources/slides/0-Organisation.pdf" target="_blank">
+      <h3>0 · Organisation</h3><p>Kursaufbau, Prüfung, Werkzeuge</p>
+    </a>
+    <a class="resource-card" href="resources/slides/1-Spring-Grundlagen.pdf" target="_blank">
+      <h3>1 · Spring Grundlagen</h3><p>Beans, Stereotypes, DI</p>
+    </a>
+    <a class="resource-card" href="resources/slides/2-JPA-Grundlagen.pdf" target="_blank">
+      <h3>2 · Spring Data (JPA)</h3><p>Entities, Repository, Beziehungen, @Transactional</p>
+    </a>
+    <a class="resource-card" href="resources/slides/3-REST-Grundlagen.pdf" target="_blank">
+      <h3>3 · REST</h3><p>Controller, DTOs, MapStruct, OpenAPI</p>
+    </a>
+    <a class="resource-card" href="resources/slides/4-Testing.pdf" target="_blank">
+      <h3>4 · Testing</h3><p>JUnit, Test-Doubles, MockMvc, JsonPath</p>
+    </a>
+    <a class="resource-card" href="resources/slides/5-Webdesign.pdf" target="_blank">
+      <h3>5 · Webdesign</h3><p>HTML, CSS, Bootstrap 5</p>
+    </a>
+    <a class="resource-card" href="resources/slides/6-Thymeleaf.pdf" target="_blank">
+      <h3>6 · Thymeleaf</h3><p>Templates, Fragments, ModelAndView</p>
+    </a>
+    <a class="resource-card" href="resources/slides/7-Forms.pdf" target="_blank">
+      <h3>7 · Forms</h3><p>Form-Binding, Validation, Ternary</p>
+    </a>
+  </div>
+</section>
+
+<section id="aufgaben" class="chapter">
+  <h2>Aufgaben-ZIPs (Starter + Lösung)</h2>
+  <p class="hint">Jede ZIP enthält ein vollständiges Spring-Boot-Gradle-Projekt (Kotlin DSL). Einfach in IntelliJ öffnen.</p>
+  <table class="resources-table">
+    <thead><tr><th>Aufgabe</th><th>Thema</th><th>Starter</th><th>Lösung</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Service + Controller mit DI</td>
+        <td><a href="resources/aufgaben/Aufgabe_1.zip">📦 Starter</a></td>
+        <td><a href="resources/aufgaben/Aufgabe_1_L%C3%B6sung.zip">✅ Lösung</a></td></tr>
+      <tr><td>2</td><td>Repository-Methoden (Derived + @Query)</td>
+        <td><a href="resources/aufgaben/Aufgabe_2.zip">📦 Starter</a></td>
+        <td><a href="resources/aufgaben/Aufgabe_2_L%C3%B6sung.zip">✅ Lösung</a></td></tr>
+      <tr><td>3</td><td>Award-Entity + Beziehung</td>
+        <td><a href="resources/aufgaben/Aufgabe_3.zip">📦 Starter</a></td>
+        <td><a href="resources/aufgaben/Aufgabe_3_L%C3%B6sung.zip">✅ Lösung</a></td></tr>
+      <tr><td>4</td><td>AwardController CRUD</td>
+        <td><a href="resources/aufgaben/Aufgabe_4.zip">📦 Starter</a></td>
+        <td><a href="resources/aufgaben/Aufgabe_4_L%C3%B6sung.zip">✅ Lösung</a></td></tr>
+      <tr><td>5</td><td>DTO + MapStruct</td>
+        <td><a href="resources/aufgaben/Aufgabe_5.zip">📦 Starter</a></td>
+        <td><a href="resources/aufgaben/Aufgabe_5_L%C3%B6sung.zip">✅ Lösung</a></td></tr>
+      <tr><td>6</td><td>MovieControllerImplTest</td>
+        <td><a href="resources/aufgaben/Aufgabe_6.zip">📦 Starter</a></td>
+        <td><a href="resources/aufgaben/Aufgabe_6_L%C3%B6sung.zip">✅ Lösung</a></td></tr>
+      <tr><td>7</td><td>Movie-Profile (pure HTML)</td>
+        <td><a href="resources/aufgaben/Aufgabe_7.zip">📦 Starter</a></td>
+        <td><a href="resources/aufgaben/Aufgabe_7_L%C3%B6sung.zip">✅ Lösung</a></td></tr>
+      <tr><td>8</td><td>Movie-Profile + eigenes CSS</td>
+        <td><a href="resources/aufgaben/Aufgabe_8.zip">📦 Starter</a></td>
+        <td class="muted">—</td></tr>
+      <tr><td>9</td><td>Movie-Profile + Bootstrap + Carousel</td>
+        <td><a href="resources/aufgaben/Aufgabe_9.zip">📦 Starter</a></td>
+        <td class="muted">—</td></tr>
+      <tr><td>10</td><td>Erste Thymeleaf-Templates</td>
+        <td><a href="resources/aufgaben/Aufgabe_10.zip">📦 Starter</a></td>
+        <td class="muted">—</td></tr>
+      <tr><td>11</td><td>Movie-Grid mit Fragments</td>
+        <td><a href="resources/aufgaben/Aufgabe_11.zip">📦 Starter</a></td>
+        <td class="muted">—</td></tr>
+      <tr><td>12</td><td>Award-Formular mit @Valid</td>
+        <td><a href="resources/aufgaben/Aufgabe_12.zip">📦 Starter</a></td>
+        <td class="muted">—</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<nav class="chapter-nav">
+<a class="prev" href="index.html">← Übersicht</a>
+<span></span>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

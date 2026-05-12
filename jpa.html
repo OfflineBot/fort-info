@@ -27,6 +27,7 @@
   </div>
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <div class="chapter-title">2 · Spring Data (JPA)</div>
     <a href="#jpa-was">2.1 ORM & JPA</a>
     <a href="#jpa-entity">2.2 Entity-Mapping</a>
@@ -45,6 +46,13 @@
 <main>
 <section id="jpa" class="chapter">
   <h2>2 · Spring Data (JPA)</h2>
+  <div class="resource-banner">
+    <a class="resource-link pdf" href="resources/slides/2-JPA-Grundlagen.pdf" target="_blank">
+      📄 Folien-PDF anzeigen / herunterladen
+      <span class="resource-meta">2-JPA-Grundlagen.pdf</span>
+    </a>
+  </div>
+
 
   <article id="jpa-was">
     <h3>2.1 ORM &amp; JPA-Grundlagen</h3>
@@ -211,6 +219,10 @@ public class MovieServiceImpl implements MovieService {
     <h3>⚙ Aufgabe 2 — Repository-Methoden</h3>
     <div class="exercise" data-id="aufg2">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_2.zip">📦 Starter-ZIP</a>
+      <a class="resource-link zip-sol" href="resources/aufgaben/Aufgabe_2_L%C3%B6sung.zip">✅ Lösungs-ZIP</a>
+      </div>
       <p>Erweitere das <code>MovieRepository</code> um:</p>
       <ol>
         <li>Eine Derived-Query, die Filme findet, deren Titel einen Substring enthält.</li>
@@ -243,6 +255,10 @@ public interface MovieRepository extends JpaRepository&lt;Movie, Long&gt; {
     <h3>⚙ Aufgabe 3 — Award + 1:n</h3>
     <div class="exercise" data-id="aufg3">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_3.zip">📦 Starter-ZIP</a>
+      <a class="resource-link zip-sol" href="resources/aufgaben/Aufgabe_3_L%C3%B6sung.zip">✅ Lösungs-ZIP</a>
+      </div>
       <p>Erweitere das Datenmodell um die Entity <code>Award</code> mit den Feldern <code>academy</code>, <code>category</code>, <code>yearAwarded</code>. Verknüpfe sie mit <code>Movie</code> (n:1, ein Film kann mehrere Awards haben). Schreibe eine Repository-Methode, die alle Awards eines Films per Movie-ID findet.</p>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
@@ -277,25 +293,38 @@ public interface AwardRepository extends JpaRepository&lt;Award, Long&gt; {
   </article>
 
   
-  <article id="jpa-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — Director bidirektional 1:n</h3>
+    <article id="jpa-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — Director-Entity bidirektional (komplett)</h3>
     <div class="exercise" data-id="jpa-bonus1">
       <h5>Aufgabenstellung</h5>
-      <p>Erweitere das Datenmodell um vollständige <strong>Director ↔ Movie</strong>-Beziehung in <em>beide</em> Richtungen:</p>
+      <p>Erweitere das Datenmodell um eine vollständige <strong>Director ↔ Movie</strong>-Beziehung in beide Richtungen, analog zu wie <code>Award ↔ Movie</code> in Aufgabe 3 modelliert ist.</p>
 <ol>
-<li><code>Director</code>-Entity mit Feldern <code>id</code>, <code>name</code>, <code>geburtsjahr</code>, <code>nationality</code>.</li>
-<li>In <code>Director</code>: Feld <code>List&lt;Movie&gt; filmography</code> als inverse Seite (1:n).</li>
-<li><code>Movie</code> bleibt owning side mit <code>@ManyToOne</code> + <code>@JoinColumn</code>.</li>
-<li><code>DirectorRepository</code> mit Derived Query <code>findByNameStartingWith(String prefix)</code> und <code>findByNationality(String n)</code>.</li>
-<li>Test in <code>ManualTestBean</code>: lege „Christopher Nolan" an, verknüpfe mit „Interstellar", lade Director per ID, logge Filmografie-Größe.</li>
+<li><code>Director</code>-Entity mit <code>id</code>, <code>name</code>, <code>geburtsjahr</code>, <code>nationality</code>.</li>
+<li>In <code>Director</code>: <code>@OneToMany(mappedBy = "director") List&lt;Movie&gt; filmography</code> als <em>inverse</em> Seite.</li>
+<li><code>Movie</code> bleibt owning side (war schon in Aufgabe 3: <code>@ManyToOne</code> + <code>@JoinColumn</code>).</li>
+<li><code>DirectorRepository</code> mit drei Methoden: <code>findByNameStartingWith(prefix)</code>, <code>findByNationality(n)</code>, <code>@Query</code> über Path-Navigation für „alle Directors mit mind. einem Film > Rating X".</li>
+<li><code>DirectorService</code> + <code>DirectorServiceImpl</code> analog zum bestehenden Award-Pattern.</li>
+<li>In <code>ManualTestBean</code> testen: lege „Christopher Nolan" an, verknüpfe mit „Interstellar", lade Director per ID, logge Filmografie-Größe.</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">@Getter @Setter @NoArgsConstructor
+<pre><code class="language-java">// Director.java
+package de.dhbw.ravensburg.wp.mymoviedatabase.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter @Setter @NoArgsConstructor
 @Entity
 public class Director {
+
     @Id @GeneratedValue
     private Long id;
+
     private String name;
     private int geburtsjahr;
     private String nationality;
@@ -308,14 +337,73 @@ public class Director {
         this.geburtsjahr = geburtsjahr;
         this.nationality = nationality;
     }
-}
+}</code></pre>
+<pre><code class="language-java">// Movie.java — bestehender Block (zur Erinnerung, schon aus Aufgabe 3)
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "director_id", nullable = true)
+private Director director;</code></pre>
+<pre><code class="language-java">// DirectorRepository.java
+package de.dhbw.ravensburg.wp.mymoviedatabase.repository;
+
+import de.dhbw.ravensburg.wp.mymoviedatabase.model.Director;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
 public interface DirectorRepository extends JpaRepository&lt;Director, Long&gt; {
+
     List&lt;Director&gt; findByNameStartingWith(String prefix);
-    List&lt;Director&gt; findByNationality(String n);
+
+    List&lt;Director&gt; findByNationality(String nationality);
+
+    @Query("""
+        SELECT DISTINCT d FROM Director d
+        JOIN d.filmography m
+        WHERE m.imdbRating &gt; :minRating
+    """)
+    List&lt;Director&gt; findWithAtLeastOneTopMovie(@Param("minRating") double minRating);
 }</code></pre>
-<p><strong>Wichtig:</strong> <code>mappedBy = "director"</code> verweist auf den Feldnamen <em>in</em> <code>Movie</code> (das Feld vom Typ <code>Director</code>). Sonst würde JPA eine zusätzliche Join-Tabelle erzeugen — falsch.</p>
+<pre><code class="language-java">// DirectorService.java
+public interface DirectorService {
+    List&lt;Director&gt; getAll();
+    Director       getById(Long id);
+    Director       add(Director d);
+    Director       update(Director d);
+    void           removeById(Long id);
+}
+
+// DirectorServiceImpl.java
+@Service
+public class DirectorServiceImpl implements DirectorService {
+    private final DirectorRepository repo;
+    public DirectorServiceImpl(DirectorRepository r) { this.repo = r; }
+
+    @Override public List&lt;Director&gt; getAll()          { return repo.findAll(); }
+    @Override public Director getById(Long id)        {
+        return repo.findById(id).orElseThrow(
+            () -&gt; new NoSuchElementException("Director " + id));
+    }
+    @Override public Director add(Director d)         { return repo.save(d); }
+    @Override public Director update(Director d)      { return repo.save(d); }
+    @Override public void     removeById(Long id)     { repo.deleteById(id); }
+}</code></pre>
+<pre><code class="language-java">// ManualTestBean.java (Erweiterung — vereinfacht)
+Director nolan = new Director("Christopher Nolan", 1970, "British-American");
+nolan = directorService.add(nolan);
+
+Movie interstellar = new Movie();
+interstellar.setTitle("Interstellar");
+interstellar.setImdbRating(8.6);
+interstellar.setDirector(nolan);
+movieService.add(interstellar);
+
+Director reloaded = directorService.getById(nolan.getId());
+log.info("Filmografie-Größe: " + reloaded.getFilmography().size());
+log.info("Erster Film:        " + reloaded.getFilmography().get(0).getTitle());</code></pre>
+<p><strong>Wichtig:</strong> <code>mappedBy = "director"</code> verweist auf den Feldnamen <em>in</em> <code>Movie</code> (nicht auf den Spaltennamen). Ohne <code>mappedBy</code> würde JPA eine zusätzliche Join-Tabelle anlegen.</p>
       </div>
     </div>
   </article>

@@ -27,6 +27,7 @@
   </div>
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <div class="chapter-title">4 · Testing</div>
     <a href="#test-pyramid">4.1 Test-Pyramide</a>
     <a href="#test-junit">4.2 JUnit 5 Basics</a>
@@ -37,12 +38,21 @@
     <a href="#test-bonus1">⚙ Bonus 1 — AwardControllerImplTest</a>
     <a href="#test-bonus2">⚙ Bonus 2 — Service-Test (reines Mockito)</a>
     <a href="#test-bonus3">⚙ Bonus 3 — @DataJpaTest gegen H2</a>
+    <a href="#test-bonus4">⚙ Bonus 4 — JsonPath im Detail</a>
+    <a href="#test-bonus5">⚙ Bonus 5 — Constraint-Violation-Tests</a>
     <a href="#test-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
 <main>
 <section id="testing" class="chapter">
   <h2>4 · Testing</h2>
+  <div class="resource-banner">
+    <a class="resource-link pdf" href="resources/slides/4-Testing.pdf" target="_blank">
+      📄 Folien-PDF anzeigen / herunterladen
+      <span class="resource-meta">4-Testing.pdf</span>
+    </a>
+  </div>
+
 
   <article id="test-pyramid">
     <h3>4.1 Test-Pyramide</h3>
@@ -171,6 +181,10 @@ public class MovieControllerImplTest {
     <h3>⚙ Aufgabe 6 — Controller-Tests</h3>
     <div class="exercise" data-id="aufg6">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_6.zip">📦 Starter-ZIP</a>
+      <a class="resource-link zip-sol" href="resources/aufgaben/Aufgabe_6_L%C3%B6sung.zip">✅ Lösungs-ZIP</a>
+      </div>
       <p>Schreibe einen <code>MovieControllerImplTest</code>, der mit <code>@WebMvcTest</code> + <code>MockMvc</code> alle Endpoints der MovieController-API abdeckt:</p>
       <ol>
         <li>GET-Liste: 2 Filme, prüfe Größe und alle Felder von Film 1.</li>
@@ -229,88 +243,201 @@ public void shouldFailAddNewMovieDueToConstraintViolation() throws Exception {
   </article>
 
   
-  <article id="test-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — AwardControllerImplTest</h3>
+    <article id="test-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — AwardControllerImplTest auf Aufgabe-6-Niveau</h3>
     <div class="exercise" data-id="test-bonus1">
       <h5>Aufgabenstellung</h5>
-      <p>Schreibe analog zum offiziellen <code>MovieControllerImplTest</code> einen vollständigen Test für den <code>AwardController</code>. Pflichtfälle:</p>
+      <p>Schreibe einen vollständigen <code>AwardControllerImplTest</code> analog zu <code>MovieControllerImplTest</code> aus Aufgabe 6 — mit allen success- und error-Pfaden, jsonPath-Assertions auf jedem Feld:</p>
 <ol>
-<li>GET-Liste mit 2 Awards.</li>
-<li>GET-by-ID erfolgreich.</li>
+<li>Setup: 2 AwardDTOs (<code>oscar_1</code>, <code>bafta_2</code>) in <code>@BeforeEach</code>.</li>
+<li>GET-Liste: prüfe <code>$.*</code> hasSize, dann jedes Feld des ersten Awards.</li>
+<li>GET-by-ID: prüfe jedes Feld am Wurzel-Pfad <code>$.field</code>.</li>
 <li>GET-by-ID mit unbekannter ID → 404.</li>
-<li>POST erfolgreich → 201.</li>
-<li>POST ohne <code>category</code> → 400, Service nicht aufgerufen.</li>
-<li>DELETE erfolgreich.</li>
+<li>POST erfolgreich → 201, korrekte JSON-Antwort.</li>
+<li>POST mit <code>category = null</code> → 400, <code>verify(awardService, never()).addAward(any())</code>.</li>
+<li>PUT erfolgreich → 200, PUT mit unbekannter ID → 404, PUT mit Constraint-Violation → 400.</li>
+<li>DELETE erfolgreich → 200, DELETE mit unbekannter ID → 404.</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">@WebMvcTest(controllers = AwardControllerImpl.class)
+<pre><code class="language-java">package de.dhbw.ravensburg.wp.mymoviedatabase.controller;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.dhbw.ravensburg.wp.mymoviedatabase.dto.AwardDTO;
+import de.dhbw.ravensburg.wp.mymoviedatabase.service.AwardService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(controllers = AwardControllerImpl.class)
 public class AwardControllerImplTest {
 
-    @MockBean    private AwardService awardService;
-    @Autowired   private MockMvc mockMvc;
-    @Autowired   private ObjectMapper objectMapper;
+    @MockBean  private AwardService awardService;
+    @Autowired private MockMvc mockMvc;
+    @Autowired private ObjectMapper objectMapper;
 
-    private AwardDTO oscar;
+    private AwardDTO oscar_1;
+    private AwardDTO bafta_2;
+    private List&lt;AwardDTO&gt; awardList;
+
+    private final String path = "/api/v1/awards";
 
     @BeforeEach
-    void setUp() {
-        oscar = new AwardDTO(1L, "Oscar", "Best Picture", 2024);
+    public void setUp() {
+        oscar_1 = new AwardDTO(1L, "Oscar", "Best Picture", 2024);
+        bafta_2 = new AwardDTO(2L, "BAFTA", "Best Visual Effects", 2015);
+        awardList = List.of(oscar_1, bafta_2);
     }
 
+    // ---------- LISTE ----------
     @Test
-    void shouldReturnAllAwards() throws Exception {
-        when(awardService.getAllAwards()).thenReturn(List.of(oscar));
-        mockMvc.perform(get("/api/v1/awards"))
+    public void shouldSucessfullyReturnAllAwards() throws Exception {
+        when(awardService.getAllAwards()).thenReturn(awardList);
+
+        mockMvc.perform(get(path))
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$.*", hasSize(1)))
-               .andExpect(jsonPath("$[0].academy", is("Oscar")));
+               .andExpect(jsonPath("$.*", hasSize(2)))
+               .andExpect(jsonPath("$[0].id",              is(oscar_1.getId().intValue())))
+               .andExpect(jsonPath("$[0].academy",         is(oscar_1.getAcademy())))
+               .andExpect(jsonPath("$[0].category",        is(oscar_1.getCategory())))
+               .andExpect(jsonPath("$[0].celebrationYear", is(oscar_1.getCelebrationYear())))
+               .andExpect(jsonPath("$[1].academy",         is(bafta_2.getAcademy())));
+
         verify(awardService).getAllAwards();
     }
 
+    // ---------- GET BY ID ----------
     @Test
-    void shouldReturnAwardById() throws Exception {
-        when(awardService.getAwardById(1L)).thenReturn(oscar);
-        mockMvc.perform(get("/api/v1/awards/1"))
+    public void shouldSucessfullyReturnAward() throws Exception {
+        when(awardService.getAwardById(1L)).thenReturn(oscar_1);
+
+        mockMvc.perform(get(path + "/1"))
                .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id",              is(oscar_1.getId().intValue())))
+               .andExpect(jsonPath("$.academy",         is("Oscar")))
+               .andExpect(jsonPath("$.category",        is("Best Picture")))
                .andExpect(jsonPath("$.celebrationYear", is(2024)));
+
+        verify(awardService).getAwardById(1L);
     }
 
     @Test
-    void shouldReturn404IfUnknown() throws Exception {
-        when(awardService.getAwardById(99L))
-            .thenThrow(new NoSuchElementException("not found"));
-        mockMvc.perform(get("/api/v1/awards/99"))
+    public void shouldFailGetAward() throws Exception {
+        when(awardService.getAwardById(anyLong()))
+            .thenThrow(new NoSuchElementException("Award not found"));
+
+        mockMvc.perform(get(path + "/99"))
                .andExpect(status().isNotFound());
+
+        verify(awardService).getAwardById(99L);
     }
 
+    // ---------- POST ----------
     @Test
-    void shouldCreateAward() throws Exception {
-        when(awardService.addAward(any())).thenReturn(oscar);
-        mockMvc.perform(post("/api/v1/awards")
+    public void shouldSucessfullyAddAward() throws Exception {
+        when(awardService.addAward(any())).thenReturn(oscar_1);
+
+        mockMvc.perform(post(path)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(oscar)))
+                .content(objectMapper.writeValueAsString(oscar_1)))
                .andExpect(status().isCreated())
-               .andExpect(jsonPath("$.id", is(1)));
+               .andExpect(jsonPath("$.id",       is(1)))
+               .andExpect(jsonPath("$.academy",  is("Oscar")));
+
+        verify(awardService).addAward(any());
     }
 
     @Test
-    void shouldReject400WhenCategoryBlank() throws Exception {
-        oscar.setCategory(null);
-        mockMvc.perform(post("/api/v1/awards")
+    public void shouldFailAddDueToConstraintViolation() throws Exception {
+        // Kein when() — die Violation passiert VOR dem Service.
+        oscar_1.setCategory(null);
+
+        mockMvc.perform(post(path)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(oscar)))
+                .content(objectMapper.writeValueAsString(oscar_1)))
                .andExpect(status().isBadRequest());
+
         verify(awardService, never()).addAward(any());
     }
 
+    // ---------- PUT ----------
     @Test
-    void shouldDeleteAward() throws Exception {
-        mockMvc.perform(delete("/api/v1/awards/1"))
+    public void shouldSuccessfullyUpdateAward() throws Exception {
+        when(awardService.updateAward(any())).thenReturn(oscar_1);
+
+        mockMvc.perform(put(path + "/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(bafta_2)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id", is(1)));
+
+        verify(awardService).updateAward(any());
+    }
+
+    @Test
+    public void shouldFailUpdateBecauseUnknownId() throws Exception {
+        when(awardService.updateAward(any()))
+            .thenThrow(new NoSuchElementException("Id not found"));
+
+        mockMvc.perform(put(path + "/50")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(oscar_1)))
+               .andExpect(status().isNotFound());
+
+        verify(awardService).updateAward(any());
+    }
+
+    @Test
+    public void shouldFailUpdateDueToConstraintViolation() throws Exception {
+        oscar_1.setCategory(null);
+
+        mockMvc.perform(put(path + "/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(oscar_1)))
+               .andExpect(status().isBadRequest());
+
+        verify(awardService, never()).updateAward(any());
+    }
+
+    // ---------- DELETE ----------
+    @Test
+    public void shouldSucessfullyRemoveAward() throws Exception {
+        doNothing().when(awardService).removeAwardById(1L);
+
+        mockMvc.perform(delete(path + "/1"))
                .andExpect(status().isOk());
+
         verify(awardService).removeAwardById(1L);
     }
+
+    @Test
+    public void shouldFailRemoveBecauseUnknownId() throws Exception {
+        doThrow(new NoSuchElementException("Id not found"))
+            .when(awardService).removeAwardById(99L);
+
+        mockMvc.perform(delete(path + "/99"))
+               .andExpect(status().isNotFound());
+
+        verify(awardService).removeAwardById(99L);
+    }
 }</code></pre>
+<p><strong>10 Tests</strong> decken alle CRUD-Endpunkte mit success+error+constraint-violation ab — exakt das Test-Pyramide-Niveau aus Aufgabe 6.</p>
       </div>
     </div>
   </article>
@@ -406,6 +533,194 @@ void mockStyle_deleteCallsService() throws Exception {
     verify(movieService, never()).addMovie(any());
 }</code></pre>
 <p><strong>Warum die unterschiedlichen Assertions?</strong> Beim Stub ist die Antwort interessant — also prüfen wir per <code>jsonPath</code> das JSON. Beim Mock ist die Antwort egal (z.B. void-Methode) — wir prüfen nur, dass die Komponente überhaupt korrekt aufgerufen wurde.</p>
+      </div>
+    </div>
+  </article>
+    <article id="test-bonus4" class="aufgabe">
+    <h3>⚙ Bonus 4 — JsonPath im Detail</h3>
+    <div class="exercise" data-id="test-bonus4">
+      <h5>Aufgabenstellung</h5>
+      <p>Die offizielle Aufgabe-6-Lösung nutzt rund <strong>30 verschiedene jsonPath-Ausdrücke</strong> — wenn du sie nicht beherrschst, schreibst du im Kurztest blind. Übe alle Patterns am MovieDTO:</p>
+<p>Gegeben sei diese JSON-Antwort des MovieControllers:</p>
+<pre><code class="language-bash">[
+  {
+    "id": 1,
+    "title": "Interstellar",
+    "duration": 2.49,
+    "imdbRating": 8.6,
+    "castIds": [4, 7, 11],
+    "awards": [
+      { "id": 1, "academy": "Oscar", "category": "Best VFX", "celebrationYear": 2015 }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "The Dark Knight",
+    "duration": 2.32,
+    "imdbRating": 9.0,
+    "castIds": [1, 2],
+    "awards": [
+      { "id": 2, "academy": "Oscar", "category": "Supporting Role", "celebrationYear": 2009 },
+      { "id": 3, "academy": "Oscar", "category": "Sound Editing",   "celebrationYear": 2009 }
+    ]
+  }
+]</code></pre>
+<p>Schreibe die passenden jsonPath-Assertions für:</p>
+<ol>
+<li>„Die Antwort enthält genau 2 Filme."</li>
+<li>„Der erste Film heißt Interstellar."</li>
+<li>„Der zweite Film hat IMDB-Rating 9.0."</li>
+<li>„Der zweite Film hat 3 Cast-Ids und enthält die ID 1 und 2 (Reihenfolge egal)."</li>
+<li>„Der erste Award des ersten Films ist von der Oscar Academy."</li>
+<li>„Der zweite Award des zweiten Films hat das Jahr 2009."</li>
+<li>Bei einer Antwort die <em>nur ein</em> Movie ist (nicht Array): „Der Movie heißt Interstellar."</li>
+<li>Bei einer Antwort die nur ein Movie ist: „Der erste Award hat ID 1."</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">// 1. Anzahl Filme
+.andExpect(jsonPath("$.*", hasSize(2)))
+
+// 2. Titel des ersten Films
+.andExpect(jsonPath("$[0].title", is("Interstellar")))
+
+// 3. Rating des zweiten Films
+.andExpect(jsonPath("$[1].imdbRating", is(9.0)))
+
+// 4. CastIds des zweiten Films
+.andExpect(jsonPath("$[1].castIds", hasSize(2)))
+.andExpect(jsonPath("$[1].castIds", containsInAnyOrder(1, 2)))
+
+// 5. Erster Award des ersten Films
+.andExpect(jsonPath("$[0].awards[0].academy", is("Oscar")))
+
+// 6. Zweiter Award des zweiten Films
+.andExpect(jsonPath("$[1].awards[1].celebrationYear", is(2009)))
+
+// 7. Bei Einzel-Objekt: kein Index, direkt $.field
+.andExpect(jsonPath("$.title", is("Interstellar")))
+
+// 8. Bei Einzel-Objekt mit verschachteltem Array
+.andExpect(jsonPath("$.awards[0].id", is(1)))</code></pre>
+<p><strong>Pattern-Übersicht:</strong></p>
+<table>
+<tr><th>Pattern</th><th>Bedeutung</th></tr>
+<tr><td><code>$</code></td><td>Wurzel</td></tr>
+<tr><td><code>$.field</code></td><td>Feld in einem Objekt</td></tr>
+<tr><td><code>$[0]</code></td><td>Erstes Element eines Arrays</td></tr>
+<tr><td><code>$[0].field</code></td><td>Feld des ersten Elements</td></tr>
+<tr><td><code>$.*</code></td><td>Alle direkten Kinder — kombiniert mit <code>hasSize</code> zur Längen-Prüfung</td></tr>
+<tr><td><code>$[0].awards[0].category</code></td><td>Verschachtelt: Award-Kategorie des ersten Awards des ersten Films</td></tr>
+</table>
+<p><strong>Wichtige Hamcrest-Matcher dazu:</strong></p>
+<ul>
+<li><code>is(value)</code> — exakter Vergleich (das gängigste)</li>
+<li><code>hasSize(n)</code> — Anzahl Elemente in Array/Objekt</li>
+<li><code>containsInAnyOrder(a, b, c)</code> — Array enthält genau diese Werte, Reihenfolge egal</li>
+</ul>
+<p><strong>Typische Fehler in Klausuren:</strong></p>
+<ol>
+<li><strong>Long vs int:</strong> JSON-IDs werden als <code>int</code> deserialisiert. <code>is(movie_1.getId())</code> schlägt fehl — schreib <code>is(movie_1.getId().intValue())</code>.</li>
+<li><strong>Index vergessen bei Arrays:</strong> <code>$.title</code> auf einer Array-Antwort gibt nichts zurück. Du brauchst <code>$[0].title</code>.</li>
+<li><strong>$.* missverstanden:</strong> bei einer Liste mit 2 Objekten ist <code>$.*</code>-hasSize = 2 (Anzahl Objekte). Bei einem Einzel-Objekt mit 5 Feldern ist <code>$.*</code>-hasSize = 5 (Anzahl Felder).</li>
+</ol>
+      </div>
+    </div>
+  </article>
+    <article id="test-bonus5" class="aufgabe">
+    <h3>⚙ Bonus 5 — Constraint-Violation-Tests (Validation-Chain)</h3>
+    <div class="exercise" data-id="test-bonus5">
+      <h5>Aufgabenstellung</h5>
+      <p>Die offizielle Lösung testet Validierungs-Fehler an mehreren Stellen. Verstehe das Pattern: bei einer <code>@Valid</code>-Violation läuft der Request <em>nicht</em> bis zum Service durch — Spring antwortet direkt mit 400.</p>
+<p>Folgender <code>MovieDTO</code> hat zwei pflichtige Felder:</p>
+<pre><code class="language-java">@Getter @Setter @NoArgsConstructor
+public class MovieDTO {
+    private Long id;
+    private String title;
+    @Min(0) @Max(1000) private double duration;
+    private LocalDate premiereDate;
+    private String description;
+    @NotBlank private String trailerUrl;
+    @NotBlank private String coverImgUrl;
+    @Min(0)   private double imdbRating;
+    private List&lt;Long&gt; castIds;
+    private List&lt;AwardDTO&gt; awards;
+}</code></pre>
+<p>Aufgabe: schreibe Tests, die <strong>jeden</strong> der folgenden Fehler genau abfangen, und prüfe per <code>verify(never())</code>, dass der Service-Call ausbleibt:</p>
+<ol>
+<li><code>trailerUrl = null</code> beim POST → 400, Service nie aufgerufen.</li>
+<li><code>coverImgUrl = ""</code> beim POST → 400 (<code>@NotBlank</code> verwirft auch leere Strings).</li>
+<li><code>imdbRating = -1.5</code> beim PUT → 400.</li>
+<li><code>duration = 5000</code> (über Max-Wert) beim POST → 400.</li>
+<li>Mehrere Fehler gleichzeitig (z.B. trailerUrl=null UND coverImgUrl=null) → 400.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Test
+public void shouldFailPostBecauseTrailerUrlNull() throws Exception {
+    movie_1.setTrailerUrl(null);
+    mockMvc.perform(post(path)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(movie_1)))
+           .andExpect(status().isBadRequest());
+
+    verify(movieService, never()).addMovie(any());
+}
+
+@Test
+public void shouldFailPostBecauseCoverImgUrlBlank() throws Exception {
+    movie_1.setCoverImgUrl("");
+    mockMvc.perform(post(path)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(movie_1)))
+           .andExpect(status().isBadRequest());
+
+    verify(movieService, never()).addMovie(any());
+}
+
+@Test
+public void shouldFailPutBecauseNegativeRating() throws Exception {
+    movie_1.setImdbRating(-1.5);
+    mockMvc.perform(put(path + "/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(movie_1)))
+           .andExpect(status().isBadRequest());
+
+    verify(movieService, never()).updateMovie(any());
+}
+
+@Test
+public void shouldFailPostBecauseDurationTooLong() throws Exception {
+    movie_1.setDuration(5000);  // @Max(1000) bricht
+    mockMvc.perform(post(path)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(movie_1)))
+           .andExpect(status().isBadRequest());
+
+    verify(movieService, never()).addMovie(any());
+}
+
+@Test
+public void shouldFailPostWithMultipleViolations() throws Exception {
+    movie_1.setTrailerUrl(null);
+    movie_1.setCoverImgUrl(null);
+    movie_1.setImdbRating(-99);
+
+    // Spring meldet 400 sobald MINDESTENS ein Constraint verletzt ist.
+    mockMvc.perform(post(path)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(movie_1)))
+           .andExpect(status().isBadRequest());
+
+    verify(movieService, never()).addMovie(any());
+}</code></pre>
+<p><strong>Pattern, das du dir merken musst:</strong></p>
+<ol>
+<li><strong>Kein <code>when()</code></strong> in Constraint-Violation-Tests — der Service wird ja nie aufgerufen, also gibt es nichts zu stubben.</li>
+<li><strong>Pflicht: <code>verify(service, never())</code></strong> — beweise dass der Validator den Request abgefangen hat.</li>
+<li><strong>Erwarteter Status: 400</strong>, nicht 422 oder 500.</li>
+</ol>
+<p><strong>Folien-Beleg:</strong> in der Lösung zu Aufgabe 6 finden sich genau diese Methoden: <code>shouldFailUpdateMovieBecauseConstraintViolation</code>, <code>shouldFailAddNewMovieDueToConstraintViolation</code>, jeweils mit dem Kommentar „<em>kein when weil Contraint Violation VOR dem Controller geworfen wird</em>".</p>
       </div>
     </div>
   </article>

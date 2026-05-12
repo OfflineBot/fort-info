@@ -27,6 +27,7 @@
   </div>
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <div class="chapter-title">1 · Spring Grundlagen</div>
     <a href="#spring-was">1.1 Was ist Spring Boot</a>
     <a href="#spring-schichten">1.2 Schichtenmodell</a>
@@ -41,6 +42,13 @@
 <main>
 <section id="spring" class="chapter">
   <h2>1 · Spring Grundlagen</h2>
+  <div class="resource-banner">
+    <a class="resource-link pdf" href="resources/slides/1-Spring-Grundlagen.pdf" target="_blank">
+      📄 Folien-PDF anzeigen / herunterladen
+      <span class="resource-meta">1-Spring-Grundlagen.pdf</span>
+    </a>
+  </div>
+
 
   <article id="spring-was">
     <h3>1.1 Was ist Spring Boot</h3>
@@ -145,6 +153,10 @@ public class ManualTestBean {
     <h3>⚙ Aufgabe 1 — Service &amp; Controller mit DI</h3>
     <div class="exercise" data-id="aufg1">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_1.zip">📦 Starter-ZIP</a>
+      <a class="resource-link zip-sol" href="resources/aufgaben/Aufgabe_1_L%C3%B6sung.zip">✅ Lösungs-ZIP</a>
+      </div>
       <p>Im Starter-Projekt sind ein <code>MovieService</code> und ein <code>MovieController</code> als Klassen ohne Interface gegeben. Sie sollen so umgebaut werden, dass:</p>
       <ol>
         <li>Service und Controller jeweils ein <strong>Interface</strong> + eine <strong>Impl</strong>-Klasse haben.</li>
@@ -174,52 +186,103 @@ ArtistService: ArtistServiceImpl</code></pre>
   </article>
 
   
-  <article id="spring-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — SoundtrackService</h3>
+    <article id="spring-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — SoundtrackService analog zur Aufgabe 1</h3>
     <div class="exercise" data-id="spring-bonus1">
       <h5>Aufgabenstellung</h5>
-      <p>Lege parallel zum bestehenden <code>MovieService</code> einen <strong>SoundtrackService</strong> an. Anforderungen:</p>
+      <p>Erweitere die Aufgabe-1-Struktur um einen <strong>SoundtrackService</strong>. Anforderungen wie in Aufgabe 1: Interface + Impl mit korrektem Stereotyp, Konstruktor-Injection im Controller, Log-Ausgabe via <code>ManualTestBean</code>.</p>
 <ol>
-<li>Interface <code>SoundtrackService</code> mit Methode <code>String getName()</code> und <code>List&lt;String&gt; listAll()</code> (gibt 3 hartcodierte Track-Namen zurück).</li>
-<li>Implementierung <code>SoundtrackServiceImpl</code> mit korrektem Stereotyp.</li>
-<li>Im <code>MovieController</code> als dritte Konstruktor-Abhängigkeit injizieren.</li>
-<li>Methode <code>String getSoundtrackServiceName()</code> im Controller hinzufügen.</li>
-<li><code>ManualTestBean</code> erweitern, sodass beim Start „Soundtrack: SoundtrackServiceImpl" geloggt wird.</li>
+<li>Interface <code>SoundtrackService</code> mit Methoden <code>String getName()</code> und <code>List&lt;String&gt; listAll()</code>.</li>
+<li>Impl <code>SoundtrackServiceImpl</code> mit <code>@Service</code>.</li>
+<li>Im <code>MovieController</code>-Interface neue Methoden <code>getSoundtrackServiceName()</code> und <code>getSoundtrackList()</code>.</li>
+<li>Konstruktor-Injection: alle drei Services (Movie/Artist/Soundtrack) im Controller.</li>
+<li><code>ManualTestBean</code> loggt beim Start alle vier Bean-Namen + die Soundtrack-Liste.</li>
 </ol>
       <button class="show">Lösung zeigen</button>
       <div class="solution">
-<pre><code class="language-java">public interface SoundtrackService {
+<pre><code class="language-java">// SoundtrackService.java
+package de.dhbw.ravensburg.wp.mymoviedatabase.service;
+
+import java.util.List;
+
+public interface SoundtrackService {
     String getName();
     List&lt;String&gt; listAll();
-}
+}</code></pre>
+<pre><code class="language-java">// SoundtrackServiceImpl.java
+package de.dhbw.ravensburg.wp.mymoviedatabase.service;
+
+import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class SoundtrackServiceImpl implements SoundtrackService {
     @Override public String getName() { return "SoundtrackServiceImpl"; }
     @Override public List&lt;String&gt; listAll() {
-        return List.of("Cornfield Chase", "Day One", "Dust");
+        return List.of("Dreaming of the Crash", "Cornfield Chase", "Dust", "Day One");
     }
-}
+}</code></pre>
+<pre><code class="language-java">// MovieController.java (Interface)
+package de.dhbw.ravensburg.wp.mymoviedatabase.controller;
+
+import java.util.List;
+
+public interface MovieController {
+    String getName();
+    String getMovieServiceName();
+    String getArtistServiceName();
+    String getSoundtrackServiceName();
+    List&lt;String&gt; getSoundtrackList();
+}</code></pre>
+<pre><code class="language-java">// MovieControllerImpl.java
+package de.dhbw.ravensburg.wp.mymoviedatabase.controller;
+
+import de.dhbw.ravensburg.wp.mymoviedatabase.service.ArtistService;
+import de.dhbw.ravensburg.wp.mymoviedatabase.service.MovieService;
+import de.dhbw.ravensburg.wp.mymoviedatabase.service.SoundtrackService;
+import org.springframework.stereotype.Controller;
+import java.util.List;
 
 @Controller
 public class MovieControllerImpl implements MovieController {
-    private final MovieService movieService;
-    private final ArtistService artistService;
+
+    private final MovieService      movieService;
+    private final ArtistService     artistService;
     private final SoundtrackService soundtrackService;
 
-    public MovieControllerImpl(MovieService m, ArtistService a, SoundtrackService s) {
-        this.movieService = m;
-        this.artistService = a;
-        this.soundtrackService = s;
+    public MovieControllerImpl(MovieService movieService,
+                               ArtistService artistService,
+                               SoundtrackService soundtrackService) {
+        this.movieService      = movieService;
+        this.artistService     = artistService;
+        this.soundtrackService = soundtrackService;
     }
 
-    @Override public String getSoundtrackServiceName() {
-        return soundtrackService.getName();
-    }
-    // … andere Methoden
+    @Override public String getName()                  { return "MovieControllerImpl"; }
+    @Override public String getMovieServiceName()      { return movieService.getName(); }
+    @Override public String getArtistServiceName()     { return artistService.getName(); }
+    @Override public String getSoundtrackServiceName() { return soundtrackService.getName(); }
+    @Override public List&lt;String&gt; getSoundtrackList()  { return soundtrackService.listAll(); }
 }</code></pre>
-<p>Im <code>ManualTestBean.callController()</code> ergänzen:</p>
-<pre><code class="language-java">log.info("Soundtrack: " + movieController.getSoundtrackServiceName());</code></pre>
+<pre><code class="language-java">// ManualTestBean.java (Update)
+@Component
+@Slf4j
+public class ManualTestBean {
+    private final MovieController movieController;
+
+    ManualTestBean(MovieController movieController) {
+        this.movieController = movieController;
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void callController() {
+        log.info("Controller:    " + movieController.getName());
+        log.info("MovieService:  " + movieController.getMovieServiceName());
+        log.info("ArtistService: " + movieController.getArtistServiceName());
+        log.info("Soundtrack:    " + movieController.getSoundtrackServiceName());
+        log.info("Tracks:        " + movieController.getSoundtrackList());
+    }
+}</code></pre>
       </div>
     </div>
   </article>

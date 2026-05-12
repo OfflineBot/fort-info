@@ -27,33 +27,208 @@
   </div>
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <div class="chapter-title">Probekurztest</div>
     <a href="#quiz">Probekurztest-Themen</a>
   </nav>
 </aside>
 <main>
+<header id="overview">
+  <h1>📝 Probekurztest</h1>
+  <p class="lead">Realistische 30-Min-Simulation: 15 Fragen quer durch alle 7 Themen.<br>Antwort vor dem Aufdecken überlegen — wie im echten Test.</p>
+</header>
+
 <section id="quiz" class="chapter">
-  <h2>Probekurztest — Themen-Checkliste</h2>
-  <p>Der Kurztest fragt zu Skript &amp; Aufgaben. Wichtige Konzepte zum Wiederholen:</p>
-  <ul class="checklist">
-    <li>Vier Kernprinzipien von Spring (Convention over Configuration, Modularisierung, Schichtenorientierung, DI)</li>
-    <li>Drei Schichten (Presentation/Business/Persistence) und welche Annotation wo gehört</li>
-    <li>Was eine Spring Bean ist und warum sie nicht mit <code>new</code> erzeugt wird</li>
-    <li>Konstruktor-Injection vs. <code>@Autowired</code> — wann was</li>
-    <li>JPA-Annotationen <code>@Entity</code>, <code>@Id</code>, <code>@GeneratedValue</code></li>
-    <li>Beziehungs-Annotationen + <code>mappedBy</code> (welche Seite ist owning)</li>
-    <li>Derived Queries vs. <code>@Query</code> (JPQL)</li>
-    <li>HTTP-Methoden, Status-Codes, REST-URI-Konventionen</li>
-    <li>Was ein DTO ist und warum man es vom Entity trennt</li>
-    <li>MapStruct: <code>componentModel = "spring"</code>, <code>@Mapping</code>, <code>@InheritInverseConfiguration</code></li>
-    <li>Test-Pyramide + Test Doubles (Mock vs. Stub vs. Fake)</li>
-    <li><code>@WebMvcTest</code> + <code>MockMvc</code> + <code>@MockBean</code> — was wird gestartet, was nicht</li>
-    <li>Bootstrap-Grid: container/row/col-N, Bedeutung von <code>g-N</code></li>
-    <li>Thymeleaf: Unterschied zwischen <code>th:insert</code> und <code>th:replace</code></li>
-    <li>Expression-Typen <code>${}</code>, <code>*{}</code>, <code>@{}</code>, <code>~{}</code></li>
-    <li>Form-Binding: <code>th:object</code>, <code>th:field</code>, <code>BindingResult</code>, PRG-Pattern</li>
-    <li>Bean-Validation-Annotationen und wo Fehler im Template angezeigt werden</li>
-  </ul>
+  <h2>15 Fragen</h2>
+  <div class="exam-questions">
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 1</span>
+      <span class="exam-q-topic">Spring</span>
+    </div>
+    <div class="exam-q-body">Welche Stereotype-Annotation gehört zu welcher Schicht? Ordne zu:<br>(a) HTTP-API mit JSON · (b) Geschäftslogik · (c) Datenzugriff · (d) generische Bean<br>→ <code>@RestController</code>, <code>@Service</code>, <code>@Repository</code>, <code>@Component</code></div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a">(a) <code>@RestController</code> · (b) <code>@Service</code> · (c) <code>@Repository</code> · (d) <code>@Component</code>. Alle drei spezifischen sind <code>@Component</code>-Subtypen mit semantischer Bedeutung.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 2</span>
+      <span class="exam-q-topic">Spring</span>
+    </div>
+    <div class="exam-q-body">Was ist an diesem Code falsch und wie korrigierst du ihn?<br><pre><code class="language-java">@Controller
+public class MovieControllerImpl {
+    private MovieService service = new MovieServiceImpl();
+}</code></pre></div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a">Direktes <code>new</code> umgeht Spring komplett — die Bean kommt nicht aus dem Container, eingebettete Abhängigkeiten sind null, Tests müssen die Klasse umgehen. Korrektur per Konstruktor-Injection:<br><pre><code class="language-java">@Controller
+public class MovieControllerImpl {
+    private final MovieService service;
+    public MovieControllerImpl(MovieService service) { this.service = service; }
+}</code></pre></div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 3</span>
+      <span class="exam-q-topic">JPA</span>
+    </div>
+    <div class="exam-q-body">Was bedeutet <code>mappedBy</code> und was passiert ohne diesen Parameter bei einer bidirektionalen Beziehung?</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><code>mappedBy</code> kennzeichnet die <em>inverse</em> Seite einer Beziehung — die owning Seite (mit <code>@JoinColumn</code>) verwaltet die Fremdschlüsselspalte. Ohne <code>mappedBy</code> hält JPA beide Seiten für owning und legt <strong>zwei</strong> Join-Tabellen an statt einer.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 4</span>
+      <span class="exam-q-topic">JPA</span>
+    </div>
+    <div class="exam-q-body">Schreibe eine Derived Query, die alle Filme nach dem Premiere-Datum X mit IMDB-Rating &gt; Y sortiert nach Premiere absteigend findet.</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><pre><code class="language-java">List&lt;Movie&gt; findByPremiereDateAfterAndImdbRatingGreaterThanOrderByPremiereDateDesc(
+    LocalDate stichdatum, double minRating);</code></pre>Lange Methodennamen sind OK — alternativ schreibst du eine <code>@Query</code>.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 5</span>
+      <span class="exam-q-topic">JPA</span>
+    </div>
+    <div class="exam-q-body">Wozu dient <code>@Transactional</code> und welche Regel zur Verwendung kennst du laut Folie?</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><code>@Transactional</code> bündelt mehrere DB-Operationen in eine Transaktion. Lazy-Loaded Beziehungen können <em>nur</em> innerhalb des Transaktionskontexts aufgelöst werden. <strong>Regel:</strong> Transaktionen können nur von <em>außerhalb</em> einer Bean gestartet werden — interner Methodenaufruf in derselben Bean ignoriert die Annotation.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 6</span>
+      <span class="exam-q-topic">REST</span>
+    </div>
+    <div class="exam-q-body">Vervollständige den Award-Endpoint: POST <code>/api/v1/awards</code>, gibt Status 201, validiert den Body.</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><pre><code class="language-java">@PostMapping
+@ResponseStatus(HttpStatus.CREATED)
+public AwardDTO addAward(@Valid @RequestBody AwardDTO award) {
+    return awardService.addAward(award);
+}</code></pre></div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 7</span>
+      <span class="exam-q-topic">REST</span>
+    </div>
+    <div class="exam-q-body">Erkläre den Unterschied zwischen <code>@PathVariable</code> und <code>@RequestParam</code> mit URL-Beispielen.</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><code>@PathVariable</code> kommt aus der URL selbst: <code>GET /awards/<strong>5</strong></code> → <code>@PathVariable Long id</code>. <code>@RequestParam</code> kommt aus dem Query-String: <code>GET /awards?<strong>year=2020</strong></code> → <code>@RequestParam Integer year</code>. PathVariable identifiziert eine Ressource, RequestParam filtert/sortiert/paginiert.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 8</span>
+      <span class="exam-q-topic">REST</span>
+    </div>
+    <div class="exam-q-body">Warum trennt man DTO von Entity? Nenne drei konkrete Gründe.</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a">1) <strong>API-Stabilität</strong>: Refactor der Entity bricht den Contract nicht. 2) <strong>Sicherheit</strong>: sensitive Felder (Passwort-Hash, interne IDs) werden nicht serialisiert. 3) <strong>Endlos-Loops vermeiden</strong>: bei bidirektionalen Beziehungen würde Jackson sonst zirkulär serialisieren.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 9</span>
+      <span class="exam-q-topic">Testing</span>
+    </div>
+    <div class="exam-q-body">Was bedeutet dieser JsonPath: <code>$[1].awards[0].celebrationYear</code>?</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a">„Jahr des ersten Awards des zweiten Films" — bei einer Liste-Response: zweites Listenelement (Index 1), dessen Feld <code>awards</code> ist ein Array, davon das erste Element (Index 0), dessen Feld <code>celebrationYear</code>.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 10</span>
+      <span class="exam-q-topic">Testing</span>
+    </div>
+    <div class="exam-q-body">Was startet <code>@WebMvcTest(controllers = MovieControllerImpl.class)</code>? Was wird <em>nicht</em> geladen?</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><strong>Gestartet:</strong> nur der MVC-Layer (Controller + ControllerAdvice + Filters + JSON-Konverter) für die angegebene Klasse. <strong>Nicht geladen:</strong> Services (musst per <code>@MockBean</code> mocken), Repositories, DB, normale <code>@Component</code>-Beans. → schnelle Tests ohne DB-Setup.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 11</span>
+      <span class="exam-q-topic">Testing</span>
+    </div>
+    <div class="exam-q-body">Schreibe einen Test, der einen GET auf <code>/api/v1/movies/99</code> macht und 404 erwartet, wenn der Service <code>NoSuchElementException</code> wirft.</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><pre><code class="language-java">@Test
+public void shouldFailGetMovie() throws Exception {
+    when(movieService.getMovieById(anyLong()))
+        .thenThrow(new NoSuchElementException("not found"));
+
+    mockMvc.perform(get("/api/v1/movies/99"))
+           .andExpect(status().isNotFound());
+
+    verify(movieService).getMovieById(99L);
+}</code></pre></div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 12</span>
+      <span class="exam-q-topic">Testing</span>
+    </div>
+    <div class="exam-q-body">Warum fehlt das <code>when()</code> in einem Constraint-Violation-Test, und was musst du stattdessen prüfen?</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a">Bei einer <code>@Valid</code>-Verletzung wirft Spring die Exception <strong>vor</strong> dem Controller — der Service-Call findet gar nicht erst statt. Also gibt es nichts zu stubben. Pflicht-Assertion: <code>verify(service, never()).addMovie(any())</code> — beweist, dass der Validator den Request abgefangen hat.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 13</span>
+      <span class="exam-q-topic">Webdesign</span>
+    </div>
+    <div class="exam-q-body">Wie definierst du in Bootstrap 5 ein Layout mit 3 gleich breiten Spalten ab Tablet, gestapelt mobil?</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><pre><code class="language-xml">&lt;div class="container"&gt;
+  &lt;div class="row g-3"&gt;
+    &lt;div class="col-12 col-md-4"&gt;…&lt;/div&gt;
+    &lt;div class="col-12 col-md-4"&gt;…&lt;/div&gt;
+    &lt;div class="col-12 col-md-4"&gt;…&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre><code>col-12</code> = volle Breite (Mobile), <code>col-md-4</code> = 4/12 ab md-Breakpoint (≥ 768 px).</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 14</span>
+      <span class="exam-q-topic">Thymeleaf</span>
+    </div>
+    <div class="exam-q-body">Was bedeuten die vier Expression-Typen <code>${…}</code>, <code>*{…}</code>, <code>@{…}</code>, <code>~{…}</code>?</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><code>${var}</code> Variable im Model (OGNL) · <code>*{feld}</code> Selection innerhalb <code>th:object</code> · <code>@{/url}</code> URL mit Context-Path · <code>~{frag :: id}</code> Fragment-Referenz für <code>th:insert</code>/<code>th:replace</code>.</div>
+    </details>
+  </div>
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">Frage 15</span>
+      <span class="exam-q-topic">Forms</span>
+    </div>
+    <div class="exam-q-body">Erkläre <code>@NotNull</code> vs <code>@NotBlank</code> vs <code>@NotEmpty</code> jeweils mit dem konkreten Effekt bei einem String "  " (3 Leerzeichen).</div>
+    <details><summary>Antwort + Erklärung</summary>
+      <div class="exam-a"><code>@NotNull</code>: erlaubt (String ist nicht null). <code>@NotEmpty</code>: erlaubt (String ist nicht leer — Whitespace zählt als Inhalt). <code>@NotBlank</code>: <strong>verbietet</strong> (String ist nach trim leer). Faustregel für Texteingaben: immer <code>@NotBlank</code>.</div>
+    </details>
+  </div>
+  </div>
+
+  <h2 style="margin-top:2rem">Bewertung</h2>
+  <div class="exam-scoring">
+    <p>Im echten Kurztest gibt es <strong>20 Punkte</strong>. Eigene Faustregel-Selbsteinschätzung:</p>
+    <ul>
+      <li>0–6 richtig: nochmal lernen, besonders die fehlerhaften Themen.</li>
+      <li>7–11 richtig: solider Stand, kleine Lücken schließen.</li>
+      <li>12+ richtig: prüfungsbereit — fokussiere auf Detail-Schliff.</li>
+    </ul>
+  </div>
 </section>
 <nav class="chapter-nav">
 <a class="prev" href="cheatsheet.html">← Cheatsheet</a>

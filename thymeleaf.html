@@ -27,6 +27,7 @@
   </div>
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <div class="chapter-title">6 · Thymeleaf</div>
     <a href="#th-was">6.1 Server vs. Client Rendering</a>
     <a href="#th-syntax">6.2 Syntax & Expressions</a>
@@ -43,6 +44,13 @@
 <main>
 <section id="thymeleaf" class="chapter">
   <h2>6 · Thymeleaf</h2>
+  <div class="resource-banner">
+    <a class="resource-link pdf" href="resources/slides/6-Thymeleaf.pdf" target="_blank">
+      📄 Folien-PDF anzeigen / herunterladen
+      <span class="resource-meta">6-Thymeleaf.pdf</span>
+    </a>
+  </div>
+
 
   <article id="th-was">
     <h3>6.1 Server-Side vs. Client-Side Rendering</h3>
@@ -184,6 +192,9 @@ public class ThMovieControllerImpl implements ThMovieController {
     <h3>⚙ Aufgabe 10 — erste Templates</h3>
     <div class="exercise" data-id="aufg10">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_10.zip">📦 Starter-ZIP</a>
+      </div>
       <p>Lege drei Templates an:</p>
       <ul>
         <li><code>templates/contact.html</code> — Kontakt-Seite</li>
@@ -215,6 +226,9 @@ public String contactInfo() { return "contact"; }</code></pre>
     <h3>⚙ Aufgabe 11 — Movie-Grid</h3>
     <div class="exercise" data-id="aufg11">
       <h5>Aufgabenstellung</h5>
+      <div class="resource-links">
+      <a class="resource-link zip" href="resources/aufgaben/Aufgabe_11.zip">📦 Starter-ZIP</a>
+      </div>
       <p>Baue eine Startseite, die alle Filme aus der DB als Bootstrap-Card-Grid anzeigt:</p>
       <ol>
         <li><code>ThMovieControllerImpl</code> mit Endpunkt <code>GET /</code>, der alle Movies aus dem <code>MovieService</code> ins Model packt (Key: <code>data</code>) und das Template <code>index</code> rendert.</li>
