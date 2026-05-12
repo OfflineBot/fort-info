@@ -18,86 +18,26 @@
 
 <aside id="sidebar">
   <h2>Fortgeschrittene<br>Informatik</h2>
-  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
-
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
   <div class="progress-box">
     <div class="progress-label">Fortschritt</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
     <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
   </div>
-
   <nav>
-    <a href="index.html">Übersicht</a>
-    <a href="orga.html#orga">Organisation</a>
-    <details open>
-      <summary>1 · Spring Grundlagen</summary>
-      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
-      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
-      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
-      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
-      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
-    </details>
-    <details open>
-      <summary>2 · Spring Data (JPA)</summary>
-      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
-      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
-      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
-      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
-      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
-      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
-      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
-      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
-    </details>
-    <details open>
-      <summary>3 · REST</summary>
-      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
-      <a href="rest.html#rest-controller">3.2 @RestController</a>
-      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
-      <a href="rest.html#rest-status">3.4 Status-Codes</a>
-      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
-      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
-      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
-      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
-    </details>
-    <details open>
-      <summary>4 · Testing</summary>
-      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
-      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
-      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
-      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
-      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
-      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
-    </details>
-    <details open>
-      <summary>5 · Webdesign</summary>
-      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
-      <a href="webdesign.html#web-css">5.2 CSS</a>
-      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
-      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
-      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
-      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
-    </details>
-    <details open>
-      <summary>6 · Thymeleaf</summary>
-      <a href="#th-was">6.1 Server- vs. Client-Rendering</a>
-      <a href="#th-syntax">6.2 Syntax &amp; Expressions</a>
-      <a href="#th-controller">6.3 Controller + ModelAndView</a>
-      <a href="#th-fragments">6.4 Fragments (insert/replace)</a>
-      <a href="#th-iteration">6.5 Iteration mit th:each</a>
-      <a href="#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
-      <a href="#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
-    </details>
-    <details open>
-      <summary>7 · Forms</summary>
-      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
-      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
-      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
-      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
-    </details>
-    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
-    <a href="quiz.html#quiz">Probekurztest-Themen</a>
-    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+    <a href="index.html" class="back">← Übersicht</a>
+    <div class="chapter-title">6 · Thymeleaf</div>
+    <a href="#th-was">6.1 Server vs. Client Rendering</a>
+    <a href="#th-syntax">6.2 Syntax & Expressions</a>
+    <a href="#th-controller">6.3 Controller + ModelAndView</a>
+    <a href="#th-fragments">6.4 Fragments</a>
+    <a href="#th-iteration">6.5 Iteration mit th:each</a>
+    <a href="#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+    <a href="#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    <a href="#th-bonus1">⚙ Bonus 1 — Movie-Detailseite</a>
+    <a href="#th-bonus2">⚙ Bonus 2 — Search-Form</a>
+    <a href="#th-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
 <main>
@@ -290,7 +230,110 @@ public String contactInfo() { return "contact"; }</code></pre>
     </div>
   </article>
 
-  <article class="verstaendnis">
+  
+  <article id="th-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — Movie-Detailseite mit allen Beziehungen</h3>
+    <div class="exercise" data-id="th-bonus1">
+      <h5>Aufgabenstellung</h5>
+      <p>Baue eine Detail-Seite, die <em>einen</em> Film mit all seinen Beziehungen rendert:</p>
+<ol>
+<li>Endpoint <code>GET /movies/{id}</code> im <code>ThMovieController</code>.</li>
+<li>Template <code>movie-detail.html</code>, das zeigt: Titel, Director (Name + Geburtsjahr), alle Awards (als Liste), alle Cast-Members (als Tabelle), Soundtrack-Tracks.</li>
+<li>Bei nicht-gefundener ID: redirect auf <code>/</code>.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@GetMapping("/movies/{id}")
+public String detail(@PathVariable Long id, Model model) {
+    Optional&lt;MovieDTO&gt; opt = movieService.findById(id);
+    if (opt.isEmpty()) return "redirect:/";
+    model.addAttribute("movie", opt.get());
+    return "movie-detail";
+}</code></pre>
+<pre><code class="language-xml">&lt;!-- templates/movie-detail.html --&gt;
+&lt;main class="container py-4"&gt;
+  &lt;h1 th:text="${movie.title}"&gt;Titel&lt;/h1&gt;
+
+  &lt;p&gt;
+    Director:
+    &lt;strong th:text="${movie.directorName}"&gt;Nolan&lt;/strong&gt;
+    (&lt;span th:text="${movie.directorGeburtsjahr}"&gt;1970&lt;/span&gt;)
+  &lt;/p&gt;
+
+  &lt;h3&gt;Awards&lt;/h3&gt;
+  &lt;ul th:if="${not #lists.isEmpty(movie.awards)}"&gt;
+    &lt;li th:each="a : ${movie.awards}"&gt;
+      &lt;strong th:text="${a.academy}"&gt;&lt;/strong&gt;:
+      &lt;span th:text="${a.category}"&gt;&lt;/span&gt;
+      (&lt;span th:text="${a.celebrationYear}"&gt;&lt;/span&gt;)
+    &lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p th:if="${#lists.isEmpty(movie.awards)}" class="text-muted"&gt;Keine Awards.&lt;/p&gt;
+
+  &lt;h3&gt;Cast&lt;/h3&gt;
+  &lt;table class="table"&gt;
+    &lt;tr th:each="c : ${movie.cast}"&gt;
+      &lt;td th:text="${c.artistName}"&gt;&lt;/td&gt;
+      &lt;td th:text="${c.roleName}"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+
+  &lt;h3&gt;Soundtrack&lt;/h3&gt;
+  &lt;ol&gt;
+    &lt;li th:each="t : ${movie.soundtrackTracks}" th:text="${t}"&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;a th:href="@{/}" class="btn btn-secondary"&gt;Zurück zur Liste&lt;/a&gt;
+&lt;/main&gt;</code></pre>
+<p><strong>Lerneffekt:</strong> <code>th:if</code> + <code>#lists.isEmpty</code> für Empty-State-Handling, <code>th:each</code> über verschachtelte Beziehungen.</p>
+      </div>
+    </div>
+  </article>
+  <article id="th-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — Search-Form mit Filter</h3>
+    <div class="exercise" data-id="th-bonus2">
+      <h5>Aufgabenstellung</h5>
+      <p>Baue eine Suchfunktion auf der Startseite:</p>
+<ol>
+<li>Suchfeld oben (GET-Form): <code>/?q=interstellar</code> filtert die Liste.</li>
+<li>Im Controller: optionaler Query-Param <code>q</code>; wenn gesetzt, ruft <code>movieService.searchByTitle(q)</code>, sonst alle.</li>
+<li>Template zeigt aktuelle Query in einer Pill an, mit Reset-Link.</li>
+<li>Empty-State: „Keine Treffer für '…'".</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@GetMapping("/")
+public ModelAndView index(@RequestParam(required = false) String q) {
+    List&lt;MovieDTO&gt; movies = (q == null || q.isBlank())
+        ? movieService.getAllMovies()
+        : movieService.searchByTitle(q);
+
+    ModelAndView mv = new ModelAndView("index");
+    mv.addObject("data", movies);
+    mv.addObject("query", q);
+    return mv;
+}</code></pre>
+<pre><code class="language-xml">&lt;form method="get" th:action="@{/}" class="mb-3"&gt;
+  &lt;input type="search" name="q" th:value="${query}"
+         class="form-control" placeholder="Filme suchen…"&gt;
+&lt;/form&gt;
+
+&lt;div th:if="${query != null and not #strings.isEmpty(query)}" class="mb-3"&gt;
+  &lt;span class="badge bg-info"&gt;
+    Filter: &lt;span th:text="${query}"&gt;&lt;/span&gt;
+    &lt;a th:href="@{/}" class="text-white text-decoration-none ms-2"&gt;✕&lt;/a&gt;
+  &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p th:if="${#lists.isEmpty(data)}" class="text-muted"&gt;
+  Keine Treffer für '&lt;span th:text="${query}"&gt;&lt;/span&gt;'.
+&lt;/p&gt;
+
+&lt;div th:insert="fragments/grid :: grid"&gt;&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </article>
+  <article id="th-checks" class="verstaendnis">
     <h3>🧠 Verständnis-Checks</h3>
     <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
     <div class="check">

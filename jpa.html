@@ -18,86 +18,27 @@
 
 <aside id="sidebar">
   <h2>Fortgeschrittene<br>Informatik</h2>
-  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
-
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
   <div class="progress-box">
     <div class="progress-label">Fortschritt</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
     <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
   </div>
-
   <nav>
-    <a href="index.html">Übersicht</a>
-    <a href="orga.html#orga">Organisation</a>
-    <details open>
-      <summary>1 · Spring Grundlagen</summary>
-      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
-      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
-      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
-      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
-      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
-    </details>
-    <details open>
-      <summary>2 · Spring Data (JPA)</summary>
-      <a href="#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
-      <a href="#jpa-entity">2.2 Entity-Mapping</a>
-      <a href="#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
-      <a href="#jpa-jpql">2.4 @Query (JPQL)</a>
-      <a href="#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
-      <a href="#jpa-tx">2.6 Transaktionen</a>
-      <a href="#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
-      <a href="#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
-    </details>
-    <details open>
-      <summary>3 · REST</summary>
-      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
-      <a href="rest.html#rest-controller">3.2 @RestController</a>
-      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
-      <a href="rest.html#rest-status">3.4 Status-Codes</a>
-      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
-      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
-      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
-      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
-    </details>
-    <details open>
-      <summary>4 · Testing</summary>
-      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
-      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
-      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
-      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
-      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
-      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
-    </details>
-    <details open>
-      <summary>5 · Webdesign</summary>
-      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
-      <a href="webdesign.html#web-css">5.2 CSS</a>
-      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
-      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
-      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
-      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
-    </details>
-    <details open>
-      <summary>6 · Thymeleaf</summary>
-      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
-      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
-      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
-      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
-      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
-      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
-      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
-    </details>
-    <details open>
-      <summary>7 · Forms</summary>
-      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
-      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
-      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
-      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
-    </details>
-    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
-    <a href="quiz.html#quiz">Probekurztest-Themen</a>
-    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+    <a href="index.html" class="back">← Übersicht</a>
+    <div class="chapter-title">2 · Spring Data (JPA)</div>
+    <a href="#jpa-was">2.1 ORM & JPA</a>
+    <a href="#jpa-entity">2.2 Entity-Mapping</a>
+    <a href="#jpa-repo">2.3 JpaRepository / Derived Queries</a>
+    <a href="#jpa-jpql">2.4 @Query (JPQL)</a>
+    <a href="#jpa-relations">2.5 Beziehungen & Cascade</a>
+    <a href="#jpa-tx">2.6 Transaktionen</a>
+    <a href="#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+    <a href="#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    <a href="#jpa-bonus1">⚙ Bonus 1 — Director bidirektional</a>
+    <a href="#jpa-bonus2">⚙ Bonus 2 — komplexe @Query mit JOIN</a>
+    <a href="#jpa-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
 <main>
@@ -334,7 +275,78 @@ public interface AwardRepository extends JpaRepository&lt;Award, Long&gt; {
     </div>
   </article>
 
-  <article class="verstaendnis">
+  
+  <article id="jpa-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — Director bidirektional 1:n</h3>
+    <div class="exercise" data-id="jpa-bonus1">
+      <h5>Aufgabenstellung</h5>
+      <p>Erweitere das Datenmodell um vollständige <strong>Director ↔ Movie</strong>-Beziehung in <em>beide</em> Richtungen:</p>
+<ol>
+<li><code>Director</code>-Entity mit Feldern <code>id</code>, <code>name</code>, <code>geburtsjahr</code>, <code>nationality</code>.</li>
+<li>In <code>Director</code>: Feld <code>List&lt;Movie&gt; filmography</code> als inverse Seite (1:n).</li>
+<li><code>Movie</code> bleibt owning side mit <code>@ManyToOne</code> + <code>@JoinColumn</code>.</li>
+<li><code>DirectorRepository</code> mit Derived Query <code>findByNameStartingWith(String prefix)</code> und <code>findByNationality(String n)</code>.</li>
+<li>Test in <code>ManualTestBean</code>: lege „Christopher Nolan" an, verknüpfe mit „Interstellar", lade Director per ID, logge Filmografie-Größe.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Getter @Setter @NoArgsConstructor
+@Entity
+public class Director {
+    @Id @GeneratedValue
+    private Long id;
+    private String name;
+    private int geburtsjahr;
+    private String nationality;
+
+    @OneToMany(mappedBy = "director")
+    private List&lt;Movie&gt; filmography = new ArrayList&lt;&gt;();
+
+    public Director(String name, int geburtsjahr, String nationality) {
+        this.name = name;
+        this.geburtsjahr = geburtsjahr;
+        this.nationality = nationality;
+    }
+}
+
+@Repository
+public interface DirectorRepository extends JpaRepository&lt;Director, Long&gt; {
+    List&lt;Director&gt; findByNameStartingWith(String prefix);
+    List&lt;Director&gt; findByNationality(String n);
+}</code></pre>
+<p><strong>Wichtig:</strong> <code>mappedBy = "director"</code> verweist auf den Feldnamen <em>in</em> <code>Movie</code> (das Feld vom Typ <code>Director</code>). Sonst würde JPA eine zusätzliche Join-Tabelle erzeugen — falsch.</p>
+      </div>
+    </div>
+  </article>
+  <article id="jpa-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — komplexe @Query mit JOIN</h3>
+    <div class="exercise" data-id="jpa-bonus2">
+      <h5>Aufgabenstellung</h5>
+      <p>Schreibe eine JPQL-Query, die alle Filme eines bestimmten Directors mit IMDB-Rating &gt; X liefert, sortiert nach Premiere absteigend.</p>
+<ol>
+<li>Methode in <code>MovieRepository</code>: <code>findByDirectorAndMinRating(String directorName, double minRating)</code>.</li>
+<li>JPQL mit JOIN auf <code>m.director</code>.</li>
+<li>Bonus: dieselbe Query auch als Derived Query schreiben — geht das überhaupt?</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Query("""
+    SELECT m FROM Movie m
+    WHERE m.director.name = :name
+      AND m.imdbRating &gt; :minRating
+    ORDER BY m.premiereDate DESC
+""")
+List&lt;Movie&gt; findByDirectorAndMinRating(
+    @Param("name") String directorName,
+    @Param("minRating") double minRating);</code></pre>
+<p>Als Derived Query geht das auch — Spring Data unterstützt Navigation in Beziehungen via Underscore:</p>
+<pre><code class="language-java">List&lt;Movie&gt; findByDirector_NameAndImdbRatingGreaterThanOrderByPremiereDateDesc(
+    String directorName, double minRating);</code></pre>
+<p>Lesbarkeits-Trade-off: Der Methodenname wird sehr lang. Ab einer gewissen Komplexität wechselt man auf <code>@Query</code>.</p>
+      </div>
+    </div>
+  </article>
+  <article id="jpa-checks" class="verstaendnis">
     <h3>🧠 Verständnis-Checks</h3>
     <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
     <div class="check">

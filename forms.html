@@ -18,86 +18,23 @@
 
 <aside id="sidebar">
   <h2>Fortgeschrittene<br>Informatik</h2>
-  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
-
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
   <div class="progress-box">
     <div class="progress-label">Fortschritt</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
     <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
   </div>
-
   <nav>
-    <a href="index.html">Übersicht</a>
-    <a href="orga.html#orga">Organisation</a>
-    <details open>
-      <summary>1 · Spring Grundlagen</summary>
-      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
-      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
-      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
-      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
-      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
-    </details>
-    <details open>
-      <summary>2 · Spring Data (JPA)</summary>
-      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
-      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
-      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
-      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
-      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
-      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
-      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
-      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
-    </details>
-    <details open>
-      <summary>3 · REST</summary>
-      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
-      <a href="rest.html#rest-controller">3.2 @RestController</a>
-      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
-      <a href="rest.html#rest-status">3.4 Status-Codes</a>
-      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
-      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
-      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
-      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
-    </details>
-    <details open>
-      <summary>4 · Testing</summary>
-      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
-      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
-      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
-      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
-      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
-      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
-    </details>
-    <details open>
-      <summary>5 · Webdesign</summary>
-      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
-      <a href="webdesign.html#web-css">5.2 CSS</a>
-      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
-      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
-      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
-      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
-    </details>
-    <details open>
-      <summary>6 · Thymeleaf</summary>
-      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
-      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
-      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
-      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
-      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
-      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
-      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
-    </details>
-    <details open>
-      <summary>7 · Forms</summary>
-      <a href="#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
-      <a href="#forms-binding">7.2 th:object &amp; th:field</a>
-      <a href="#forms-validation">7.3 Validation (@Valid)</a>
-      <a href="#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
-    </details>
-    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
-    <a href="quiz.html#quiz">Probekurztest-Themen</a>
-    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+    <a href="index.html" class="back">← Übersicht</a>
+    <div class="chapter-title">7 · Forms</div>
+    <a href="#forms-was">7.1 Formulare</a>
+    <a href="#forms-binding">7.2 th:object & th:field</a>
+    <a href="#forms-validation">7.3 Validation</a>
+    <a href="#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    <a href="#forms-bonus1">⚙ Bonus 1 — Movie-Edit-Form</a>
+    <a href="#forms-bonus2">⚙ Bonus 2 — Director-Form mit Custom Validation</a>
+    <a href="#forms-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
 <main>
@@ -228,7 +165,133 @@ public class AwardFormController {
     </div>
   </article>
 
-  <article class="verstaendnis">
+  
+  <article id="forms-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — Movie-Edit-Form</h3>
+    <div class="exercise" data-id="forms-bonus1">
+      <h5>Aufgabenstellung</h5>
+      <p>Baue ein vollständiges Edit-Formular für einen Film:</p>
+<ol>
+<li>GET <code>/movies/{id}/edit</code> → Form mit aktuellen Werten vorbefüllt.</li>
+<li>POST <code>/movies/{id}</code> → Validation, dann save + redirect auf Detail-Seite.</li>
+<li>Validations: <code>@NotBlank title</code>, <code>@Min(0) duration</code>, <code>@PastOrPresent premiereDate</code>, <code>@DecimalMax("10.0") @DecimalMin("0.0") imdbRating</code>.</li>
+<li>Bei Validierungsfehlern: dasselbe Form-Template mit Fehlermeldungen anzeigen.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">// DTO mit Validation:
+@Getter @Setter
+public class MovieFormDTO {
+    private Long id;
+
+    @NotBlank
+    private String title;
+
+    @Min(0)
+    private double duration;
+
+    @PastOrPresent
+    private LocalDate premiereDate;
+
+    @DecimalMin("0.0") @DecimalMax("10.0")
+    private double imdbRating;
+}
+
+// Controller:
+@Controller @RequestMapping("/movies")
+public class MovieFormController {
+
+    private final MovieService service;
+    public MovieFormController(MovieService s) { service = s; }
+
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable Long id, Model model) {
+        MovieDTO m = service.getMovieById(id);
+        model.addAttribute("movieForm", toForm(m));
+        return "movie/edit";
+    }
+
+    @PostMapping("/{id}")
+    public String save(@PathVariable Long id,
+                       @Valid @ModelAttribute("movieForm") MovieFormDTO form,
+                       BindingResult br) {
+        if (br.hasErrors()) return "movie/edit";
+        form.setId(id);
+        service.update(form);
+        return "redirect:/movies/" + id;
+    }
+}</code></pre>
+<pre><code class="language-xml">&lt;form th:action="@{/movies/{id}(id=*{id})}" th:object="${movieForm}" method="post"&gt;
+  &lt;div class="mb-3"&gt;
+    &lt;label class="form-label"&gt;Titel&lt;/label&gt;
+    &lt;input class="form-control" type="text" th:field="*{title}"
+           th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'"&gt;
+    &lt;div class="invalid-feedback" th:errors="*{title}"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="mb-3"&gt;
+    &lt;label class="form-label"&gt;IMDB-Rating&lt;/label&gt;
+    &lt;input class="form-control" type="number" step="0.1" th:field="*{imdbRating}"
+           th:classappend="${#fields.hasErrors('imdbRating')} ? 'is-invalid'"&gt;
+    &lt;div class="invalid-feedback" th:errors="*{imdbRating}"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;button type="submit" class="btn btn-primary"&gt;Speichern&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+      </div>
+    </div>
+  </article>
+  <article id="forms-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — Director-Form mit Custom Validation</h3>
+    <div class="exercise" data-id="forms-bonus2">
+      <h5>Aufgabenstellung</h5>
+      <p>Erstelle ein Form für einen Director mit eigener Validierungs-Annotation für die Nationalität (ISO-Ländercode 2 Großbuchstaben):</p>
+<ol>
+<li>DTO <code>DirectorFormDTO</code> mit Feldern <code>name</code>, <code>geburtsjahr</code>, <code>nationality</code>.</li>
+<li>Validations: <code>@NotBlank name</code>, <code>@Min(1900) @Max(2025) geburtsjahr</code>, <code>@Pattern(regexp="[A-Z]{2}") nationality</code>.</li>
+<li>Bei Fehler: Bootstrap-Feedback (rote Border + Fehlermeldung).</li>
+<li>Bonus: lokalisierte Fehlermeldung via <code>messages.properties</code>.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Getter @Setter
+public class DirectorFormDTO {
+    @NotBlank(message = "{director.name.required}")
+    private String name;
+
+    @Min(value = 1900, message = "Vor 1900? Wirklich?")
+    @Max(value = 2025, message = "Aus der Zukunft?")
+    private int geburtsjahr;
+
+    @Pattern(regexp = "[A-Z]{2}",
+             message = "ISO-Ländercode (z.B. US, DE, GB)")
+    private String nationality;
+}
+
+@Controller @RequestMapping("/directors")
+public class DirectorFormController {
+
+    @GetMapping("/neu")
+    public String form(Model m) {
+        m.addAttribute("directorForm", new DirectorFormDTO());
+        return "director/form";
+    }
+
+    @PostMapping
+    public String save(@Valid @ModelAttribute("directorForm") DirectorFormDTO form,
+                       BindingResult br) {
+        if (br.hasErrors()) return "director/form";
+        directorService.create(form);
+        return "redirect:/directors";
+    }
+}</code></pre>
+<p><code>messages.properties</code>:</p>
+<pre><code class="language-bash">director.name.required=Bitte den Namen eingeben.</code></pre>
+<p><strong>Lerneffekt:</strong> Validation-Messages können entweder hartcodiert in der Annotation oder via <code>{key}</code>-Referenz aus <code>messages.properties</code> geladen werden — letzteres ist i18n-fähig.</p>
+      </div>
+    </div>
+  </article>
+  <article id="forms-checks" class="verstaendnis">
     <h3>🧠 Verständnis-Checks</h3>
     <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
     <div class="check">

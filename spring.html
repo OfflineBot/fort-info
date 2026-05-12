@@ -18,86 +18,24 @@
 
 <aside id="sidebar">
   <h2>Fortgeschrittene<br>Informatik</h2>
-  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
-
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
   <div class="progress-box">
     <div class="progress-label">Fortschritt</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
     <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
   </div>
-
   <nav>
-    <a href="index.html">Übersicht</a>
-    <a href="orga.html#orga">Organisation</a>
-    <details open>
-      <summary>1 · Spring Grundlagen</summary>
-      <a href="#spring-was">1.1 Was ist Spring Boot</a>
-      <a href="#spring-schichten">1.2 Schichtenmodell</a>
-      <a href="#spring-beans">1.3 Beans &amp; Stereotypes</a>
-      <a href="#spring-di">1.4 Dependency Injection</a>
-      <a href="#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
-    </details>
-    <details open>
-      <summary>2 · Spring Data (JPA)</summary>
-      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
-      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
-      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
-      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
-      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
-      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
-      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
-      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
-    </details>
-    <details open>
-      <summary>3 · REST</summary>
-      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
-      <a href="rest.html#rest-controller">3.2 @RestController</a>
-      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
-      <a href="rest.html#rest-status">3.4 Status-Codes</a>
-      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
-      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
-      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
-      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
-    </details>
-    <details open>
-      <summary>4 · Testing</summary>
-      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
-      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
-      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
-      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
-      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
-      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
-    </details>
-    <details open>
-      <summary>5 · Webdesign</summary>
-      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
-      <a href="webdesign.html#web-css">5.2 CSS</a>
-      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
-      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
-      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
-      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
-    </details>
-    <details open>
-      <summary>6 · Thymeleaf</summary>
-      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
-      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
-      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
-      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
-      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
-      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
-      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
-    </details>
-    <details open>
-      <summary>7 · Forms</summary>
-      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
-      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
-      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
-      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
-    </details>
-    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
-    <a href="quiz.html#quiz">Probekurztest-Themen</a>
-    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+    <a href="index.html" class="back">← Übersicht</a>
+    <div class="chapter-title">1 · Spring Grundlagen</div>
+    <a href="#spring-was">1.1 Was ist Spring Boot</a>
+    <a href="#spring-schichten">1.2 Schichtenmodell</a>
+    <a href="#spring-beans">1.3 Beans & Stereotypes</a>
+    <a href="#spring-di">1.4 Dependency Injection</a>
+    <a href="#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    <a href="#spring-bonus1">⚙ Bonus 1 — SoundtrackService</a>
+    <a href="#spring-bonus2">⚙ Bonus 2 — @Configuration / @Bean</a>
+    <a href="#spring-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
 <main>
@@ -235,7 +173,91 @@ ArtistService: ArtistServiceImpl</code></pre>
     </div>
   </article>
 
-  <article class="verstaendnis">
+  
+  <article id="spring-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — SoundtrackService</h3>
+    <div class="exercise" data-id="spring-bonus1">
+      <h5>Aufgabenstellung</h5>
+      <p>Lege parallel zum bestehenden <code>MovieService</code> einen <strong>SoundtrackService</strong> an. Anforderungen:</p>
+<ol>
+<li>Interface <code>SoundtrackService</code> mit Methode <code>String getName()</code> und <code>List&lt;String&gt; listAll()</code> (gibt 3 hartcodierte Track-Namen zurück).</li>
+<li>Implementierung <code>SoundtrackServiceImpl</code> mit korrektem Stereotyp.</li>
+<li>Im <code>MovieController</code> als dritte Konstruktor-Abhängigkeit injizieren.</li>
+<li>Methode <code>String getSoundtrackServiceName()</code> im Controller hinzufügen.</li>
+<li><code>ManualTestBean</code> erweitern, sodass beim Start „Soundtrack: SoundtrackServiceImpl" geloggt wird.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">public interface SoundtrackService {
+    String getName();
+    List&lt;String&gt; listAll();
+}
+
+@Service
+public class SoundtrackServiceImpl implements SoundtrackService {
+    @Override public String getName() { return "SoundtrackServiceImpl"; }
+    @Override public List&lt;String&gt; listAll() {
+        return List.of("Cornfield Chase", "Day One", "Dust");
+    }
+}
+
+@Controller
+public class MovieControllerImpl implements MovieController {
+    private final MovieService movieService;
+    private final ArtistService artistService;
+    private final SoundtrackService soundtrackService;
+
+    public MovieControllerImpl(MovieService m, ArtistService a, SoundtrackService s) {
+        this.movieService = m;
+        this.artistService = a;
+        this.soundtrackService = s;
+    }
+
+    @Override public String getSoundtrackServiceName() {
+        return soundtrackService.getName();
+    }
+    // … andere Methoden
+}</code></pre>
+<p>Im <code>ManualTestBean.callController()</code> ergänzen:</p>
+<pre><code class="language-java">log.info("Soundtrack: " + movieController.getSoundtrackServiceName());</code></pre>
+      </div>
+    </div>
+  </article>
+  <article id="spring-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — @Configuration / @Bean</h3>
+    <div class="exercise" data-id="spring-bonus2">
+      <h5>Aufgabenstellung</h5>
+      <p>Manchmal willst du eine Bean registrieren, deren Klasse du <em>nicht</em> selbst geschrieben hast (3rd-party-Lib) — dann geht das nicht über <code>@Component</code>. Lösung: eine Klasse mit <code>@Configuration</code> und einer <code>@Bean</code>-Methode.</p>
+<ol>
+<li>Lege <code>AppConfig</code> mit <code>@Configuration</code> an.</li>
+<li>Definiere eine <code>@Bean</code>-Methode <code>appName()</code>, die <code>"MyMovieDatabase"</code> zurückgibt.</li>
+<li>Inject das Ergebnis (Typ <code>String</code>) per Konstruktor + <code>@Qualifier("appName")</code> in den <code>MovieController</code>.</li>
+<li>Logge den App-Namen in <code>ManualTestBean</code>.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+    @Bean
+    public String appName() {
+        return "MyMovieDatabase";
+    }
+}
+
+@Controller
+public class MovieControllerImpl implements MovieController {
+    private final String appName;
+
+    public MovieControllerImpl(@Qualifier("appName") String appName, /* andere */) {
+        this.appName = appName;
+    }
+    public String getAppName() { return appName; }
+}</code></pre>
+<p><strong>Lerneffekt:</strong> <code>@Bean</code> wird genutzt, wenn die Bean-Erzeugung Logik braucht (Properties lesen, Driver bauen, etc.). <code>@Component</code> reicht nur für eigene Klassen, die du frei annotieren kannst.</p>
+      </div>
+    </div>
+  </article>
+  <article id="spring-checks" class="verstaendnis">
     <h3>🧠 Verständnis-Checks</h3>
     <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
     <div class="check">

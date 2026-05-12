@@ -3,10 +3,8 @@
 
 const STORAGE_KEY = "fortinfo-progress";
 
-// Total number of exercises across the whole site (12 Aufgaben).
-// Hard-coded because each page only renders its own exercises but the
-// sidebar progress should reflect the global state.
-const TOTAL_EXERCISES = 12;
+// Total exercises across the whole site: 12 Moodle-Aufgaben + 15 Bonus = 27.
+const TOTAL_EXERCISES = 27;
 
 document.addEventListener("DOMContentLoaded", () => {
   if (window.hljs) window.hljs.highlightAll();

@@ -18,86 +18,26 @@
 
 <aside id="sidebar">
   <h2>Fortgeschrittene<br>Informatik</h2>
-  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
-
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
   <div class="progress-box">
     <div class="progress-label">Fortschritt</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
     <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
   </div>
-
   <nav>
-    <a href="index.html">Übersicht</a>
-    <a href="orga.html#orga">Organisation</a>
-    <details open>
-      <summary>1 · Spring Grundlagen</summary>
-      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
-      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
-      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
-      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
-      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
-    </details>
-    <details open>
-      <summary>2 · Spring Data (JPA)</summary>
-      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
-      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
-      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
-      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
-      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
-      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
-      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
-      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
-    </details>
-    <details open>
-      <summary>3 · REST</summary>
-      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
-      <a href="rest.html#rest-controller">3.2 @RestController</a>
-      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
-      <a href="rest.html#rest-status">3.4 Status-Codes</a>
-      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
-      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
-      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
-      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
-    </details>
-    <details open>
-      <summary>4 · Testing</summary>
-      <a href="#test-pyramid">4.1 Test-Pyramide</a>
-      <a href="#test-junit">4.2 JUnit 5 Basics</a>
-      <a href="#test-doubles">4.3 Test Doubles &amp; Mockito</a>
-      <a href="#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
-      <a href="#test-jsonpath">4.5 JsonPath</a>
-      <a href="#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
-    </details>
-    <details open>
-      <summary>5 · Webdesign</summary>
-      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
-      <a href="webdesign.html#web-css">5.2 CSS</a>
-      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
-      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
-      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
-      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
-    </details>
-    <details open>
-      <summary>6 · Thymeleaf</summary>
-      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
-      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
-      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
-      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
-      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
-      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
-      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
-    </details>
-    <details open>
-      <summary>7 · Forms</summary>
-      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
-      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
-      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
-      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
-    </details>
-    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
-    <a href="quiz.html#quiz">Probekurztest-Themen</a>
-    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+    <a href="index.html" class="back">← Übersicht</a>
+    <div class="chapter-title">4 · Testing</div>
+    <a href="#test-pyramid">4.1 Test-Pyramide</a>
+    <a href="#test-junit">4.2 JUnit 5 Basics</a>
+    <a href="#test-doubles">4.3 Test Doubles & Mockito</a>
+    <a href="#test-mockmvc">4.4 MockMvc & @WebMvcTest</a>
+    <a href="#test-jsonpath">4.5 JsonPath</a>
+    <a href="#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    <a href="#test-bonus1">⚙ Bonus 1 — AwardControllerImplTest</a>
+    <a href="#test-bonus2">⚙ Bonus 2 — Service-Test (reines Mockito)</a>
+    <a href="#test-bonus3">⚙ Bonus 3 — @DataJpaTest gegen H2</a>
+    <a href="#test-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
 <main>
@@ -288,7 +228,210 @@ public void shouldFailAddNewMovieDueToConstraintViolation() throws Exception {
     </div>
   </article>
 
-  <article class="verstaendnis">
+  
+  <article id="test-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — AwardControllerImplTest</h3>
+    <div class="exercise" data-id="test-bonus1">
+      <h5>Aufgabenstellung</h5>
+      <p>Schreibe analog zum offiziellen <code>MovieControllerImplTest</code> einen vollständigen Test für den <code>AwardController</code>. Pflichtfälle:</p>
+<ol>
+<li>GET-Liste mit 2 Awards.</li>
+<li>GET-by-ID erfolgreich.</li>
+<li>GET-by-ID mit unbekannter ID → 404.</li>
+<li>POST erfolgreich → 201.</li>
+<li>POST ohne <code>category</code> → 400, Service nicht aufgerufen.</li>
+<li>DELETE erfolgreich.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@WebMvcTest(controllers = AwardControllerImpl.class)
+public class AwardControllerImplTest {
+
+    @MockBean    private AwardService awardService;
+    @Autowired   private MockMvc mockMvc;
+    @Autowired   private ObjectMapper objectMapper;
+
+    private AwardDTO oscar;
+
+    @BeforeEach
+    void setUp() {
+        oscar = new AwardDTO(1L, "Oscar", "Best Picture", 2024);
+    }
+
+    @Test
+    void shouldReturnAllAwards() throws Exception {
+        when(awardService.getAllAwards()).thenReturn(List.of(oscar));
+        mockMvc.perform(get("/api/v1/awards"))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.*", hasSize(1)))
+               .andExpect(jsonPath("$[0].academy", is("Oscar")));
+        verify(awardService).getAllAwards();
+    }
+
+    @Test
+    void shouldReturnAwardById() throws Exception {
+        when(awardService.getAwardById(1L)).thenReturn(oscar);
+        mockMvc.perform(get("/api/v1/awards/1"))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.celebrationYear", is(2024)));
+    }
+
+    @Test
+    void shouldReturn404IfUnknown() throws Exception {
+        when(awardService.getAwardById(99L))
+            .thenThrow(new NoSuchElementException("not found"));
+        mockMvc.perform(get("/api/v1/awards/99"))
+               .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void shouldCreateAward() throws Exception {
+        when(awardService.addAward(any())).thenReturn(oscar);
+        mockMvc.perform(post("/api/v1/awards")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(oscar)))
+               .andExpect(status().isCreated())
+               .andExpect(jsonPath("$.id", is(1)));
+    }
+
+    @Test
+    void shouldReject400WhenCategoryBlank() throws Exception {
+        oscar.setCategory(null);
+        mockMvc.perform(post("/api/v1/awards")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(oscar)))
+               .andExpect(status().isBadRequest());
+        verify(awardService, never()).addAward(any());
+    }
+
+    @Test
+    void shouldDeleteAward() throws Exception {
+        mockMvc.perform(delete("/api/v1/awards/1"))
+               .andExpect(status().isOk());
+        verify(awardService).removeAwardById(1L);
+    }
+}</code></pre>
+      </div>
+    </div>
+  </article>
+  <article id="test-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — Service-Test (reines Mockito, ohne Spring)</h3>
+    <div class="exercise" data-id="test-bonus2">
+      <h5>Aufgabenstellung</h5>
+      <p>Bisher haben wir Controller mit <code>@WebMvcTest</code> getestet. Jetzt ein <em>echter</em> Unit-Test des Service-Layers — ohne Spring zu starten:</p>
+<ol>
+<li>Test ohne <code>@SpringBootTest</code> oder <code>@WebMvcTest</code> — pures JUnit + Mockito.</li>
+<li>Mock <code>MovieRepository</code> per <code>@Mock</code>.</li>
+<li>Erstelle den Service per <code>@InjectMocks</code> mit dem gemockten Repo.</li>
+<li>Tests: <code>getAllMovies</code> mappt korrekt vom Repo zur DTO-Liste.</li>
+<li>Test: <code>removeMovieById</code> wirft <code>NoSuchElementException</code>, wenn <code>existsById</code> false.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@ExtendWith(MockitoExtension.class)
+class MovieServiceImplTest {
+
+    @Mock        MovieRepository repo;
+    @Mock        MovieMapper     mapper;
+    @InjectMocks MovieServiceImpl service;
+
+    @Test
+    void shouldReturnAllMovies() {
+        Movie m = new Movie(); m.setTitle("Dune");
+        MovieDTO dto = new MovieDTO(); dto.setTitle("Dune");
+
+        when(repo.findAll()).thenReturn(List.of(m));
+        when(mapper.movieToDto(m)).thenReturn(dto);
+
+        List&lt;MovieDTO&gt; result = service.getAllMovies();
+
+        assertEquals(1, result.size());
+        assertEquals("Dune", result.get(0).getTitle());
+    }
+
+    @Test
+    void shouldThrowOnRemoveUnknownId() {
+        when(repo.existsById(99L)).thenReturn(false);
+
+        assertThrows(NoSuchElementException.class,
+            () -&gt; service.removeMovieById(99L));
+
+        verify(repo, never()).deleteById(any());
+    }
+
+    @Test
+    void shouldDeleteWhenExists() {
+        when(repo.existsById(1L)).thenReturn(true);
+
+        service.removeMovieById(1L);
+
+        verify(repo).deleteById(1L);
+    }
+}</code></pre>
+<p><strong>Vorteile:</strong> ms-schnelle Tests (kein Spring-Kontext), klare Isolation der Service-Logik. <strong>Nachteil:</strong> testet nicht die Integration mit echten Spring-Beans (z.B. Validation auf DTOs).</p>
+      </div>
+    </div>
+  </article>
+  <article id="test-bonus3" class="aufgabe">
+    <h3>⚙ Bonus 3 — @DataJpaTest gegen H2</h3>
+    <div class="exercise" data-id="test-bonus3">
+      <h5>Aufgabenstellung</h5>
+      <p>Repository-Methoden testet man am besten gegen eine echte DB. Mit <code>@DataJpaTest</code> startet Spring nur den JPA-Layer mit einer In-Memory H2-DB:</p>
+<ol>
+<li><code>@DataJpaTest</code> auf der Test-Klasse.</li>
+<li><code>@Autowired TestEntityManager entityManager</code> + <code>@Autowired MovieRepository repo</code>.</li>
+<li>Test: persistiere 3 Filme, rufe <code>findByImdbRatingGreaterThan(7.5)</code>, prüfe Anzahl + Inhalte.</li>
+<li>Test: lege Movie + verknüpften Award an, prüfe Cascade.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@DataJpaTest
+class MovieRepositoryTest {
+
+    @Autowired private TestEntityManager em;
+    @Autowired private MovieRepository repo;
+
+    @Test
+    void shouldFindHighRatedMovies() {
+        Movie a = movie("A", 8.0);
+        Movie b = movie("B", 6.5);
+        Movie c = movie("C", 9.1);
+        em.persist(a); em.persist(b); em.persist(c);
+        em.flush();
+
+        List&lt;Movie&gt; result = repo.findByImdbRatingGreaterThan(7.5);
+
+        assertEquals(2, result.size());
+        assertThat(result).extracting(Movie::getTitle).containsExactlyInAnyOrder("A", "C");
+    }
+
+    @Test
+    void shouldCascadeAwardOnSave() {
+        Movie m = movie("Interstellar", 8.6);
+        Award oscar = new Award("Oscar", "Visual Effects", 2015);
+        oscar.setMovie(m);
+        m.setAwards(List.of(oscar));
+
+        Movie saved = repo.save(m);
+        em.flush(); em.clear();
+
+        Movie reloaded = repo.findById(saved.getId()).orElseThrow();
+        assertEquals(1, reloaded.getAwards().size());
+        assertEquals("Oscar", reloaded.getAwards().get(0).getAcademy());
+    }
+
+    private Movie movie(String title, double rating) {
+        Movie m = new Movie();
+        m.setTitle(title);
+        m.setImdbRating(rating);
+        return m;
+    }
+}</code></pre>
+<p><strong>Was startet @DataJpaTest:</strong> JPA-Beans (EntityManager, Repos) + In-Memory-DB (H2). Kein Web-Layer, kein Service-Bean — fokussierter und schneller als <code>@SpringBootTest</code>.</p>
+      </div>
+    </div>
+  </article>
+  <article id="test-checks" class="verstaendnis">
     <h3>🧠 Verständnis-Checks</h3>
     <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
     <div class="check">

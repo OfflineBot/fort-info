@@ -18,86 +18,27 @@
 
 <aside id="sidebar">
   <h2>Fortgeschrittene<br>Informatik</h2>
-  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
-
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
   <div class="progress-box">
     <div class="progress-label">Fortschritt</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
     <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
   </div>
-
   <nav>
-    <a href="index.html">Übersicht</a>
-    <a href="orga.html#orga">Organisation</a>
-    <details open>
-      <summary>1 · Spring Grundlagen</summary>
-      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
-      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
-      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
-      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
-      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
-    </details>
-    <details open>
-      <summary>2 · Spring Data (JPA)</summary>
-      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
-      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
-      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
-      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
-      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
-      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
-      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
-      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
-    </details>
-    <details open>
-      <summary>3 · REST</summary>
-      <a href="#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
-      <a href="#rest-controller">3.2 @RestController</a>
-      <a href="#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
-      <a href="#rest-status">3.4 Status-Codes</a>
-      <a href="#rest-dto">3.5 DTOs &amp; MapStruct</a>
-      <a href="#rest-openapi">3.6 OpenAPI / Swagger</a>
-      <a href="#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
-      <a href="#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
-    </details>
-    <details open>
-      <summary>4 · Testing</summary>
-      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
-      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
-      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
-      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
-      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
-      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
-    </details>
-    <details open>
-      <summary>5 · Webdesign</summary>
-      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
-      <a href="webdesign.html#web-css">5.2 CSS</a>
-      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
-      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
-      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
-      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
-    </details>
-    <details open>
-      <summary>6 · Thymeleaf</summary>
-      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
-      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
-      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
-      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
-      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
-      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
-      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
-    </details>
-    <details open>
-      <summary>7 · Forms</summary>
-      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
-      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
-      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
-      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
-    </details>
-    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
-    <a href="quiz.html#quiz">Probekurztest-Themen</a>
-    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+    <a href="index.html" class="back">← Übersicht</a>
+    <div class="chapter-title">3 · REST</div>
+    <a href="#rest-was">3.1 REST & HTTP</a>
+    <a href="#rest-controller">3.2 @RestController</a>
+    <a href="#rest-params">3.3 Parameter-Typen</a>
+    <a href="#rest-status">3.4 Status-Codes</a>
+    <a href="#rest-dto">3.5 DTOs & MapStruct</a>
+    <a href="#rest-openapi">3.6 OpenAPI / Swagger</a>
+    <a href="#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+    <a href="#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    <a href="#rest-bonus1">⚙ Bonus 1 — DirectorController CRUD</a>
+    <a href="#rest-bonus2">⚙ Bonus 2 — @ExceptionHandler + ResponseEntity</a>
+    <a href="#rest-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
 <main>
@@ -333,7 +274,113 @@ public class AwardServiceImpl implements AwardService {
     </div>
   </article>
 
-  <article class="verstaendnis">
+  
+  <article id="rest-bonus1" class="aufgabe">
+    <h3>⚙ Bonus 1 — DirectorController CRUD + Sub-Resource</h3>
+    <div class="exercise" data-id="rest-bonus1">
+      <h5>Aufgabenstellung</h5>
+      <p>Baue analog zum <code>AwardController</code> einen <strong>DirectorController</strong>:</p>
+<ol>
+<li>Standard-CRUD über <code>/api/v1/directors</code>: GET-Liste, GET-by-ID, POST, PUT, DELETE.</li>
+<li><strong>Sub-Resource</strong>: <code>GET /api/v1/directors/{id}/movies</code> liefert die Filmografie eines Directors.</li>
+<li>DTOs trennen: <code>DirectorDTO</code> (mit ID, Name, Geburtsjahr, Nationalität, <code>List&lt;Long&gt; movieIds</code>).</li>
+<li>POST gibt Status 201 zurück.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@RestController
+@RequestMapping("/api/v1/directors")
+public class DirectorControllerImpl implements DirectorController {
+
+    private final DirectorService service;
+
+    public DirectorControllerImpl(DirectorService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List&lt;DirectorDTO&gt; getAll() {
+        return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public DirectorDTO getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    // Sub-Resource: Filmografie eines Directors
+    @GetMapping("/{id}/movies")
+    public List&lt;MovieDTO&gt; getMovies(@PathVariable Long id) {
+        return service.getMoviesOfDirector(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public DirectorDTO add(@Valid @RequestBody DirectorDTO dto) {
+        return service.add(dto);
+    }
+
+    @PutMapping("/{id}")
+    public DirectorDTO update(@PathVariable Long id,
+                              @Valid @RequestBody DirectorDTO dto) {
+        dto.setId(id);
+        return service.update(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) { service.delete(id); }
+}</code></pre>
+<p><strong>Sub-Resource-Pattern:</strong> Wenn eine Ressource <em>gehört zu</em> einer anderen, wird sie als Pfadkomponente eingehängt: <code>/parents/{id}/children</code>. Saubere REST-Konvention statt <code>/movies?directorId=5</code>.</p>
+      </div>
+    </div>
+  </article>
+  <article id="rest-bonus2" class="aufgabe">
+    <h3>⚙ Bonus 2 — @ExceptionHandler + ResponseEntity</h3>
+    <div class="exercise" data-id="rest-bonus2">
+      <h5>Aufgabenstellung</h5>
+      <p>Bisher liefert ein nicht-gefundener Award den Default-500-Fehler. Implementiere globales Exception-Handling:</p>
+<ol>
+<li><code>@ControllerAdvice</code>-Klasse <code>GlobalExceptionHandler</code>.</li>
+<li>Methode für <code>NoSuchElementException</code> → <code>ResponseEntity</code> mit Status 404 und JSON-Fehlerobjekt.</li>
+<li>Methode für <code>MethodArgumentNotValidException</code> (Validation-Fehler) → 400 mit Liste der Fehler.</li>
+<li>Im Service throw <code>NoSuchElementException</code> wenn Repository <code>findById(...).isEmpty()</code>.</li>
+</ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">record ApiError(int status, String message, Instant timestamp) {}
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity&lt;ApiError&gt; handleNotFound(NoSuchElementException e) {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(new ApiError(404, e.getMessage(), Instant.now()));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleValidation(
+            MethodArgumentNotValidException e) {
+        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
+        e.getBindingResult().getFieldErrors().forEach(fe -&gt;
+            errors.put(fe.getField(), fe.getDefaultMessage())
+        );
+        return ResponseEntity.badRequest().body(errors);
+    }
+}
+
+// im Service:
+public AwardDTO getById(Long id) {
+    Award a = repo.findById(id).orElseThrow(
+        () -&gt; new NoSuchElementException("Award " + id + " not found"));
+    return mapper.awardToDto(a);
+}</code></pre>
+<p><strong>Vorteil:</strong> der Controller bleibt schlank — kein <code>try/catch</code> in jeder Methode. Spring routet Exceptions automatisch zum passenden Handler.</p>
+      </div>
+    </div>
+  </article>
+  <article id="rest-checks" class="verstaendnis">
     <h3>🧠 Verständnis-Checks</h3>
     <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
     <div class="check">
