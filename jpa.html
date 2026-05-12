@@ -37,9 +37,9 @@
     <a href="#jpa-tx">2.6 Transaktionen</a>
     <a href="#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
     <a href="#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
-    <a href="#jpa-bonus1">⚙ Bonus 1 — Director bidirektional</a>
-    <a href="#jpa-bonus2">⚙ Bonus 2 — komplexe @Query mit JOIN</a>
-    <a href="#jpa-bonus3">⚙ Bonus 3 — Lazy/Eager + @Transactional</a>
+    <a href="#jpa-bonus1">⚙ Weitere Aufgabe 1 — Director bidirektional</a>
+    <a href="#jpa-bonus2">⚙ Weitere Aufgabe 2 — komplexe @Query mit JOIN</a>
+    <a href="#jpa-bonus3">⚙ Weitere Aufgabe 3 — Lazy/Eager + @Transactional</a>
     <a href="#jpa-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -54,7 +54,32 @@
   </div>
 
 
-  <article id="jpa-was">
+  
+  <article class="typische-fehler">
+    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
+    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>@OneToMany</code> ohne <code>mappedBy</code> bei bidirektionaler Beziehung</div>
+      <div class="pitfall-explain">JPA legt dann zwei Join-Tabellen an statt einer. Auf der inversen Seite immer <code>mappedBy = "feldname"</code> setzen — Wert ist der Java-Feldname der owning side.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>cascade = CascadeType.ALL</code> blind setzen</div>
+      <div class="pitfall-explain">Beim <code>delete(movie)</code> löschst du dann auch den Director — andere Filme verlieren ihre Beziehung. Bewusst pro Beziehung wählen: oft nur <code>PERSIST</code> + <code>MERGE</code>.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ JPQL mit Tabellennamen statt Klassennamen</div>
+      <div class="pitfall-explain"><code>SELECT * FROM movies</code> ist SQL, nicht JPQL. Korrekt: <code>SELECT m FROM Movie m</code> — Klassenname + Alias. Felder als <code>m.title</code>, nicht <code>title_column</code>.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Lazy-Beziehung außerhalb Transaktion zugreifen</div>
+      <div class="pitfall-explain"><code>LazyInitializationException</code> bei der Serialisierung. Lösung: Service-Methode mit <code>@Transactional</code> annotieren — solange offen ist, kann Hibernate nachladen.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>@Transactional</code> intern aufrufen</div>
+      <div class="pitfall-explain">Methode A in derselben Bean ruft Methode B mit <code>@Transactional</code> auf — die Annotation greift NICHT, weil Spring sie nur bei <em>externen</em> Aufrufen über den Proxy abfängt.</div>
+    </div>
+  </article>
+<article id="jpa-was">
     <h3>2.1 ORM &amp; JPA-Grundlagen</h3>
     <p><strong>ORM (Object-Relational Mapping)</strong> bildet Java-Objekte auf relationale Tabellen ab. <strong>JPA (Jakarta Persistence API)</strong> ist die Java-Spezifikation dafür; <strong>Hibernate</strong> ist die in Spring Boot mitgelieferte Standard-Implementierung. <strong>Spring Data JPA</strong> packt eine Repository-Schicht obendrauf, die viele CRUD-Operationen ohne eine Zeile SQL bereitstellt.</p>
 
@@ -294,7 +319,7 @@ public interface AwardRepository extends JpaRepository&lt;Award, Long&gt; {
 
   
     <article id="jpa-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — Director-Entity bidirektional (komplett)</h3>
+    <h3>⚙ Weitere Aufgabe 1 — Director-Entity bidirektional (komplett)</h3>
     <div class="exercise" data-id="jpa-bonus1">
       <h5>Aufgabenstellung</h5>
       <p>Erweitere das Datenmodell um eine vollständige <strong>Director ↔ Movie</strong>-Beziehung in beide Richtungen, analog zu wie <code>Award ↔ Movie</code> in Aufgabe 3 modelliert ist.</p>
@@ -408,7 +433,7 @@ log.info("Erster Film:        " + reloaded.getFilmography().get(0).getTitle());<
     </div>
   </article>
   <article id="jpa-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — komplexe @Query mit JOIN</h3>
+    <h3>⚙ Weitere Aufgabe 2 — komplexe @Query mit JOIN</h3>
     <div class="exercise" data-id="jpa-bonus2">
       <h5>Aufgabenstellung</h5>
       <p>Schreibe eine JPQL-Query, die alle Filme eines bestimmten Directors mit IMDB-Rating &gt; X liefert, sortiert nach Premiere absteigend.</p>
@@ -436,7 +461,7 @@ List&lt;Movie&gt; findByDirectorAndMinRating(
     </div>
   </article>
     <article id="jpa-bonus3" class="aufgabe">
-    <h3>⚙ Bonus 3 — Lazy/Eager Fetching + @Transactional</h3>
+    <h3>⚙ Weitere Aufgabe 3 — Lazy/Eager Fetching + @Transactional</h3>
     <div class="exercise" data-id="jpa-bonus3">
       <h5>Aufgabenstellung</h5>
       <p>Die Folien behandeln Ladestrategien (FetchType) und <code>@Transactional</code>. Setze Folgendes um:</p>

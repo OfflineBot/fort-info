@@ -35,11 +35,11 @@
     <a href="#test-mockmvc">4.4 MockMvc & @WebMvcTest</a>
     <a href="#test-jsonpath">4.5 JsonPath</a>
     <a href="#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
-    <a href="#test-bonus1">⚙ Bonus 1 — AwardControllerImplTest</a>
-    <a href="#test-bonus2">⚙ Bonus 2 — Service-Test (reines Mockito)</a>
-    <a href="#test-bonus3">⚙ Bonus 3 — @DataJpaTest gegen H2</a>
-    <a href="#test-bonus4">⚙ Bonus 4 — JsonPath im Detail</a>
-    <a href="#test-bonus5">⚙ Bonus 5 — Constraint-Violation-Tests</a>
+    <a href="#test-bonus1">⚙ Weitere Aufgabe 1 — AwardControllerImplTest</a>
+    <a href="#test-bonus2">⚙ Weitere Aufgabe 2 — Service-Test (reines Mockito)</a>
+    <a href="#test-bonus3">⚙ Weitere Aufgabe 3 — @DataJpaTest gegen H2</a>
+    <a href="#test-bonus4">⚙ Weitere Aufgabe 4 — JsonPath im Detail</a>
+    <a href="#test-bonus5">⚙ Weitere Aufgabe 5 — Constraint-Violation-Tests</a>
     <a href="#test-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -54,7 +54,36 @@
   </div>
 
 
-  <article id="test-pyramid">
+  
+  <article class="typische-fehler">
+    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
+    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Mock-Bean ohne <code>when()</code> aufrufen</div>
+      <div class="pitfall-explain">Mockito gibt dann den Default zurück: <code>null</code>, <code>0</code>, oder leere Liste — egal welche Logik der echte Service hat. Pro Test alle nötigen Stubs aufsetzen.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ JsonPath: <code>$.title</code> auf einer Array-Antwort</div>
+      <div class="pitfall-explain">Bei Liste musst du den Index angeben: <code>$[0].title</code>. <code>$.title</code> auf einer Liste matcht nichts.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Long-IDs als JSON-Asserts ohne <code>.intValue()</code></div>
+      <div class="pitfall-explain">Jackson serialisiert kleine Long als <code>int</code>. <code>jsonPath("$.id", is(1L))</code> schlägt fehl — du brauchst <code>is(1)</code> oder <code>is(movie.getId().intValue())</code>.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Constraint-Violation-Test mit <code>when()</code></div>
+      <div class="pitfall-explain">Bei <code>@Valid</code>-Verletzung passiert der Service-Call gar nicht. <code>when(...)</code> ist sinnlos. Statt dessen: <code>verify(service, never())</code> nach dem Mock-Aufruf.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>@WebMvcTest</code> mit <code>@Autowired</code>-Service</div>
+      <div class="pitfall-explain">Services werden nicht geladen. <code>@MockBean</code> ist Pflicht für jede Service-Abhängigkeit, sonst wirft der Test „No qualifying bean".</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Test-Klassen-Naming verletzt</div>
+      <div class="pitfall-explain">Folien-Konvention: <code>X</code>-Test heißt <code>XTest</code> (ohne Underscore, Test als Suffix). Test-Methoden mit <code>should</code> + Verhalten beginnen — sonst Punktabzug bei Code-Review.</div>
+    </div>
+  </article>
+<article id="test-pyramid">
     <h3>4.1 Test-Pyramide</h3>
     <p>Im Kurs wird die klassische Pyramide unterrichtet:</p>
     <ol>
@@ -244,7 +273,7 @@ public void shouldFailAddNewMovieDueToConstraintViolation() throws Exception {
 
   
     <article id="test-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — AwardControllerImplTest auf Aufgabe-6-Niveau</h3>
+    <h3>⚙ Weitere Aufgabe 1 — AwardControllerImplTest auf Aufgabe-6-Niveau</h3>
     <div class="exercise" data-id="test-bonus1">
       <h5>Aufgabenstellung</h5>
       <p>Schreibe einen vollständigen <code>AwardControllerImplTest</code> analog zu <code>MovieControllerImplTest</code> aus Aufgabe 6 — mit allen success- und error-Pfaden, jsonPath-Assertions auf jedem Feld:</p>
@@ -442,7 +471,7 @@ public class AwardControllerImplTest {
     </div>
   </article>
     <article id="test-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — @BeforeEach + Helper-Methoden</h3>
+    <h3>⚙ Weitere Aufgabe 2 — @BeforeEach + Helper-Methoden</h3>
     <div class="exercise" data-id="test-bonus2">
       <h5>Aufgabenstellung</h5>
       <p>Die Folien empfehlen explizit, wiederholten Test-Setup-Code in <code>@BeforeEach</code> / <code>@BeforeAll</code> + Helper-Methoden auszulagern. Refactor des <code>MovieControllerImplTest</code>:</p>
@@ -495,7 +524,7 @@ class MovieControllerImplTest {
     </div>
   </article>
     <article id="test-bonus3" class="aufgabe">
-    <h3>⚙ Bonus 3 — Stub vs. Mock am MovieService</h3>
+    <h3>⚙ Weitere Aufgabe 3 — Stub vs. Mock am MovieService</h3>
     <div class="exercise" data-id="test-bonus3">
       <h5>Aufgabenstellung</h5>
       <p>Die Folien stellen den Unterschied zwischen Stub und Mock am Banking-Beispiel dar: <em>Stub bildet Antwortverhalten nach (Stand 100€ → 80€), Mock prüft nur den Aufruf.</em> Übertrage diese Unterscheidung auf den MovieService:</p>
@@ -537,7 +566,7 @@ void mockStyle_deleteCallsService() throws Exception {
     </div>
   </article>
     <article id="test-bonus4" class="aufgabe">
-    <h3>⚙ Bonus 4 — JsonPath im Detail</h3>
+    <h3>⚙ Weitere Aufgabe 4 — JsonPath im Detail</h3>
     <div class="exercise" data-id="test-bonus4">
       <h5>Aufgabenstellung</h5>
       <p>Die offizielle Aufgabe-6-Lösung nutzt rund <strong>30 verschiedene jsonPath-Ausdrücke</strong> — wenn du sie nicht beherrschst, schreibst du im Kurztest blind. Übe alle Patterns am MovieDTO:</p>
@@ -628,7 +657,7 @@ void mockStyle_deleteCallsService() throws Exception {
     </div>
   </article>
     <article id="test-bonus5" class="aufgabe">
-    <h3>⚙ Bonus 5 — Constraint-Violation-Tests (Validation-Chain)</h3>
+    <h3>⚙ Weitere Aufgabe 5 — Constraint-Violation-Tests (Validation-Chain)</h3>
     <div class="exercise" data-id="test-bonus5">
       <h5>Aufgabenstellung</h5>
       <p>Die offizielle Lösung testet Validierungs-Fehler an mehreren Stellen. Verstehe das Pattern: bei einer <code>@Valid</code>-Violation läuft der Request <em>nicht</em> bis zum Service durch — Spring antwortet direkt mit 400.</p>

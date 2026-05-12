@@ -36,8 +36,8 @@
     <a href="#th-iteration">6.5 Iteration mit th:each</a>
     <a href="#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
     <a href="#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
-    <a href="#th-bonus1">⚙ Bonus 1 — Movie-Detailseite</a>
-    <a href="#th-bonus2">⚙ Bonus 2 — Search-Form</a>
+    <a href="#th-bonus1">⚙ Weitere Aufgabe 1 — Movie-Detailseite</a>
+    <a href="#th-bonus2">⚙ Weitere Aufgabe 2 — Search-Form</a>
     <a href="#th-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -52,7 +52,32 @@
   </div>
 
 
-  <article id="th-was">
+  
+  <article class="typische-fehler">
+    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
+    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>th:insert</code> vs <code>th:replace</code> verwechseln</div>
+      <div class="pitfall-explain"><code>insert</code> packt das Fragment <em>in</em> den Tag (Tag bleibt). <code>replace</code> ersetzt den Tag komplett. Bei wrapping-Containern (z.B. <code>&lt;section&gt;</code>) macht das einen DOM-Unterschied.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Namespace <code>xmlns:th</code> vergessen</div>
+      <div class="pitfall-explain">Ohne Namespace im <code>&lt;html&gt;</code>-Tag bleiben die <code>th:</code>-Attribute als unbekannte HTML-Attribute stehen — Browser zeigt nichts, Thymeleaf rendert nicht.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>${var}</code> innerhalb <code>th:object</code> statt <code>*{var}</code></div>
+      <div class="pitfall-explain">Geht zwar oft, ist aber unklar und macht Form-Binding kaputt. Innerhalb <code>th:object</code> immer Selection-Expression <code>*{feld}</code> verwenden.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ URL ohne <code>@{…}</code></div>
+      <div class="pitfall-explain"><code>th:href="/users"</code> hardcodiert ohne Context-Path — schlägt fehl, sobald die App unter <code>/myapp/</code> deployt wird. Immer <code>th:href="@{/users}"</code>.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Template-Pfad mit <code>.html</code>-Endung</div>
+      <div class="pitfall-explain">Im Controller <code>return "index.html"</code> — falsch. Thymeleaf erwartet nur den Namen ohne Endung: <code>return "index"</code>.</div>
+    </div>
+  </article>
+<article id="th-was">
     <h3>6.1 Server-Side vs. Client-Side Rendering</h3>
     <p>Im Kurs werden drei Render-Modelle gegenübergestellt:</p>
     <ol>
@@ -246,7 +271,7 @@ public String contactInfo() { return "contact"; }</code></pre>
 
   
   <article id="th-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — Movie-Detailseite mit allen Beziehungen</h3>
+    <h3>⚙ Weitere Aufgabe 1 — Movie-Detailseite mit allen Beziehungen</h3>
     <div class="exercise" data-id="th-bonus1">
       <h5>Aufgabenstellung</h5>
       <p>Baue eine Detail-Seite, die <em>einen</em> Film mit all seinen Beziehungen rendert:</p>
@@ -304,7 +329,7 @@ public String detail(@PathVariable Long id, Model model) {
     </div>
   </article>
   <article id="th-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — Search-Form mit Filter</h3>
+    <h3>⚙ Weitere Aufgabe 2 — Search-Form mit Filter</h3>
     <div class="exercise" data-id="th-bonus2">
       <h5>Aufgabenstellung</h5>
       <p>Baue eine Suchfunktion auf der Startseite:</p>

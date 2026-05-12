@@ -34,8 +34,8 @@
     <a href="#spring-beans">1.3 Beans & Stereotypes</a>
     <a href="#spring-di">1.4 Dependency Injection</a>
     <a href="#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
-    <a href="#spring-bonus1">⚙ Bonus 1 — SoundtrackService</a>
-    <a href="#spring-bonus2">⚙ Bonus 2 — @Configuration / @Bean</a>
+    <a href="#spring-bonus1">⚙ Weitere Aufgabe 1 — SoundtrackService</a>
+    <a href="#spring-bonus2">⚙ Weitere Aufgabe 2 — @Configuration / @Bean</a>
     <a href="#spring-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -50,7 +50,28 @@
   </div>
 
 
-  <article id="spring-was">
+  
+  <article class="typische-fehler">
+    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
+    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Bean direkt mit <code>new</code> erzeugen</div>
+      <div class="pitfall-explain">Außerhalb des Spring-Containers ist es <em>keine</em> Bean — DI funktioniert nicht, Repository ist null, Tests umgehen die Klasse. Immer per Konstruktor injizieren lassen.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>@Autowired</code> auf Feld statt Konstruktor</div>
+      <div class="pitfall-explain">Felder können dann nicht <code>final</code> sein, Tests brauchen Reflection oder Spring-Kontext. Konstruktor-Injection ist seit Spring 3.5 die empfohlene Variante.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Forgotten <code>@Service</code> / <code>@Controller</code></div>
+      <div class="pitfall-explain">Ohne Stereotype-Annotation findet der Component-Scan die Klasse nicht — Spring kennt sie nicht, DI an anderen Stellen schlägt mit „No qualifying bean of type ..." fehl.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Falsche Schichten-Reihenfolge</div>
+      <div class="pitfall-explain">Service ruft Controller — niemals. Aufrufrichtung ist <em>immer</em> Controller → Service → Repository. Sonst zirkuläre Abhängigkeit + Verlust der Testbarkeit.</div>
+    </div>
+  </article>
+<article id="spring-was">
     <h3>1.1 Was ist Spring Boot</h3>
     <p>Spring ist ein offenes Framework zur Erstellung von plattformunabhängigen Web-Anwendungen mit Java. <strong>Spring Boot</strong> setzt auf Spring auf und ergänzt Standardeinstellungen, damit man self-contained, ausführbare JAR-Dateien ohne separaten Anwendungsserver bekommt.</p>
 
@@ -187,7 +208,7 @@ ArtistService: ArtistServiceImpl</code></pre>
 
   
     <article id="spring-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — SoundtrackService analog zur Aufgabe 1</h3>
+    <h3>⚙ Weitere Aufgabe 1 — SoundtrackService analog zur Aufgabe 1</h3>
     <div class="exercise" data-id="spring-bonus1">
       <h5>Aufgabenstellung</h5>
       <p>Erweitere die Aufgabe-1-Struktur um einen <strong>SoundtrackService</strong>. Anforderungen wie in Aufgabe 1: Interface + Impl mit korrektem Stereotyp, Konstruktor-Injection im Controller, Log-Ausgabe via <code>ManualTestBean</code>.</p>
@@ -287,7 +308,7 @@ public class ManualTestBean {
     </div>
   </article>
     <article id="spring-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — Drei Injection-Typen vergleichen</h3>
+    <h3>⚙ Weitere Aufgabe 2 — Drei Injection-Typen vergleichen</h3>
     <div class="exercise" data-id="spring-bonus2">
       <h5>Aufgabenstellung</h5>
       <p>Die Folien zeigen drei Wege der Dependency Injection: <em>Constructor Injection</em>, <em>Setter Injection</em> und <em>Field Injection</em>. Implementiere jede einmal und beschreibe die Trade-offs.</p>

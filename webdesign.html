@@ -35,8 +35,8 @@
     <a href="#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
     <a href="#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
     <a href="#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
-    <a href="#web-bonus1">⚙ Bonus 1 — Director-Profilseite</a>
-    <a href="#web-bonus2">⚙ Bonus 2 — Awards-Tabelle mit Sort/Filter</a>
+    <a href="#web-bonus1">⚙ Weitere Aufgabe 1 — Director-Profilseite</a>
+    <a href="#web-bonus2">⚙ Weitere Aufgabe 2 — Awards-Tabelle mit Sort/Filter</a>
     <a href="#web-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -51,7 +51,28 @@
   </div>
 
 
-  <article id="web-html">
+  
+  <article class="typische-fehler">
+    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
+    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ CSS inline statt extern</div>
+      <div class="pitfall-explain">Inline-Style ist die schlechteste Variante (kein Caching, schwer zu pflegen). Externe Datei via <code>&lt;link rel="stylesheet"&gt;</code> ist Standard.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Bootstrap <code>col</code> ohne <code>row</code></div>
+      <div class="pitfall-explain">Spalten brauchen einen <code>row</code>-Wrapper — sonst stimmt der Gutter nicht und die Spalten überlappen. Immer: <code>container &gt; row &gt; col</code>.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Carousel ohne <code>data-bs-ride="carousel"</code></div>
+      <div class="pitfall-explain">Ohne dieses Attribut startet die Slideshow nicht automatisch. Außerdem brauchen die Buttons das passende <code>data-bs-target</code> auf die Carousel-ID.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>col-md-4</code> falsch verstehen</div>
+      <div class="pitfall-explain">„md-4" heißt: ab Tablet (≥ 768 px) 4 von 12 Spalten. Drunter (Mobile) volle Breite. Nicht: „auf Mobile auch 4 Spalten breit".</div>
+    </div>
+  </article>
+<article id="web-html">
     <h3>5.1 HTML-Grundlagen</h3>
     <p>HTML ist die Strukturschicht. Die wichtigsten Tags für die Übungen:</p>
     <ul>
@@ -303,7 +324,7 @@ thead th { background: #f3f3f3; }</code></pre>
 
   
   <article id="web-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — Director-Profilseite</h3>
+    <h3>⚙ Weitere Aufgabe 1 — Director-Profilseite</h3>
     <div class="exercise" data-id="web-bonus1">
       <h5>Aufgabenstellung</h5>
       <p>Baue analog zum Movie-Profile (Aufgabe 9) eine <code>director-profile.html</code> mit Bootstrap:</p>
@@ -348,7 +369,7 @@ thead th { background: #f3f3f3; }</code></pre>
     </div>
   </article>
   <article id="web-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — Awards-Tabelle mit Sort-Optik</h3>
+    <h3>⚙ Weitere Aufgabe 2 — Awards-Tabelle mit Sort-Optik</h3>
     <div class="exercise" data-id="web-bonus2">
       <h5>Aufgabenstellung</h5>
       <p>Erstelle eine HTML-Seite, die alle Awards übersichtlich darstellt:</p>

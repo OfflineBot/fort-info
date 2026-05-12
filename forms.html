@@ -33,9 +33,9 @@
     <a href="#forms-binding">7.2 th:object & th:field</a>
     <a href="#forms-validation">7.3 Validation</a>
     <a href="#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
-    <a href="#forms-bonus1">⚙ Bonus 1 — Movie-Edit-Form</a>
-    <a href="#forms-bonus2">⚙ Bonus 2 — Director-Form mit Custom Validation</a>
-    <a href="#forms-bonus3">⚙ Bonus 3 — Ternary + th:classappend</a>
+    <a href="#forms-bonus1">⚙ Weitere Aufgabe 1 — Movie-Edit-Form</a>
+    <a href="#forms-bonus2">⚙ Weitere Aufgabe 2 — Director-Form mit Custom Validation</a>
+    <a href="#forms-bonus3">⚙ Weitere Aufgabe 3 — Ternary + th:classappend</a>
     <a href="#forms-checks">🧠 Verständnis-Checks</a>
   </nav>
 </aside>
@@ -50,7 +50,32 @@
   </div>
 
 
-  <article id="forms-was">
+  
+  <article class="typische-fehler">
+    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
+    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>BindingResult</code> falsch positioniert</div>
+      <div class="pitfall-explain">Muss <strong>direkt</strong> nach dem mit <code>@Valid</code> annotierten Objekt stehen. Andere Reihenfolge → Spring wirft <code>MethodArgumentNotValidException</code> + 400.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Validation greift nicht</div>
+      <div class="pitfall-explain"><code>@Valid</code> auf dem Controller-Parameter vergessen → Constraints werden ignoriert. Außerdem auf der DTO-Klasse Felder mit <code>@NotBlank</code> etc. annotieren — sonst gibt es nichts zu validieren.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ <code>@NotBlank</code> auf Nicht-String</div>
+      <div class="pitfall-explain"><code>@NotBlank</code> funktioniert nur für <code>String</code>. Für Integer / Long: <code>@NotNull</code>. Für Collections: <code>@NotEmpty</code>. Verwechslung gibt Compile-Time-Fehler.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ PRG-Pattern weglassen</div>
+      <div class="pitfall-explain">Nach erfolgreichem POST direkt das Formular wieder rendern — Browser-Refresh wiederholt den POST (Doppel-Submit). Lösung: <code>return "redirect:/path"</code>.</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-title">⚠ Ternary-Operator außerhalb <code>${…}</code></div>
+      <div class="pitfall-explain"><code>th:text="${age &gt; 18} ? &#39;adult&#39; : &#39;student&#39;"</code> — falsch. Korrekt: <code>th:text="${(age &gt; 18) ? &#39;adult&#39; : &#39;student&#39;}"</code>. Der Ternary muss <em>innerhalb</em> der Expression-Klammern stehen.</div>
+    </div>
+  </article>
+<article id="forms-was">
     <h3>7.1 Formulare in Spring + Thymeleaf</h3>
     <p>Ein Formular hat in Spring drei Akteure:</p>
     <ol>
@@ -179,7 +204,7 @@ public class AwardFormController {
 
   
   <article id="forms-bonus1" class="aufgabe">
-    <h3>⚙ Bonus 1 — Movie-Edit-Form</h3>
+    <h3>⚙ Weitere Aufgabe 1 — Movie-Edit-Form</h3>
     <div class="exercise" data-id="forms-bonus1">
       <h5>Aufgabenstellung</h5>
       <p>Baue ein vollständiges Edit-Formular für einen Film:</p>
@@ -254,7 +279,7 @@ public class MovieFormController {
     </div>
   </article>
   <article id="forms-bonus2" class="aufgabe">
-    <h3>⚙ Bonus 2 — Director-Form mit Custom Validation</h3>
+    <h3>⚙ Weitere Aufgabe 2 — Director-Form mit Custom Validation</h3>
     <div class="exercise" data-id="forms-bonus2">
       <h5>Aufgabenstellung</h5>
       <p>Erstelle ein Form für einen Director mit eigener Validierungs-Annotation für die Nationalität (ISO-Ländercode 2 Großbuchstaben):</p>
@@ -304,7 +329,7 @@ public class DirectorFormController {
     </div>
   </article>
     <article id="forms-bonus3" class="aufgabe">
-    <h3>⚙ Bonus 3 — Ternary-Operator + th:classappend</h3>
+    <h3>⚙ Weitere Aufgabe 3 — Ternary-Operator + th:classappend</h3>
     <div class="exercise" data-id="forms-bonus3">
       <h5>Aufgabenstellung</h5>
       <p>Die Folien zeigen den Ternary-Operator (<code>Bedingung ? Then : Else</code>) explizit als Kurzschreibweise für If-Then-Else in Thymeleaf-Attributen. Setze ihn ein, um Conditionals knapp zu formulieren:</p>
