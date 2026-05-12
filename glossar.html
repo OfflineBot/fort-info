@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Glossar — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+  <nav>
+    <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <div class="chapter-title">Glossar</div>
+    <a href="#A">A — D</a>
+    <a href="#E">E — H</a>
+    <a href="#I">I — M</a>
+    <a href="#N">N — R</a>
+    <a href="#S">S — W</a>
+  </nav>
+</aside>
+<main>
+<header id="overview">
+  <h1>📖 Glossar</h1>
+  <p class="lead">40 Schlüsselbegriffe aus allen 7 Themen — alphabetisch sortiert. Strg+F zum schnellen Suchen.</p>
+  <div class="gloss-search-bar">
+    <input id="gloss-search" type="search" placeholder="Begriff filtern (live)…" autofocus>
+  </div>
+</header>
+
+<section class="chapter">
+  <div class="gloss-list">
+  <div class="gloss-item" id="g-autowired">
+    <div class="gloss-term">@Autowired</div>
+    <div class="gloss-def">Spring-Annotation für Dependency Injection. Empfohlen über dem Konstruktor (statt Feld). Spring sucht eine passende Bean und reicht sie rein.</div>
+  </div>
+  <div class="gloss-item" id="g-bean">
+    <div class="gloss-term">@Bean</div>
+    <div class="gloss-def">Annotation an einer Methode innerhalb einer <code>@Configuration</code>-Klasse — registriert deren Rückgabewert als Spring-Bean. Nutze, wenn du nicht selbst die Klasse annotieren kannst.</div>
+  </div>
+  <div class="gloss-item" id="g-bean">
+    <div class="gloss-term">Bean</div>
+    <div class="gloss-def">Java-Objekt, dessen Lebenszyklus (Instanziierung, Wiring, Zerstörung) von Spring verwaltet wird. Wird <em>nie</em> mit <code>new</code> erzeugt.</div>
+  </div>
+  <div class="gloss-item" id="g-beforeeach-beforeall">
+    <div class="gloss-term">@BeforeEach / @BeforeAll</div>
+    <div class="gloss-def">JUnit-Lifecycle: <code>@BeforeEach</code> läuft vor jeder Testmethode (z.B. fresh setup), <code>@BeforeAll</code> einmalig pro Klasse (muss <code>static</code> sein).</div>
+  </div>
+  <div class="gloss-item" id="g-bindingresult">
+    <div class="gloss-term">BindingResult</div>
+    <div class="gloss-def">Spring-Objekt, das Validation-Fehler vom <code>@Valid</code>-DTO sammelt. Muss direkt nach dem zu validierenden Parameter stehen.</div>
+  </div>
+  <div class="gloss-item" id="g-bootstrap">
+    <div class="gloss-term">Bootstrap</div>
+    <div class="gloss-def">CSS-Framework. 12-Spalten-Grid, vorgefertigte Komponenten (Cards, Modals, Carousel), Utility-Klassen für Spacing/Color/Display.</div>
+  </div>
+  <div class="gloss-item" id="g-cascadetype">
+    <div class="gloss-term">CascadeType</div>
+    <div class="gloss-def">Steuert welche Operationen auf einem Parent (save/merge/remove) auf das Child weitergereicht werden. <code>ALL</code> kaskadiert alles — meist zu aggressiv.</div>
+  </div>
+  <div class="gloss-item" id="g-configuration">
+    <div class="gloss-term">@Configuration</div>
+    <div class="gloss-def">Markiert eine Klasse als Konfigurations-Source („Configuration as Code"). Enthält typischerweise <code>@Bean</code>-Methoden.</div>
+  </div>
+  <div class="gloss-item" id="g-constructor-injection">
+    <div class="gloss-term">Constructor Injection</div>
+    <div class="gloss-def">DI per Konstruktor-Parameter. Vorteile: <code>final</code>-Felder möglich, im Test direkt aufrufbar, Pflicht-Abhängigkeiten explizit. Spring 3.5+ Best Practice.</div>
+  </div>
+  <div class="gloss-item" id="g-convention-over-configuration">
+    <div class="gloss-term">Convention over Configuration</div>
+    <div class="gloss-def">Spring-Boot-Prinzip: Best-Practice-Defaults statt jede Detail-Einstellung. Beispiel: Templates in <code>resources/templates/</code> ohne extra Konfig.</div>
+  </div>
+  <div class="gloss-item" id="g-dependency-injection-di">
+    <div class="gloss-term">Dependency Injection (DI)</div>
+    <div class="gloss-def">Eine Klasse bekommt ihre Abhängigkeiten <em>von außen</em> übergeben statt sie selbst zu erzeugen. Reduziert Kopplung, erleichtert Tests.</div>
+  </div>
+  <div class="gloss-item" id="g-derived-query">
+    <div class="gloss-term">Derived Query</div>
+    <div class="gloss-def">Spring-Data-Mechanismus: Repository-Methodenname (z.B. <code>findByTitleContaining</code>) wird automatisch in eine Query übersetzt. Keine SQL/JPQL nötig.</div>
+  </div>
+  <div class="gloss-item" id="g-dto-data-transfer-object">
+    <div class="gloss-term">DTO (Data Transfer Object)</div>
+    <div class="gloss-def">Eigene Klasse für die API-Sicht, getrennt von der Entity. Verhindert Endlos-JSON, schützt sensible Felder, stabilisiert API.</div>
+  </div>
+  <div class="gloss-item" id="g-entity-id-generatedvalue">
+    <div class="gloss-term">@Entity / @Id / @GeneratedValue</div>
+    <div class="gloss-def">JPA-Pflichtannotationen für persistierte Klasse: <code>@Entity</code> auf der Klasse, <code>@Id</code> auf dem PK-Feld, <code>@GeneratedValue</code> für Auto-Increment.</div>
+  </div>
+  <div class="gloss-item" id="g-eventlistener-applicationreadyevent-class">
+    <div class="gloss-term">@EventListener(ApplicationReadyEvent.class)</div>
+    <div class="gloss-def">Spring ruft die annotierte Methode genau einmal auf, sobald die App vollständig hochgefahren ist. Im Kurs in <code>ManualTestBean</code>.</div>
+  </div>
+  <div class="gloss-item" id="g-fake-mock-stub">
+    <div class="gloss-term">Fake / Mock / Stub</div>
+    <div class="gloss-def">Test-Doubles: Fake = manuelle Alternativ-Impl. Mock = auto-generiert, prüft <em>Aufrufe</em>. Stub = semi-auto, definiertes <em>Antwortverhalten</em>.</div>
+  </div>
+  <div class="gloss-item" id="g-fetchtype-lazy-eager">
+    <div class="gloss-term">FetchType.LAZY / EAGER</div>
+    <div class="gloss-def">JPA-Ladestrategie. LAZY lädt referenzierte Objekte erst bei Zugriff (braucht offene Transaktion). EAGER lädt sofort mit. Default je nach Beziehung.</div>
+  </div>
+  <div class="gloss-item" id="g-hibernate">
+    <div class="gloss-term">Hibernate</div>
+    <div class="gloss-def">Populärstes ORM-Framework, Default-Implementierung der JPA-Spec in Spring Boot. Übernimmt das tatsächliche Mapping Java ↔ DB.</div>
+  </div>
+  <div class="gloss-item" id="g-joincolumn-jointable">
+    <div class="gloss-term">@JoinColumn / @JoinTable</div>
+    <div class="gloss-def"><code>@JoinColumn</code> definiert die FK-Spalte auf der owning side. <code>@JoinTable</code> die Verknüpfungstabelle bei Many-to-Many.</div>
+  </div>
+  <div class="gloss-item" id="g-jpa-jakarta-persistence-api">
+    <div class="gloss-term">JPA (Jakarta Persistence API)</div>
+    <div class="gloss-def">Java-Spec für ORM (früher JPA = Java Persistence API). Definiert Annotationen + EntityManager. Implementierung z.B. Hibernate.</div>
+  </div>
+  <div class="gloss-item" id="g-jpql">
+    <div class="gloss-term">JPQL</div>
+    <div class="gloss-def">Object-Query-Sprache der JPA. Wie SQL, aber auf Klassen + Feldern statt Tabellen + Spalten. <code>SELECT m FROM Movie m WHERE m.title = :t</code>.</div>
+  </div>
+  <div class="gloss-item" id="g-jsonpath">
+    <div class="gloss-term">JsonPath</div>
+    <div class="gloss-def">Pfad-Sprache für JSON-Assertions in Tests. <code>$</code> = root, <code>$[0]</code> = erstes Array-Element, <code>$.field</code> = Feld, <code>$.*</code> = alle Kinder.</div>
+  </div>
+  <div class="gloss-item" id="g-mappedby">
+    <div class="gloss-term">mappedBy</div>
+    <div class="gloss-def">Markiert die <em>inverse</em> Seite einer bidirektionalen Beziehung. Wert = Feldname auf der owning side (mit <code>@JoinColumn</code>).</div>
+  </div>
+  <div class="gloss-item" id="g-mapstruct">
+    <div class="gloss-term">MapStruct</div>
+    <div class="gloss-def">Compile-time Code-Generator für Mapper Entity ↔ DTO. Annotation: <code>@Mapper(componentModel = "spring")</code>.</div>
+  </div>
+  <div class="gloss-item" id="g-mockbean">
+    <div class="gloss-term">@MockBean</div>
+    <div class="gloss-def">Spring-Test-Annotation: ersetzt eine Bean im Spring-Kontext durch einen Mockito-Mock. Default-Returns bis du mit <code>when()</code> stubbst.</div>
+  </div>
+  <div class="gloss-item" id="g-mockmvc">
+    <div class="gloss-term">MockMvc</div>
+    <div class="gloss-def">Spring-Test-Werkzeug, das HTTP-Requests im Test simuliert ohne echten Server zu starten. Ersetzt manuelle Postman-Aufrufe.</div>
+  </div>
+  <div class="gloss-item" id="g-modelandview">
+    <div class="gloss-term">ModelAndView</div>
+    <div class="gloss-def">Thymeleaf-Controller-Rückgabe: kombiniert Template-Name + Model-Daten in einem Objekt. Alternative: <code>String</code>-Rückgabe + <code>Model</code>-Parameter.</div>
+  </div>
+  <div class="gloss-item" id="g-openapi-swagger">
+    <div class="gloss-term">OpenAPI / Swagger</div>
+    <div class="gloss-def">Standard für maschinenlesbare REST-API-Beschreibung. Spring generiert sie automatisch aus deinen <code>@RestController</code>. UI unter <code>/swagger-ui.html</code>.</div>
+  </div>
+  <div class="gloss-item" id="g-persistence-context">
+    <div class="gloss-term">Persistence Context</div>
+    <div class="gloss-def">Cache der „verwalteten" Entities innerhalb einer Transaktion. Änderungen werden beim Commit automatisch geschrieben.</div>
+  </div>
+  <div class="gloss-item" id="g-prg-pattern">
+    <div class="gloss-term">PRG-Pattern</div>
+    <div class="gloss-def"><strong>P</strong>ost-<strong>R</strong>edirect-<strong>G</strong>et. Nach erfolgreichem POST per <code>redirect:</code> umleiten — verhindert Doppel-Submit beim Browser-Refresh.</div>
+  </div>
+  <div class="gloss-item" id="g-requestbody-requestparam-pathvariable">
+    <div class="gloss-term">@RequestBody / @RequestParam / @PathVariable</div>
+    <div class="gloss-def">Quellen für Controller-Parameter: <code>@RequestBody</code> = JSON-Body. <code>@RequestParam</code> = Query-String. <code>@PathVariable</code> = Teil der URL.</div>
+  </div>
+  <div class="gloss-item" id="g-responsestatus">
+    <div class="gloss-term">@ResponseStatus</div>
+    <div class="gloss-def">Setzt den HTTP-Status, der bei normalem Methodenrückgabe zurückgegeben wird. <code>@ResponseStatus(HttpStatus.CREATED)</code> für POST → 201.</div>
+  </div>
+  <div class="gloss-item" id="g-restcontroller">
+    <div class="gloss-term">@RestController</div>
+    <div class="gloss-def"><code>@Controller</code> + <code>@ResponseBody</code> auf jeder Methode. Standard für JSON-APIs.</div>
+  </div>
+  <div class="gloss-item" id="g-schichtenmodell">
+    <div class="gloss-term">Schichtenmodell</div>
+    <div class="gloss-def">Controller (HTTP-Schnittstelle) → Service (Business-Logik) → Repository (DB-Zugriff). Aufruf nur in dieser Richtung.</div>
+  </div>
+  <div class="gloss-item" id="g-spring-data-jpa">
+    <div class="gloss-term">Spring Data JPA</div>
+    <div class="gloss-def">Schicht über JPA, die Repository-Interfaces ohne Implementierung erlaubt. Nutze <code>extends JpaRepository&lt;T, ID&gt;</code>.</div>
+  </div>
+  <div class="gloss-item" id="g-stereotype">
+    <div class="gloss-term">Stereotype</div>
+    <div class="gloss-def">Spring-Begriff für die Schicht-Annotationen <code>@Component</code>, <code>@Service</code>, <code>@Repository</code>, <code>@Controller</code>. Funktional gleich, semantisch unterschiedlich.</div>
+  </div>
+  <div class="gloss-item" id="g-th-object-th-field-th-errors">
+    <div class="gloss-term">th:object / th:field / th:errors</div>
+    <div class="gloss-def">Thymeleaf Form-Trio: <code>th:object</code> bindet das Form-Objekt, <code>th:field</code> setzt id+name+value, <code>th:errors</code> rendert Validierungsfehler.</div>
+  </div>
+  <div class="gloss-item" id="g-transactional">
+    <div class="gloss-term">@Transactional</div>
+    <div class="gloss-def">Spring-Annotation für deklarative Transaktionen. Pflicht für Lazy-Loading-Auflösung. Nur von <em>außerhalb</em> der Bean aufrufbar.</div>
+  </div>
+  <div class="gloss-item" id="g-valid">
+    <div class="gloss-term">@Valid</div>
+    <div class="gloss-def">Triggert Bean-Validation auf einem Methoden-Parameter. Constraints am DTO werden geprüft, Fehler landen in <code>BindingResult</code> (oder als 400).</div>
+  </div>
+  <div class="gloss-item" id="g-webmvctest">
+    <div class="gloss-term">@WebMvcTest</div>
+    <div class="gloss-def">Lädt nur den MVC-Layer (Controller) für einen Test. Schneller als <code>@SpringBootTest</code>. Services brauchen <code>@MockBean</code>.</div>
+  </div>
+  </div>
+</section>
+
+<nav class="chapter-nav">
+<a class="prev" href="index.html">← Übersicht</a>
+<span></span>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

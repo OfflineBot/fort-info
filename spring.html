@@ -28,6 +28,7 @@
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <a href="glossar.html" class="glossar-link">📖 Glossar</a>
     <div class="chapter-title">1 · Spring Grundlagen</div>
     <a href="#spring-was">1.1 Was ist Spring Boot</a>
     <a href="#spring-schichten">1.2 Schichtenmodell</a>
@@ -51,7 +52,19 @@
 
 
   
-  <article class="typische-fehler">
+  
+  <article class="tldr">
+    <h3>🎯 TL;DR — was du wirklich wissen musst</h3>
+    <ul>
+      <li><strong>Spring Boot</strong> = Spring + Convention-over-Configuration. JAR statt Anwendungsserver.</li>
+      <li><strong>Vier Kernprinzipien:</strong> Convention over Configuration · Modularisierung · Schichtenorientierung · Dependency Injection.</li>
+      <li><strong>Schichten:</strong> Controller (HTTP) → Service (Logik) → Repository (DB). Aufruf nur in dieser Richtung.</li>
+      <li><strong>Stereotypes:</strong> <code>@Controller</code> / <code>@RestController</code> / <code>@Service</code> / <code>@Repository</code> / <code>@Component</code>. Alle = Bean.</li>
+      <li><strong>DI:</strong> Konstruktor-Injection bevorzugt — final-Felder, test-freundlich, explizite Pflicht-Abhängigkeiten.</li>
+      <li><strong>Bean ≠ <code>new</code>:</strong> niemals selbst instanziieren — Spring verwaltet den Lebenszyklus.</li>
+    </ul>
+  </article>
+<article class="typische-fehler">
     <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
     <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
     <div class="pitfall">

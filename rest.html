@@ -28,6 +28,7 @@
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <a href="glossar.html" class="glossar-link">📖 Glossar</a>
     <div class="chapter-title">3 · REST</div>
     <a href="#rest-was">3.1 REST & HTTP</a>
     <a href="#rest-controller">3.2 @RestController</a>
@@ -54,7 +55,20 @@
 
 
   
-  <article class="typische-fehler">
+  
+  <article class="tldr">
+    <h3>🎯 TL;DR — was du wirklich wissen musst</h3>
+    <ul>
+      <li><strong>REST</strong> = Ressourcen über URI + HTTP-Methoden (GET/POST/PUT/PATCH/DELETE).</li>
+      <li><strong>Status-Codes:</strong> 200 OK · 201 Created (POST) · 204 No Content · 400 Bad Request · 404 Not Found · 500.</li>
+      <li><strong>@RestController</strong> = <code>@Controller</code> + <code>@ResponseBody</code> auf jeder Methode. Antwort wird zu JSON.</li>
+      <li><strong>Parameter:</strong> <code>@PathVariable</code> (URL) · <code>@RequestParam</code> (Query) · <code>@RequestBody</code> (JSON-Body).</li>
+      <li><strong>DTO statt Entity:</strong> API-Stabilität, sensible Felder verstecken, Endlos-Loops vermeiden.</li>
+      <li><strong>MapStruct:</strong> <code>@Mapper(componentModel = "spring")</code> + <code>@Mapping</code> + <code>@InheritInverseConfiguration</code>.</li>
+      <li><strong>Validation:</strong> <code>@Valid @RequestBody</code> aktiviert Bean-Validation auf dem DTO. Constraint-Violation → 400.</li>
+    </ul>
+  </article>
+<article class="typische-fehler">
     <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
     <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
     <div class="pitfall">

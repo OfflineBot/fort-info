@@ -28,6 +28,7 @@
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <a href="glossar.html" class="glossar-link">📖 Glossar</a>
     <div class="chapter-title">4 · Testing</div>
     <a href="#test-pyramid">4.1 Test-Pyramide</a>
     <a href="#test-junit">4.2 JUnit 5 Basics</a>
@@ -55,7 +56,20 @@
 
 
   
-  <article class="typische-fehler">
+  
+  <article class="tldr">
+    <h3>🎯 TL;DR — was du wirklich wissen musst</h3>
+    <ul>
+      <li><strong>Test-Pyramide:</strong> viele Unit-Tests · einige Integrationstests · wenige Systemtests.</li>
+      <li><strong>Best-Practice-Naming:</strong> Testklasse <code>XTest</code>, Testmethode <code>shouldXBecauseY</code> — Erfolg & Fehler je extra.</li>
+      <li><strong>Test-Doubles:</strong> Fake (manuell, voll) · Stub (semi-auto, Antwortverhalten) · Mock (auto, Aufruf-Verhalten).</li>
+      <li><strong>@WebMvcTest:</strong> startet nur den MVC-Layer. Services per <code>@MockBean</code> mocken.</li>
+      <li><strong>MockMvc</strong> simuliert HTTP-Requests im Test (kein echter Server). <code>perform(get(…)).andExpect(status().isOk())</code>.</li>
+      <li><strong>JsonPath:</strong> <code>$</code>=root · <code>$[0]</code>=erstes Array-Element · <code>$.field</code> · <code>$[0].nested[1].x</code> · <code>$.*</code>=alle Kinder.</li>
+      <li><strong>Constraint-Violation:</strong> kein <code>when()</code> nötig — Service wird nie aufgerufen. <code>verify(service, never())</code> beweist es.</li>
+    </ul>
+  </article>
+<article class="typische-fehler">
     <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
     <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
     <div class="pitfall">

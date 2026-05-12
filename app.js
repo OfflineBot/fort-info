@@ -109,6 +109,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
+
+  // Glossar live filter
+  const glossSearch = document.getElementById("gloss-search");
+  if (glossSearch) {
+    glossSearch.addEventListener("input", () => {
+      const q = glossSearch.value.toLowerCase().trim();
+      document.querySelectorAll(".gloss-item").forEach((el) => {
+        const text = el.textContent.toLowerCase();
+        el.style.display = !q || text.includes(q) ? "" : "none";
+      });
+    });
+  }
+
   updateProgress();
 });
 

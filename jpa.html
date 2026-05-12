@@ -28,6 +28,7 @@
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <a href="glossar.html" class="glossar-link">📖 Glossar</a>
     <div class="chapter-title">2 · Spring Data (JPA)</div>
     <a href="#jpa-was">2.1 ORM & JPA</a>
     <a href="#jpa-entity">2.2 Entity-Mapping</a>
@@ -55,7 +56,19 @@
 
 
   
-  <article class="typische-fehler">
+  
+  <article class="tldr">
+    <h3>🎯 TL;DR — was du wirklich wissen musst</h3>
+    <ul>
+      <li><strong>JPA</strong> = Spec, <strong>Hibernate</strong> = Implementierung, <strong>Spring Data JPA</strong> = Repository-Schicht obendrauf.</li>
+      <li><strong>Entity:</strong> <code>@Entity</code> + <code>@Id</code> + <code>@GeneratedValue</code>. Lombok-Annotationen sparen Boilerplate.</li>
+      <li><strong>Beziehungen:</strong> <code>@OneToOne</code>, <code>@OneToMany</code>, <code>@ManyToOne</code>, <code>@ManyToMany</code>. Inverse Seite = <code>mappedBy="feldname"</code>.</li>
+      <li><strong>Repository:</strong> <code>extends JpaRepository&lt;T, ID&gt;</code> + Derived Queries (<code>findByXContaining</code>) oder <code>@Query</code> mit JPQL.</li>
+      <li><strong>JPQL ≠ SQL:</strong> auf Klassennamen + Feldnamen, nicht Tabellen + Spalten. <code>SELECT m FROM Movie m WHERE m.title = :t</code>.</li>
+      <li><strong>@Transactional:</strong> bündelt DB-Calls. Pflicht für Lazy-Loading-Auflösung. Nur von <em>außerhalb</em> der Bean aufrufbar.</li>
+    </ul>
+  </article>
+<article class="typische-fehler">
     <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
     <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
     <div class="pitfall">

@@ -28,6 +28,7 @@
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <a href="glossar.html" class="glossar-link">📖 Glossar</a>
     <div class="chapter-title">7 · Forms</div>
     <a href="#forms-was">7.1 Formulare</a>
     <a href="#forms-binding">7.2 th:object & th:field</a>
@@ -51,7 +52,19 @@
 
 
   
-  <article class="typische-fehler">
+  
+  <article class="tldr">
+    <h3>🎯 TL;DR — was du wirklich wissen musst</h3>
+    <ul>
+      <li><strong>Form-Binding:</strong> <code>th:object="${form}"</code> + <code>th:field="*{feld}"</code> setzt id, name, value automatisch.</li>
+      <li><strong>Validation:</strong> Annotationen am DTO (<code>@NotBlank</code>, <code>@NotNull</code>, <code>@Size</code>, <code>@Min</code>, <code>@Max</code>, <code>@Pattern</code>) + <code>@Valid</code> im Controller.</li>
+      <li><strong>BindingResult</strong> muss <em>direkt nach</em> dem <code>@Valid</code>-Objekt im Methoden-Parameter stehen.</li>
+      <li><strong>PRG-Pattern:</strong> nach erfolgreichem POST <code>return "redirect:/path"</code> — verhindert Doppel-Submit beim Refresh.</li>
+      <li><strong>Conditionals:</strong> <code>th:if</code> für Anzeigen/Verstecken · Ternary <code>${cond ? 'x' : 'y'}</code> für Werte/Klassen.</li>
+      <li><strong>Fehler im Template:</strong> <code>#fields.hasErrors('feld')</code> + <code>th:errors="*{feld}"</code>.</li>
+    </ul>
+  </article>
+<article class="typische-fehler">
     <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
     <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
     <div class="pitfall">

@@ -28,6 +28,7 @@
   <nav>
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <a href="glossar.html" class="glossar-link">📖 Glossar</a>
     <div class="chapter-title">6 · Thymeleaf</div>
     <a href="#th-was">6.1 Server vs. Client Rendering</a>
     <a href="#th-syntax">6.2 Syntax & Expressions</a>
@@ -53,7 +54,19 @@
 
 
   
-  <article class="typische-fehler">
+  
+  <article class="tldr">
+    <h3>🎯 TL;DR — was du wirklich wissen musst</h3>
+    <ul>
+      <li><strong>Thymeleaf</strong> = serverseitige Template-Engine, default in Spring Boot. Templates sind valides HTML.</li>
+      <li><strong>Pfade:</strong> Templates in <code>src/main/resources/templates/</code>, statisches in <code>static/</code>.</li>
+      <li><strong>Expression-Typen:</strong> <code>${var}</code> (Variable) · <code>*{feld}</code> (Selection) · <code>@{/url}</code> (URL) · <code>~{frag :: id}</code> (Fragment).</li>
+      <li><strong>th:-Attribute:</strong> <code>th:text</code>, <code>th:if</code>, <code>th:each</code>, <code>th:href</code>, <code>th:object</code>, <code>th:field</code>, <code>th:errors</code>.</li>
+      <li><strong>Fragments:</strong> <code>th:fragment="name"</code> definiert · <code>th:insert="~{datei :: name}"</code> bindet ein.</li>
+      <li><strong>Controller:</strong> Rückgabe = Template-Name (ohne <code>.html</code>). <code>Model</code> oder <code>ModelAndView</code> für Daten.</li>
+    </ul>
+  </article>
+<article class="typische-fehler">
     <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
     <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
     <div class="pitfall">
