@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>3 · REST — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="#rest-controller">3.2 @RestController</a>
+      <a href="#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="#rest-status">3.4 Status-Codes</a>
+      <a href="#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="rest" class="chapter">
+  <h2>3 · REST</h2>
+
+  <article id="rest-was">
+    <h3>3.1 REST-Grundlagen &amp; HTTP</h3>
+    <p><strong>REST</strong> (Representational State Transfer) ist ein Architekturstil für Web-APIs. Ressourcen werden über <strong>URIs</strong> adressiert; Operationen sind die HTTP-Methoden.</p>
+
+    <table>
+      <tr><th>Methode</th><th>Bedeutung</th><th>Idempotent?</th><th>Body?</th></tr>
+      <tr><td><code>GET</code></td><td>Lesen</td><td>ja</td><td>nein</td></tr>
+      <tr><td><code>POST</code></td><td>Anlegen</td><td>nein</td><td>ja</td></tr>
+      <tr><td><code>PUT</code></td><td>Komplett-Update / Ersetzen</td><td>ja</td><td>ja</td></tr>
+      <tr><td><code>PATCH</code></td><td>Teil-Update</td><td>nein</td><td>ja</td></tr>
+      <tr><td><code>DELETE</code></td><td>Löschen</td><td>ja</td><td>nein</td></tr>
+    </table>
+
+    <h4>Status-Codes (Auswahl)</h4>
+    <table>
+      <tr><th>Code</th><th>Bedeutung</th></tr>
+      <tr><td>200 OK</td><td>Erfolg, Antwort enthält Daten</td></tr>
+      <tr><td>201 Created</td><td>Ressource erfolgreich angelegt</td></tr>
+      <tr><td>204 No Content</td><td>Erfolg, ohne Antwortbody</td></tr>
+      <tr><td>400 Bad Request</td><td>Anfrage ungültig (z.B. Validierung schlug fehl)</td></tr>
+      <tr><td>401 Unauthorized</td><td>nicht eingeloggt</td></tr>
+      <tr><td>403 Forbidden</td><td>eingeloggt, aber nicht berechtigt</td></tr>
+      <tr><td>404 Not Found</td><td>Ressource existiert nicht</td></tr>
+      <tr><td>500 Internal Server Error</td><td>Server-Bug</td></tr>
+    </table>
+  </article>
+
+  <article id="rest-controller">
+    <h3>3.2 @RestController</h3>
+    <p><code>@RestController</code> = <code>@Controller</code> + <code>@ResponseBody</code> auf jeder Methode. Die Rückgabe wird automatisch zu JSON serialisiert (Jackson).</p>
+
+<pre><code class="language-java">@RestController
+@RequestMapping("/api/v1/awards")
+public class AwardControllerImpl implements AwardController {
+
+    private AwardService awardService;
+
+    public AwardControllerImpl(AwardService awardService) {
+        this.awardService = awardService;
+    }
+
+    @GetMapping
+    public List&lt;Award&gt; getAllAwards() {
+        return awardService.getAllAwards();
+    }
+
+    @GetMapping("/{awardId}")
+    public Award getAwardById(@PathVariable("awardId") Long awardId) {
+        return awardService.getAwardById(awardId);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Award addAward(@RequestBody Award award) {
+        return awardService.addAward(award);
+    }
+
+    @PutMapping("/{awardId}")
+    public Award updateAwardById(@PathVariable("awardId") Long awardId,
+                                 @RequestBody Award award) {
+        award.setId(awardId);
+        return awardService.updateAward(award);
+    }
+
+    @DeleteMapping("/{awardId}")
+    public void removeAwardById(@PathVariable("awardId") Long awardId) {
+        awardService.removeAwardById(awardId);
+    }
+}</code></pre>
+  </article>
+
+  <article id="rest-params">
+    <h3>3.3 Parameter-Typen</h3>
+    <table>
+      <tr><th>Annotation</th><th>Quelle</th><th>Beispiel-URL</th></tr>
+      <tr><td><code>@PathVariable</code></td><td>Teil der URL</td><td><code>/awards/<strong>5</strong></code></td></tr>
+      <tr><td><code>@RequestParam</code></td><td>Query-String</td><td><code>/awards?<strong>year=2020</strong></code></td></tr>
+      <tr><td><code>@RequestBody</code></td><td>HTTP-Body (JSON)</td><td>POST/PUT-Body</td></tr>
+      <tr><td><code>@RequestHeader</code></td><td>HTTP-Header</td><td><code>Authorization: Bearer …</code></td></tr>
+    </table>
+  </article>
+
+  <article id="rest-status">
+    <h3>3.4 Status-Codes setzen</h3>
+<pre><code class="language-java">// per Annotation auf der Methode
+@PostMapping
+@ResponseStatus(HttpStatus.CREATED)
+public Award addAward(@RequestBody Award award) { ... }
+
+// per ResponseEntity (flexibler — Status &amp; Header dynamisch)
+@GetMapping("/{id}")
+public ResponseEntity&lt;Award&gt; get(@PathVariable Long id) {
+    Award a = awardService.getAwardById(id);
+    if (a == null) return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(a);
+}</code></pre>
+  </article>
+
+  <article id="rest-dto">
+    <h3>3.5 DTOs &amp; MapStruct</h3>
+    <p><strong>DTO (Data Transfer Object):</strong> eigene Klasse für die API-Sicht, getrennt von der Entity. Vorteile:</p>
+    <ul>
+      <li>API-Stabilität: Entity-Refactor bricht den Contract nicht.</li>
+      <li>Versteckt sensitive Felder (Passwort-Hash, interne IDs).</li>
+      <li>Vermeidet Endlos-Loops bei Bidirektionalen Beziehungen während JSON-Serialisierung.</li>
+    </ul>
+
+<pre><code class="language-java">@Getter @Setter @NoArgsConstructor
+public class AwardDTO {
+    private Long id;
+    private String academy;
+    @NotBlank
+    private String category;
+    private int celebrationYear;     // umbenannt von "yearAwarded"!
+
+    public AwardDTO(Long id, String academy, String category, int celebrationYear) {
+        this.id = id;
+        this.academy = academy;
+        this.category = category;
+        this.celebrationYear = celebrationYear;
+    }
+}</code></pre>
+
+    <h4>MapStruct — Mapper-Generierung</h4>
+    <p><a href="https://mapstruct.org">MapStruct</a> generiert zur Compilezeit Mapper-Klassen aus einem Interface. <code>componentModel = "spring"</code> registriert die generierte Implementierung als Spring Bean (per <code>@Component</code>) — du kannst sie also einfach injizieren.</p>
+
+<pre><code class="language-java">@Mapper(componentModel = "spring")
+public interface AwardMapper {
+
+    @Mapping(source = "yearAwarded", target = "celebrationYear")
+    AwardDTO awardToAwardDTO(Award award);
+    List&lt;AwardDTO&gt; awardsToAwardDTOs(List&lt;Award&gt; awards);
+
+    @InheritInverseConfiguration
+    @Mapping(target = "movie", ignore = true)
+    Award awardDTOToAward(AwardDTO awardDTO);
+    List&lt;Award&gt; awardDTOsToAwards(List&lt;AwardDTO&gt; awardDTOs);
+}</code></pre>
+
+    <p><code>@InheritInverseConfiguration</code> dreht das oben definierte Mapping um — du musst die Field-Mappings nicht doppelt schreiben.</p>
+  </article>
+
+  <article id="rest-openapi">
+    <h3>3.6 OpenAPI / Swagger</h3>
+    <p>OpenAPI (früher Swagger) ist ein Standard, um REST-APIs maschinen­lesbar zu beschreiben. Die Bibliothek <code>springdoc-openapi-ui</code> generiert aus deinen <code>@RestController</code>-Klassen automatisch:</p>
+    <ul>
+      <li><code>/v3/api-docs</code> — JSON-Beschreibung</li>
+      <li><code>/swagger-ui.html</code> — interaktive HTML-Doku zum Ausprobieren</li>
+    </ul>
+    <p>Mit Annotationen wie <code>@Operation(summary = "…")</code>, <code>@Parameter(description = "…")</code>, <code>@ApiResponse(responseCode = "404", description = "…")</code> kannst du die Doku verfeinern.</p>
+  </article>
+
+  <article id="rest-aufg4" class="aufgabe">
+    <h3>⚙ Aufgabe 4 — AwardController</h3>
+    <div class="exercise" data-id="aufg4">
+      <h5>Aufgabenstellung</h5>
+      <p>Lege analog zum bestehenden <code>MovieController</code> einen <strong>AwardController</strong> an, der CRUD-Operationen über <code>/api/v1/awards</code> anbietet:</p>
+      <ul>
+        <li><code>GET    /api/v1/awards</code> — alle Awards</li>
+        <li><code>GET    /api/v1/awards/{awardId}</code> — einen Award</li>
+        <li><code>POST   /api/v1/awards</code> — neuen Award anlegen (Status 201)</li>
+        <li><code>PUT    /api/v1/awards/{awardId}</code> — Award updaten</li>
+        <li><code>DELETE /api/v1/awards/{awardId}</code> — Award löschen</li>
+      </ul>
+      <p>Definiere ein Interface <code>AwardController</code> mit den Methodensignaturen und implementiere es in <code>AwardControllerImpl</code>. Service- und Repository-Klassen sind im Starter vorhanden.</p>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p><strong>Interface:</strong></p>
+<pre><code class="language-java">public interface AwardController {
+    List&lt;Award&gt; getAllAwards();
+    Award getAwardById(@PathVariable("awardId") Long awardId);
+    void  removeAwardById(@PathVariable("awardId") Long awardId);
+    Award addAward(@RequestBody Award award);
+    Award updateAwardById(@PathVariable("awardId") Long awardId, @RequestBody Award award);
+}</code></pre>
+        <p><strong>Implementation:</strong> siehe Codebeispiel unter §3.2 — exakt wie im Lösungs-ZIP.</p>
+        <p><strong>Test mit Postman:</strong></p>
+<pre><code class="language-bash">POST http://localhost:8080/api/v1/awards
+Content-Type: application/json
+
+{ "academy": "Oscar", "category": "Best Picture", "yearAwarded": 2024 }
+
+→ 201 Created
+{ "id": 1, "academy": "Oscar", "category": "Best Picture", "yearAwarded": 2024 }</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article id="rest-aufg5" class="aufgabe">
+    <h3>⚙ Aufgabe 5 — DTO + Mapper</h3>
+    <div class="exercise" data-id="aufg5">
+      <h5>Aufgabenstellung</h5>
+      <p>Trenne die API-Sicht von der Entity:</p>
+      <ol>
+        <li>Lege einen <code>AwardDTO</code> an. Das Feld <code>yearAwarded</code> aus der Entity soll im DTO <strong>celebrationYear</strong> heißen (Renaming-Mapping).</li>
+        <li>Lege einen MapStruct-<code>AwardMapper</code> an, der zwischen Entity und DTO konvertiert (in beide Richtungen).</li>
+        <li>Passe Service und Controller so an, dass sie nach außen DTOs liefern und entgegennehmen, intern aber Entities verwenden.</li>
+        <li>Setze auf das DTO-Feld <code>category</code> die Validierung <code>@NotBlank</code>.</li>
+      </ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p>DTO + Mapper: siehe Codebeispiele unter §3.5.</p>
+        <p>Im <code>AwardServiceImpl</code> wird der Mapper injiziert und nach jedem Repository-Call angewendet:</p>
+<pre><code class="language-java">@Service
+public class AwardServiceImpl implements AwardService {
+
+    private final AwardRepository repo;
+    private final AwardMapper     mapper;
+
+    public AwardServiceImpl(AwardRepository repo, AwardMapper mapper) {
+        this.repo   = repo;
+        this.mapper = mapper;
+    }
+
+    @Override
+    public List&lt;AwardDTO&gt; getAllAwards() {
+        return mapper.awardsToAwardDTOs(repo.findAll());
+    }
+
+    @Override
+    public AwardDTO addAward(AwardDTO dto) {
+        Award entity = mapper.awardDTOToAward(dto);
+        return mapper.awardToAwardDTO(repo.save(entity));
+    }
+}</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article class="verstaendnis">
+    <h3>🧠 Verständnis-Checks</h3>
+    <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
+    <div class="check">
+      <p class="q">Welche HTTP-Methode für: Anlegen / Lesen / Komplett-Update / Teil-Update / Löschen?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">POST (anlegen), GET (lesen), PUT (komplett-Update / Ersetzen), PATCH (Teil-Update), DELETE (löschen). PUT &amp; DELETE sind idempotent, POST &amp; PATCH nicht.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Status 200 vs 201 vs 204 — wann was?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><strong>200 OK</strong>: Erfolg mit Antwortbody (typisch GET, PUT). <strong>201 Created</strong>: Ressource neu angelegt (POST). <strong>204 No Content</strong>: Erfolg ohne Body (oft DELETE).</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Status 400 vs 404 vs 401 vs 403?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><strong>400</strong>: Anfrage ungültig (Validierungsfehler, kaputtes JSON). <strong>404</strong>: Ressource existiert nicht. <strong>401</strong>: nicht eingeloggt. <strong>403</strong>: eingeloggt, aber keine Berechtigung.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q"><code>@PathVariable</code> vs <code>@RequestParam</code> — wann was?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>@PathVariable</code>: Teil der URL (<code>/awards/<strong>5</strong></code>) — identifiziert eine konkrete Ressource. <code>@RequestParam</code>: Query-String (<code>/awards?<strong>year=2020</strong></code>) — Filter, Sortierung, Pagination.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Warum trennt man DTO von Entity?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">API-Stabilität (Entity-Refactor bricht den Contract nicht), Verstecken sensitiver Felder (z.B. Passwort-Hash), und vermeiden von Endlos-Loops bei bidirektionalen Beziehungen während JSON-Serialisierung.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was macht <code>@InheritInverseConfiguration</code> in MapStruct?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Spiegelt die im Forward-Mapping definierten <code>@Mapping</code>-Regeln automatisch um (z.B. <code>celebrationYear → yearAwarded</code>), sodass du das umgekehrte Mapping nicht doppelt schreiben musst.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Unterschied zwischen <code>@ResponseStatus(HttpStatus.CREATED)</code> und <code>ResponseEntity.status(201).body(x)</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>@ResponseStatus</code> setzt den Status statisch pro Methode. <code>ResponseEntity</code> ist dynamisch — du kannst Status, Header und Body abhängig vom Ergebnis setzen (z.B. 200 vs 404 in derselben Methode).</div>
+      </details>
+    </div>
+  </article>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="jpa.html">← 2 · Spring Data (JPA)</a>
+<a class="next" href="testing.html">4 · Testing →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

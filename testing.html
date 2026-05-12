@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>4 · Testing — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="#test-jsonpath">4.5 JsonPath</a>
+      <a href="#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="testing" class="chapter">
+  <h2>4 · Testing</h2>
+
+  <article id="test-pyramid">
+    <h3>4.1 Test-Pyramide</h3>
+    <p>Im Kurs wird die klassische Pyramide unterrichtet:</p>
+    <ol>
+      <li><strong>Unit-Tests</strong> — testen eine einzelne Klasse / Methode isoliert. Schnell, viele.</li>
+      <li><strong>Integrationstests</strong> — testen das Zusammenspiel mehrerer Komponenten (z.B. Controller + Service + Repository). Mittlere Anzahl.</li>
+      <li><strong>Systemtests</strong> — testen die ganze Anwendung end-to-end (HTTP rein, JSON raus, evtl. DB). Wenige, langsam.</li>
+    </ol>
+    <p>Faustregel: wenig Systemtests, viele Unit-Tests, mittel viele Integrationstests.</p>
+  </article>
+
+  <article id="test-junit">
+    <h3>4.2 JUnit 5 Basics</h3>
+<pre><code class="language-java">import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class MovieServiceTest {
+
+    private MovieService service;
+
+    @BeforeEach
+    void setUp() { service = new MovieServiceImpl(...); }
+
+    @Test
+    @DisplayName("findAll liefert alle Filme")
+    void findAll() {
+        var movies = service.getAllMovies();
+        assertEquals(2, movies.size());
+    }
+
+    @Test
+    void findByIdWirftWennNichtVorhanden() {
+        assertThrows(NoSuchElementException.class,
+            () -&gt; service.getMovieById(999L));
+    }
+}</code></pre>
+    <p>Lifecycle: <code>@BeforeAll</code> (static), <code>@BeforeEach</code>, <code>@AfterEach</code>, <code>@AfterAll</code> (static). Außerdem nützlich: <code>@DisplayName</code>, <code>@Disabled</code>, <code>@Tag</code>.</p>
+  </article>
+
+  <article id="test-doubles">
+    <h3>4.3 Test Doubles &amp; Mockito</h3>
+    <p><strong>Test Double</strong> = Sammelbegriff für Ersatzobjekte. Im Spring-Kontext:</p>
+    <ul>
+      <li><strong>Dummy</strong> — wird übergeben, aber nie genutzt.</li>
+      <li><strong>Stub</strong> — gibt vordefinierte Antworten zurück.</li>
+      <li><strong>Mock</strong> — wie Stub, plus Verifikation der Aufrufe.</li>
+      <li><strong>Spy</strong> — echtes Objekt, einzelne Methoden überschrieben.</li>
+      <li><strong>Fake</strong> — eigene, vereinfachte Implementierung (z.B. In-Memory-Repo).</li>
+    </ul>
+
+<pre><code class="language-java">import static org.mockito.Mockito.*;
+
+@Test
+void mockBeispiel() {
+    MovieService mock = mock(MovieService.class);
+    when(mock.getMovieById(1L)).thenReturn(new MovieDTO(...));
+
+    var result = mock.getMovieById(1L);
+    assertNotNull(result);
+
+    verify(mock).getMovieById(1L);
+    verify(mock, never()).getAllMovies();
+}</code></pre>
+  </article>
+
+  <article id="test-mockmvc">
+    <h3>4.4 MockMvc &amp; @WebMvcTest</h3>
+    <p><code>@WebMvcTest(controllers = X.class)</code> startet nur den MVC-Layer (kein voller Kontext, keine DB) und gibt dir <code>MockMvc</code> zum Aufruf der Endpoints. Service-Beans werden mit <code>@MockBean</code> gemockt.</p>
+
+<pre><code class="language-java">@WebMvcTest(controllers = MovieControllerImpl.class)
+public class MovieControllerImplTest {
+
+    @MockBean    private MovieService movieService;
+    @Autowired   private MockMvc      mockMvc;
+    @Autowired   private ObjectMapper objectMapper;
+
+    private MovieDTO movie_1;
+
+    @BeforeEach
+    public void setUp() {
+        movie_1 = new MovieDTO(1L, "Interstellar", 2.49, /* ... */ );
+    }
+
+    @Test
+    public void shouldReturnMovieById() throws Exception {
+        when(movieService.getMovieById(1L)).thenReturn(movie_1);
+
+        mockMvc.perform(get("/api/v1/movies/1"))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.title", is("Interstellar")));
+
+        verify(movieService).getMovieById(1L);
+    }
+
+    @Test
+    public void shouldReturn404WhenIdUnknown() throws Exception {
+        when(movieService.getMovieById(anyLong()))
+            .thenThrow(new NoSuchElementException("not found"));
+
+        mockMvc.perform(get("/api/v1/movies/20"))
+               .andExpect(status().isNotFound());
+    }
+}</code></pre>
+  </article>
+
+  <article id="test-jsonpath">
+    <h3>4.5 JsonPath</h3>
+    <p>Mit <code>jsonPath("$.feld", matcher)</code> prüfst du gezielt einzelne Felder im JSON-Response.</p>
+    <table>
+      <tr><th>JsonPath</th><th>Bedeutung</th></tr>
+      <tr><td><code>$</code></td><td>Wurzel</td></tr>
+      <tr><td><code>$.title</code></td><td>Feld <code>title</code></td></tr>
+      <tr><td><code>$[0]</code></td><td>erstes Array-Element</td></tr>
+      <tr><td><code>$.*</code></td><td>alle direkten Kinder</td></tr>
+      <tr><td><code>$.awards[0].academy</code></td><td>verschachtelt</td></tr>
+    </table>
+
+    <p>Beliebte Hamcrest-Matcher (statisch importiert über <code>org.hamcrest.Matchers.*</code>):</p>
+<pre><code class="language-java">.andExpect(jsonPath("$.*", hasSize(2)))
+.andExpect(jsonPath("$[0].title", is("Interstellar")))
+.andExpect(jsonPath("$.castIds", containsInAnyOrder(1, 2, 4)));</code></pre>
+  </article>
+
+  <article id="test-aufg6" class="aufgabe">
+    <h3>⚙ Aufgabe 6 — Controller-Tests</h3>
+    <div class="exercise" data-id="aufg6">
+      <h5>Aufgabenstellung</h5>
+      <p>Schreibe einen <code>MovieControllerImplTest</code>, der mit <code>@WebMvcTest</code> + <code>MockMvc</code> alle Endpoints der MovieController-API abdeckt:</p>
+      <ol>
+        <li>GET-Liste: 2 Filme, prüfe Größe und alle Felder von Film 1.</li>
+        <li>GET-by-ID: existierende ID → 200 mit Film-Daten.</li>
+        <li>GET-by-ID: unbekannte ID → 404.</li>
+        <li>POST: erfolgreich → 201.</li>
+        <li>POST mit ungültigem Payload (z.B. <code>trailerUrl=null</code>) → 400, Service wird <strong>nicht</strong> aufgerufen.</li>
+        <li>PUT: erfolgreich → 200; PUT mit unbekannter ID → 404; PUT mit ungültigem Payload → 400.</li>
+        <li>DELETE: erfolgreich → 200; DELETE mit unbekannter ID → 404.</li>
+      </ol>
+      <p>Verwende <code>@MockBean</code> für den <code>MovieService</code> und prüfe per <code>verify()</code>, dass der Service korrekt (oder eben gar nicht) aufgerufen wurde.</p>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p>Hier die wichtigsten Tests aus der Lösung; Setup mit zwei Test-Filmen (Interstellar, The Dark Knight):</p>
+<pre><code class="language-java">@Test
+public void shouldSucessfullyReturnAllMovies() throws Exception {
+    when(movieService.getAllMovies()).thenReturn(movieList);
+
+    mockMvc.perform(get("/api/v1/movies"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.*", hasSize(2)))
+        .andExpect(jsonPath("$[0].id",       is(movie_1.getId().intValue())))
+        .andExpect(jsonPath("$[0].title",    is(movie_1.getTitle())))
+        .andExpect(jsonPath("$[0].awards[0].celebrationYear",
+                             is(movie_1.getAwards().get(0).getCelebrationYear())));
+
+    verify(movieService).getAllMovies();
+}
+
+@Test
+public void shouldFailGetMovie() throws Exception {
+    when(movieService.getMovieById(anyLong()))
+        .thenThrow(new NoSuchElementException("No movie found for id"));
+
+    mockMvc.perform(get("/api/v1/movies/20"))
+           .andExpect(status().isNotFound());
+
+    verify(movieService).getMovieById(20L);
+}
+
+@Test
+public void shouldFailAddNewMovieDueToConstraintViolation() throws Exception {
+    // kein when() — Constraint Violation passiert VOR dem Controller!
+    movie_1.setTrailerUrl(null);
+
+    mockMvc.perform(post("/api/v1/movies")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(movie_1)))
+        .andExpect(status().isBadRequest());
+
+    verify(movieService, never()).addMovie(any());
+}</code></pre>
+        <p><strong>Wichtige Lehre aus der Lösung:</strong> bei Validation-Fehlern (<code>@Valid</code>) wird die Service-Methode <em>nicht</em> aufgerufen — deshalb auch kein <code>when()</code>, dafür ein <code>verify(..., never())</code>.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="verstaendnis">
+    <h3>🧠 Verständnis-Checks</h3>
+    <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
+    <div class="check">
+      <p class="q">Was sagt die Best-Practice-Konvention im Kurs zur Benennung von Testklassen?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Testklasse beginnt mit dem Namen der zu testenden Klasse und endet auf <code>Test</code>: z.B. <code>MovieControllerImplTest</code>, <code>AwardControllerImplTest</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wie sollen Testmethoden laut Folie heißen?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Mit Präfix <code>should</code> + dem zu testenden Verhalten — sowohl Erfolgs- als auch Fehlerfall: <code>shouldSuccessfullyLogin</code>, <code>shouldNotLoginBecauseWrongPassword</code>, <code>shouldNotLoginBecauseEmptyPassword</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wo liegt der Test-Ordner und wie soll seine Struktur aussehen?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>src/test/</code>. Die Package-Struktur muss <strong>identisch</strong> zu <code>src/main/</code> sein — sonst funktioniert die DI von Spring beim Laden der Test-Beans nicht zuverlässig.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Erkläre die drei Test-Arten der Pyramide kurz.</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><strong>Unit-Test</strong>: einzelne Methode/Klasse isoliert. <strong>Integrationstest</strong>: Zusammenspiel mehrerer Komponenten (z.B. Controller→Service→Repo). <strong>Systemtest</strong>: gesamte Anwendung inkl. nicht-funktionaler Anforderungen, möglichst nahe am Produktivsystem.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was ist die zentrale Herausforderung bei Unit-Tests in Spring, die Test-Doubles lösen?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Klassen haben Abhängigkeiten zu anderen (Controller→Service→Repo). Um eine Methode <em>isoliert</em> zu testen, ersetzt man die Abhängigkeit durch ein Test-Double — die echte Implementierung wird nicht aufgerufen.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Erkläre Fake vs. Mock vs. Stub gemäß Kurs.</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><strong>Fake</strong>: eigenständig geschriebene Alternativ-Implementierung mit reduzierter Komplexität (aufwändig). <strong>Mock</strong>: automatisch generiert, Standard-Rückgaben, Fokus auf <em>Aufruf-Verhalten</em>. <strong>Stub</strong>: semi-automatisch, angepasstes Antwortverhalten, Fokus auf <em>Zustand/Ergebnis</em>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Banking-Beispiel: was prüft ein Stub vs. ein Mock bei einer Überweisung?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><strong>Stub</strong> bildet das Konto-Antwortverhalten nach (Stand 100€ → Transaktion → Stand 80€) und prüft den Endzustand. <strong>Mock</strong> prüft <em>nur</em>, ob der Transaktionsbefehl korrekt an den Bankserver geschickt wurde — nicht den Kontostand.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Welche Annotation verwandelt eine Klasse im Spring-Test in einen Mock?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>@MockBean</code> auf dem Feld. Spring ersetzt damit die echte Bean im Test-Kontext durch eine Mockito-Mock-Implementierung — alle Methoden geben Defaults zurück, bis du sie mit <code>when().thenReturn()</code> stubbst.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was startet <code>@WebMvcTest(controllers = X.class)</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Nur den MVC-Layer (Controller + ControllerAdvice + Filters) für die genannte Klasse. Kein Service-, Repository- oder DB-Bean wird geladen — alle Service-Abhängigkeiten musst du per <code>@MockBean</code> mocken. Ergebnis: schnelle Tests.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was ersetzt MockMvc gegenüber Postman?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Postman ist manuelles HTTP-Aufrufen. MockMvc simuliert HTTP-Requests <em>im Test</em> ohne echten Server zu starten — du kannst URL, Methode, Header, Body steuern und Status, Headers, JSON-Body assertieren.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Schreibe ein Stub für: <code>movieService.getMovieById(1L)</code> soll <code>movie_1</code> zurückgeben.</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>when(movieService.getMovieById(1L)).thenReturn(movie_1);</code></div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was prüft <code>verify(movieService, never()).addMovie(any())</code> und wann ist das relevant?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Es prüft, dass <code>addMovie</code> <em>nicht</em> aufgerufen wurde. Relevant z.B. bei Constraint-Violation-Tests: wenn der Validator vor dem Controller schlägt, darf der Service gar nicht erst angefasst werden.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Warum hat dieser Test <em>kein</em> <code>when()</code>?<br><pre><code class="language-java">movie_1.setTrailerUrl(null);
+mockMvc.perform(post("/api/v1/movies")
+  .contentType(APPLICATION_JSON)
+  .content(objectMapper.writeValueAsString(movie_1)))
+  .andExpect(status().isBadRequest());</code></pre></p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Weil die <code>@Valid</code>-Constraint-Violation <em>vor</em> dem Controller geworfen wird — der Service wird nicht aufgerufen, also gibt es nichts zu stubben. Stattdessen prüft man am Ende per <code>verify(service, never())…</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">JsonPath: wie liest du das <code>academy</code>-Feld des ersten Awards des ersten Movies?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>$[0].awards[0].academy</code>. Bei einer einzelnen Movie-Antwort entsprechend <code>$.awards[0].academy</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Welche zwei JUnit-Lifecycle-Annotationen werden im Kurs für Setup empfohlen, und wofür?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>@BeforeAll</code> (statisch, einmal pro Testklasse) für teures Setup; <code>@BeforeEach</code> (vor jeder Testmethode) für frische Test-Objekte, damit kein Test den anderen beeinflusst.</div>
+      </details>
+    </div>
+  </article>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="rest.html">← 3 · REST</a>
+<a class="next" href="webdesign.html">5 · Webdesign →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

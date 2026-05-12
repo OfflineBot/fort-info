@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>2 · Spring Data (JPA) — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="#jpa-tx">2.6 Transaktionen</a>
+      <a href="#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="jpa" class="chapter">
+  <h2>2 · Spring Data (JPA)</h2>
+
+  <article id="jpa-was">
+    <h3>2.1 ORM &amp; JPA-Grundlagen</h3>
+    <p><strong>ORM (Object-Relational Mapping)</strong> bildet Java-Objekte auf relationale Tabellen ab. <strong>JPA (Jakarta Persistence API)</strong> ist die Java-Spezifikation dafür; <strong>Hibernate</strong> ist die in Spring Boot mitgelieferte Standard-Implementierung. <strong>Spring Data JPA</strong> packt eine Repository-Schicht obendrauf, die viele CRUD-Operationen ohne eine Zeile SQL bereitstellt.</p>
+
+    <h4>Begriffe</h4>
+    <table>
+      <tr><th>Begriff</th><th>Bedeutung</th></tr>
+      <tr><td>Entity</td><td>Java-Klasse, die einer Tabelle entspricht (<code>@Entity</code>)</td></tr>
+      <tr><td>EntityManager</td><td>verwaltet Entity-Lebenszyklus (intern in Spring Data)</td></tr>
+      <tr><td>Persistence Context</td><td>Cache der "verwalteten" Entities während einer Transaktion</td></tr>
+      <tr><td>Repository</td><td>Interface mit CRUD- &amp; Such-Methoden (<code>JpaRepository</code>)</td></tr>
+      <tr><td>JPQL</td><td>Object-Query-Sprache — wie SQL, aber auf Entities statt Tabellen</td></tr>
+    </table>
+  </article>
+
+  <article id="jpa-entity">
+    <h3>2.2 Entity-Mapping</h3>
+    <p>Eine Entity-Klasse braucht <code>@Entity</code> und ein <code>@Id</code>-Feld. Im Kurs werden zur Reduktion von Boilerplate <strong>Lombok-Annotationen</strong> genutzt.</p>
+
+<pre><code class="language-java">package de.dhbw.ravensburg.wp.mymoviedatabase.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+public class Movie {
+
+    @Id
+    @GeneratedValue
+    private long id;
+
+    private String title;
+    private double duration;
+    private LocalDate premiereDate;
+    private String description;
+    private String trailerUrl;
+    private String coverImgUrl;
+    private double imdbRating;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "director_id", nullable = true)
+    private Director director;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "movie_moviecast",
+        joinColumns        = { @JoinColumn(name = "movie_id", referencedColumnName = "id") },
+        inverseJoinColumns = { @JoinColumn(name = "cast_id",  referencedColumnName = "id") })
+    private List&lt;MovieCast&gt; involvedMovieCast;
+
+    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
+    private Soundtrack soundtrack;
+}</code></pre>
+
+    <p>Wichtige Annotationen:</p>
+    <ul>
+      <li><code>@Entity</code> — Klasse wird einer Tabelle zugeordnet (Tabellenname = Klassenname).</li>
+      <li><code>@Id</code> — Primärschlüssel-Feld.</li>
+      <li><code>@GeneratedValue</code> — DB generiert die ID (Auto-Increment).</li>
+      <li><code>@Column</code> — Spalten-Konfiguration (Name, nullable, length, …).</li>
+      <li><code>@JoinColumn</code> / <code>@JoinTable</code> — Konfiguration der FK-Spalten bzw. Verknüpfungstabellen.</li>
+    </ul>
+  </article>
+
+  <article id="jpa-repo">
+    <h3>2.3 JpaRepository &amp; Derived Queries</h3>
+    <p>Ein <code>JpaRepository</code> stellt CRUD-Methoden zur Verfügung (<code>save</code>, <code>findById</code>, <code>findAll</code>, <code>deleteById</code>, …). Zusätzliche Methoden lassen sich allein durch <strong>Methodennamen</strong> definieren — Spring leitet daraus die Query ab.</p>
+
+<pre><code class="language-java">@Repository
+public interface MovieRepository extends JpaRepository&lt;Movie, Long&gt; {
+    List&lt;Movie&gt; findByTitleContaining(String substring);
+    List&lt;Movie&gt; findByImdbRatingGreaterThan(double rating);
+    List&lt;Movie&gt; findByPremiereDateAfter(LocalDate reference);
+}</code></pre>
+
+    <h4>Derived-Query Schlüsselwörter (Auswahl)</h4>
+    <table>
+      <tr><th>Keyword</th><th>SQL-Pendant</th></tr>
+      <tr><td><code>findBy{Feld}</code></td><td><code>WHERE feld = ?</code></td></tr>
+      <tr><td><code>...Containing</code></td><td><code>LIKE '%?%'</code></td></tr>
+      <tr><td><code>...StartingWith</code> / <code>...EndingWith</code></td><td><code>LIKE '?%'</code> / <code>LIKE '%?'</code></td></tr>
+      <tr><td><code>...GreaterThan</code> / <code>...LessThan</code></td><td><code>&gt;</code> / <code>&lt;</code></td></tr>
+      <tr><td><code>...After</code> / <code>...Before</code></td><td>Datumvergleich</td></tr>
+      <tr><td><code>...Between</code></td><td><code>BETWEEN ? AND ?</code></td></tr>
+      <tr><td><code>...In</code></td><td><code>IN (?, ?, ...)</code></td></tr>
+      <tr><td><code>...And...</code> / <code>...Or...</code></td><td>Logik-Operator</td></tr>
+      <tr><td><code>...OrderBy{Feld}{Asc|Desc}</code></td><td><code>ORDER BY feld</code></td></tr>
+    </table>
+  </article>
+
+  <article id="jpa-jpql">
+    <h3>2.4 @Query (JPQL)</h3>
+    <p>Wenn die Methodennamen-Konvention nicht reicht, schreibt man die Query selbst — in <strong>JPQL</strong> (auf Entities, nicht Tabellen) oder als native SQL.</p>
+
+<pre><code class="language-java">@Query("SELECT m FROM Movie m WHERE m.title = :param1")
+List&lt;Movie&gt; findAllMoviesByTitle(@Param("param1") String title);
+
+@Query("SELECT m FROM Movie m WHERE m.duration &lt; 2.3 AND m.imdbRating &gt; 7.0")
+List&lt;Movie&gt; findAllShortMoviesWithGoodImdbRating();</code></pre>
+
+    <p><strong>Achtung:</strong> in JPQL referenzierst du <em>Klassennamen</em> (<code>Movie</code>) und <em>Feldnamen</em> (<code>m.title</code>), nicht Tabellen- oder Spaltennamen.</p>
+  </article>
+
+  <article id="jpa-relations">
+    <h3>2.5 Beziehungen &amp; Cascade</h3>
+    <table>
+      <tr><th>Annotation</th><th>Kardinalität</th><th>Beispiel</th></tr>
+      <tr><td><code>@OneToOne</code></td><td>1:1</td><td>Movie ↔ Soundtrack</td></tr>
+      <tr><td><code>@OneToMany</code></td><td>1:n</td><td>Movie → Awards</td></tr>
+      <tr><td><code>@ManyToOne</code></td><td>n:1</td><td>Movie → Director</td></tr>
+      <tr><td><code>@ManyToMany</code></td><td>n:m</td><td>Movie ↔ MovieCast</td></tr>
+    </table>
+
+    <h4>CascadeType</h4>
+    <p>Steuert, welche Operationen vom Parent auf das Child weitergereicht werden:</p>
+    <ul>
+      <li><code>PERSIST</code> — <code>save(parent)</code> speichert auch das Child</li>
+      <li><code>MERGE</code> — Update wird durchgereicht</li>
+      <li><code>REMOVE</code> — Löschen wird durchgereicht</li>
+      <li><code>ALL</code> — alle vier (PERSIST + MERGE + REMOVE + REFRESH + DETACH)</li>
+    </ul>
+    <p>Im Kurs steht überall <code>cascade = CascadeType.ALL</code> — pragmatisch für Übungen, in Produktion bewusster wählen (sonst löscht ein <code>delete(movie)</code> den ganzen <code>Director</code> mit, was selten gewollt ist).</p>
+
+    <h4>mappedBy — wer "besitzt" die Beziehung</h4>
+    <p>In bidirektionalen Beziehungen gibt es eine <em>owning side</em> (mit <code>@JoinColumn</code>) und eine <em>inverse side</em> (mit <code>mappedBy = "feldname"</code>). Beispiel <code>Award</code> ↔ <code>Movie</code>:</p>
+<pre><code class="language-java">@Entity
+public class Award {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id")     // owning side
+    private Movie movie;
+}
+
+// Movie wäre die inverse side (würde sie eine Liste der Awards halten):
+// @OneToMany(mappedBy = "movie")
+// private List&lt;Award&gt; awards;</code></pre>
+  </article>
+
+  <article id="jpa-tx">
+    <h3>2.6 Transaktionen</h3>
+    <p>Spring verwaltet Transaktionen deklarativ über <code>@Transactional</code>. Standardmäßig sind <code>JpaRepository</code>-Methoden bereits in eine Transaktion gewrappt. Auf Service-Ebene macht man:</p>
+<pre><code class="language-java">@Service
+public class MovieServiceImpl implements MovieService {
+
+    private final MovieRepository repo;
+    public MovieServiceImpl(MovieRepository repo) { this.repo = repo; }
+
+    @Transactional   // alle DB-Aufrufe in dieser Methode sind eine Einheit
+    public Movie addWithAward(Movie m, Award a) {
+        m.getAwards().add(a);
+        return repo.save(m);
+    }
+}</code></pre>
+    <p><strong>ACID-Eigenschaften:</strong> Atomicity, Consistency, Isolation, Durability.</p>
+  </article>
+
+  <article id="jpa-aufg2" class="aufgabe">
+    <h3>⚙ Aufgabe 2 — Repository-Methoden</h3>
+    <div class="exercise" data-id="aufg2">
+      <h5>Aufgabenstellung</h5>
+      <p>Erweitere das <code>MovieRepository</code> um:</p>
+      <ol>
+        <li>Eine Derived-Query, die Filme findet, deren Titel einen Substring enthält.</li>
+        <li>Eine Derived-Query, die Filme mit IMDB-Rating &gt; X liefert.</li>
+        <li>Eine Derived-Query, die Filme nach einem Stichdatum (Premiere) liefert.</li>
+        <li>Eine <code>@Query</code>, die Filme exakt mit übergebenem Titel sucht (mit <code>:param1</code>).</li>
+        <li>Eine <code>@Query</code>, die kurze Filme (<code>duration &lt; 2.3</code>) mit IMDB-Rating &gt; 7.0 findet.</li>
+      </ol>
+      <p>Die <code>ManualTestBean</code> ruft danach jede Methode auf und loggt die Ergebnisse.</p>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Repository
+public interface MovieRepository extends JpaRepository&lt;Movie, Long&gt; {
+
+    List&lt;Movie&gt; findByTitleContaining(String substring);
+    List&lt;Movie&gt; findByImdbRatingGreaterThan(double rating);
+    List&lt;Movie&gt; findByPremiereDateAfter(LocalDate reference);
+
+    @Query("SELECT m FROM Movie m WHERE m.title = :param1")
+    List&lt;Movie&gt; findAllMoviesByTitle(@Param("param1") String title);
+
+    @Query("SELECT m FROM Movie m WHERE m.duration &lt; 2.3 AND m.imdbRating &gt; 7.0")
+    List&lt;Movie&gt; findAllShortMoviesWithGoodImdbRating();
+}</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article id="jpa-aufg3" class="aufgabe">
+    <h3>⚙ Aufgabe 3 — Award + 1:n</h3>
+    <div class="exercise" data-id="aufg3">
+      <h5>Aufgabenstellung</h5>
+      <p>Erweitere das Datenmodell um die Entity <code>Award</code> mit den Feldern <code>academy</code>, <code>category</code>, <code>yearAwarded</code>. Verknüpfe sie mit <code>Movie</code> (n:1, ein Film kann mehrere Awards haben). Schreibe eine Repository-Methode, die alle Awards eines Films per Movie-ID findet.</p>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@Getter @Setter @NoArgsConstructor
+@Entity
+public class Award {
+    @Id @GeneratedValue
+    private Long id;
+
+    private String academy;
+    private String category;
+    private int yearAwarded;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
+
+    public Award(String academy, String category, int yearAwarded) {
+        this.academy     = academy;
+        this.category    = category;
+        this.yearAwarded = yearAwarded;
+    }
+}
+
+@Repository
+public interface AwardRepository extends JpaRepository&lt;Award, Long&gt; {
+    List&lt;Award&gt; findByMovie_Id(Long movieId);
+}</code></pre>
+        <p>Das Underscore <code>_</code> in <code>findByMovie_Id</code> sagt Spring Data: navigiere in der Beziehung <code>movie</code> auf das Feld <code>id</code>.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="verstaendnis">
+    <h3>🧠 Verständnis-Checks</h3>
+    <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
+    <div class="check">
+      <p class="q">Welche zwei Annotationen brauchst du minimal, damit eine Klasse zur JPA-Entity wird?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>@Entity</code> auf der Klasse + <code>@Id</code> auf einem Feld. Ohne Primary Key wirft Hibernate beim Start einen Fehler.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was bewirkt <code>@GeneratedValue</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Die DB (bzw. Hibernate) erzeugt den Wert automatisch — typischerweise via Auto-Increment oder Sequenz. Du musst die ID nie selbst setzen; sie ist nach <code>save()</code> verfügbar.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Bei <code>Movie</code> ↔ <code>Director</code> (ein Film hat einen Director, ein Director hat viele Filme): welche Annotation auf welcher Seite?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Auf <code>Movie</code>: <code>@ManyToOne</code> (viele Filme zeigen auf einen Director) mit <code>@JoinColumn(name="director_id")</code>. Auf <code>Director</code> (falls bidirektional): <code>@OneToMany(mappedBy="director")</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was macht <code>mappedBy</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Es markiert die <em>inverse</em> Seite einer bidirektionalen Beziehung. Der Wert ist der Feldname der <em>owning</em> Seite (mit der <code>@JoinColumn</code>). Ohne <code>mappedBy</code> würde JPA <em>zwei</em> Beziehungstabellen anlegen statt einer.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Bei <code>cascade = CascadeType.ALL</code>: was passiert, wenn ich einen <code>Movie</code> lösche, der einen Director referenziert?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Der Director wird <em>mitgelöscht</em>. Das ist im Kurs für Übungen pragmatisch, in Produktion aber meist falsch — andere Filme könnten denselben Director referenzieren. Bewusste Wahl pro Beziehung empfohlen.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Schreibe eine Derived Query, die alle Filme mit IMDB-Rating &gt; 7 sortiert nach Premiere absteigend findet.</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>List&lt;Movie&gt; findByImdbRatingGreaterThanOrderByPremiereDateDesc(double rating);</code> — Spring Data leitet die Query allein aus dem Methodennamen ab.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">In <code>@Query("SELECT m FROM Movie m WHERE m.title = :t")</code>: ist <em>Movie</em> eine Tabelle oder eine Klasse?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Eine <strong>Klasse</strong> (Java-Entity-Name). JPQL operiert auf dem Object-Modell, nicht auf SQL-Tabellen. Felder wie <code>m.title</code> sind Java-Feldnamen, nicht Spaltennamen.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was bedeutet <em>Persistence Context</em>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Der Cache der verwalteten Entities innerhalb einer Transaktion. Solange ein Objekt im Persistence Context lebt, schreibt JPA jede Änderung beim Commit automatisch zurück — ohne dass du <code>save()</code> aufrufen musst.</div>
+      </details>
+    </div>
+  </article>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="spring.html">← 1 · Spring Grundlagen</a>
+<a class="next" href="rest.html">3 · REST →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

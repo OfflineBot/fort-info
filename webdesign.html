@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>5 · Webdesign — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="#web-html">5.1 HTML-Grundlagen</a>
+      <a href="#web-css">5.2 CSS</a>
+      <a href="#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="webdesign" class="chapter">
+  <h2>5 · Webdesign</h2>
+
+  <article id="web-html">
+    <h3>5.1 HTML-Grundlagen</h3>
+    <p>HTML ist die Strukturschicht. Die wichtigsten Tags für die Übungen:</p>
+    <ul>
+      <li><code>&lt;h1&gt;…&lt;h6&gt;</code> — Überschriften</li>
+      <li><code>&lt;p&gt;</code> — Absatz</li>
+      <li><code>&lt;img src="…"&gt;</code> — Bild (selbstschließend)</li>
+      <li><code>&lt;a href="…"&gt;</code> — Link</li>
+      <li><code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code> — Tabellen</li>
+      <li><code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code> + <code>&lt;li&gt;</code> — Listen</li>
+      <li><code>&lt;div&gt;</code> / <code>&lt;span&gt;</code> — Container</li>
+      <li><code>&lt;strong&gt;</code> / <code>&lt;br&gt;</code> — fett / Zeilenumbruch</li>
+    </ul>
+
+<pre><code class="language-xml">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Interstellar (2014)&lt;/h1&gt;
+    &lt;img src="cover.jpg"&gt;
+    &lt;h2&gt;Summary&lt;/h2&gt;
+    &lt;p&gt;A team of explorers travel through a wormhole in space …&lt;/p&gt;
+    &lt;strong&gt;Director: &lt;/strong&gt;Christopher Nolan
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </article>
+
+  <article id="web-css">
+    <h3>5.2 CSS</h3>
+    <p>CSS ist die Präsentationsschicht. Drei Möglichkeiten zur Einbindung:</p>
+    <ol>
+      <li><strong>Inline:</strong> <code>style="color:red"</code> — schlechteste Variante.</li>
+      <li><strong>Im <code>&lt;head&gt;</code>:</strong> <code>&lt;style&gt;…&lt;/style&gt;</code>.</li>
+      <li><strong>Externe Datei:</strong> <code>&lt;link rel="stylesheet" href="css/style.css"&gt;</code> — Standard.</li>
+    </ol>
+
+<pre><code class="language-css">.top {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  padding: .5rem;
+  border: 1px solid #ccc;
+}</code></pre>
+
+    <h4>Wichtige Selektoren</h4>
+    <ul>
+      <li><code>elem</code> — alle Elemente dieses Tags</li>
+      <li><code>.klasse</code> — alle mit <code>class="klasse"</code></li>
+      <li><code>#id</code> — das Element mit <code>id="id"</code></li>
+      <li><code>elem.klasse</code> — kombiniert</li>
+      <li><code>parent &gt; child</code> — direkter Nachfahre</li>
+      <li><code>a:hover</code> — Pseudo-Klasse</li>
+    </ul>
+  </article>
+
+  <article id="web-bootstrap">
+    <h3>5.3 Bootstrap 5</h3>
+    <p>Bootstrap ist ein CSS-Framework mit fertigen Komponenten und einem 12-Spalten-Grid. Im Kurs wird über CDN eingebunden:</p>
+
+<pre><code class="language-xml">&lt;link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code></pre>
+
+    <h4>Grid-System</h4>
+<pre><code class="language-xml">&lt;div class="container"&gt;
+  &lt;div class="row g-0"&gt;
+    &lt;div class="col-4"&gt;Cover-Bild&lt;/div&gt;
+    &lt;div class="col-8"&gt;Trailer-Bild&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h4>Im Kurs verwendete Klassen</h4>
+    <table>
+      <tr><th>Klasse</th><th>Wirkung</th></tr>
+      <tr><td><code>container</code></td><td>zentrierter, responsive Wrapper</td></tr>
+      <tr><td><code>row</code> / <code>col-N</code></td><td>12-Spalten-Grid</td></tr>
+      <tr><td><code>g-0</code> bis <code>g-5</code></td><td>Gap zwischen Spalten</td></tr>
+      <tr><td><code>mt-4</code>, <code>mb-4</code></td><td>Margin top/bottom Stufe 4</td></tr>
+      <tr><td><code>img-fluid</code> / <code>w-100</code></td><td>Bild responsive / volle Breite</td></tr>
+      <tr><td><code>table table-striped table-hover</code></td><td>gestyltes Tabellen-Set</td></tr>
+      <tr><td><code>carousel</code></td><td>Bildkarussell</td></tr>
+    </table>
+
+    <h4>Carousel-Komponente (aus Aufgabe 9)</h4>
+<pre><code class="language-xml">&lt;div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-item active"&gt;
+      &lt;img src="bild1.jpg" class="d-block w-100" alt="..."&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel-item"&gt;
+      &lt;img src="bild2.jpg" class="d-block w-100" alt="..."&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-control-prev" type="button"
+          data-bs-target="#carouselExampleControls" data-bs-slide="prev"&gt;
+    &lt;span class="carousel-control-prev-icon" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;span class="visually-hidden"&gt;Previous&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="carousel-control-next" type="button"
+          data-bs-target="#carouselExampleControls" data-bs-slide="next"&gt;
+    &lt;span class="carousel-control-next-icon" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;span class="visually-hidden"&gt;Next&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  </article>
+
+  <article id="web-aufg7" class="aufgabe">
+    <h3>⚙ Aufgabe 7 — Pure HTML</h3>
+    <div class="exercise" data-id="aufg7">
+      <h5>Aufgabenstellung</h5>
+      <p>Lege eine Datei <code>movie-profile.html</code> an, die das Profil eines Films (Interstellar) darstellt — ohne CSS, nur mit semantischem HTML:</p>
+      <ul>
+        <li>Titel + Erscheinungsjahr als <code>h1</code></li>
+        <li>Cover-Bild (von IMDB-URL)</li>
+        <li>Summary als <code>p</code></li>
+        <li>Director / Writers / Stars als fette Labels</li>
+        <li>Cast-Tabelle (Artist name / Role name) mit <code>thead</code> + <code>tbody</code></li>
+      </ul>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-xml">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Interstellar (2014)&lt;/h1&gt;
+    &lt;img src="https://m.media-amazon.com/images/M/MV5B…UX182_AL_.jpg"&gt;
+
+    &lt;h2&gt;Summary&lt;/h2&gt;
+    &lt;p&gt;A team of explorers travel through a wormhole in space in an attempt
+       to ensure humanity's survival.&lt;/p&gt;
+    &lt;strong&gt;Director: &lt;/strong&gt;Christopher Nolan&lt;br&gt;
+    &lt;strong&gt;Writers: &lt;/strong&gt;Jonathan Nolan, Christopher Nolan&lt;br&gt;
+    &lt;strong&gt;Stars: &lt;/strong&gt;Matthew McConaughey, Anne Hathaway, Jessica Chastain
+
+    &lt;h2&gt;Cast:&lt;/h2&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;&lt;th&gt;Artist name&lt;/th&gt;&lt;th&gt;Role name&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;Ellen Burstyn&lt;/td&gt;&lt;td&gt;Murph (Older)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Matthew McConaughey&lt;/td&gt;&lt;td&gt;Cooper&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Mackenzie Foy&lt;/td&gt;&lt;td&gt;Murph (10 Yrs.)&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;John Lithgow&lt;/td&gt;&lt;td&gt;Donald&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article id="web-aufg8" class="aufgabe">
+    <h3>⚙ Aufgabe 8 — eigenes CSS</h3>
+    <div class="exercise" data-id="aufg8">
+      <h5>Aufgabenstellung</h5>
+      <p>Erweitere das Profil aus Aufgabe 7 um <strong>eigenes CSS</strong> in einer separaten Datei <code>css/style.css</code>. Pack Cover- und Trailer-Bild nebeneinander in einen Container <code>.top</code>. Style die Tabelle.</p>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p><code>movie-profile.html</code> bekommt im <code>&lt;head&gt;</code>:</p>
+<pre><code class="language-xml">&lt;link rel="stylesheet" href="css/style.css"&gt;</code></pre>
+        <p>Layout-Skelett mit Container:</p>
+<pre><code class="language-xml">&lt;div class="top"&gt;
+    &lt;h1&gt;Interstellar (2014)&lt;/h1&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;img src="cover.jpg"&gt;&lt;/td&gt;
+            &lt;td&gt;
+                &lt;a href="https://www.youtube.com/watch?v=k-iI-vftGGE"&gt;
+                    &lt;img src="trailer.jpg"&gt;
+                &lt;/a&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+        <p>Beispiel-CSS:</p>
+<pre><code class="language-css">body { font-family: sans-serif; max-width: 960px; margin: 2rem auto; }
+.top { text-align: center; margin-bottom: 1.5rem; }
+.top img { max-width: 300px; height: auto; }
+
+table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+th, td { padding: .5rem .8rem; border: 1px solid #ccc; }
+thead th { background: #f3f3f3; }</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article id="web-aufg9" class="aufgabe">
+    <h3>⚙ Aufgabe 9 — Bootstrap + Carousel</h3>
+    <div class="exercise" data-id="aufg9">
+      <h5>Aufgabenstellung</h5>
+      <p>Baue das Movie-Profile mit Bootstrap 5 neu auf. Anforderungen:</p>
+      <ul>
+        <li>Bootstrap CDN einbinden (CSS &amp; JS)</li>
+        <li>Cover- + Trailer-Bild via <code>.row .col-4 / .col-8</code> nebeneinander</li>
+        <li>Cast-Tabelle mit <code>.table .table-striped .table-hover</code></li>
+        <li>Awards als ungeordnete Liste</li>
+        <li>Soundtrack als geordnete Liste</li>
+        <li><strong>Bilderkarussell</strong> (carousel) am Ende mit mehreren Szenenbildern</li>
+      </ul>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p>Komplette Lösung im Lösungs-ZIP. Schlüsselausschnitte:</p>
+<pre><code class="language-xml">&lt;div class="container"&gt;
+  &lt;div class="top"&gt;
+    &lt;h1&gt;Interstellar (2014)&lt;/h1&gt;
+    &lt;div class="row g-0"&gt;
+      &lt;div class="col-4"&gt;
+        &lt;img class="img-fluid w-100" src="cover.jpg"&gt;
+      &lt;/div&gt;
+      &lt;div class="col-8"&gt;
+        &lt;img class="img-fluid w-100" src="trailer.jpg"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;h2 class="mt-4"&gt;Cast:&lt;/h2&gt;
+  &lt;table class="table table-striped table-hover"&gt; … &lt;/table&gt;
+
+  &lt;h2 class="mt-4 mb-4"&gt;Pictures&lt;/h2&gt;
+  &lt;div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"&gt;
+    … (siehe Codebeispiel unter §5.3)
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p><strong>Lerneffekt:</strong> dieselbe Seite drei Mal — pure HTML (Aufgabe 7) → eigenes CSS (Aufgabe 8) → Bootstrap (Aufgabe 9). Du siehst direkt, wie viel weniger CSS du selbst schreiben musst, sobald du ein Framework nutzt, und welchen Trade-off du dafür eingehst (HTML wird "klassen-lastig").</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="verstaendnis">
+    <h3>🧠 Verständnis-Checks</h3>
+    <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
+    <div class="check">
+      <p class="q">Welche drei Möglichkeiten gibt es, CSS einzubinden — und welche ist Standard?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Inline-Style, <code>&lt;style&gt;</code> im Head, oder <code>&lt;link rel="stylesheet" href="…"&gt;</code> auf eine externe Datei. Letzteres ist Standard (Wiederverwendung, Caching, Trennung von HTML &amp; CSS).</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was bedeutet <code>col-md-4</code> in Bootstrap?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Ab dem Breakpoint <code>md</code> (≥ 768 px) nimmt das Element <strong>4 von 12 Grid-Spalten</strong> ein. Drunter (Mobile) füllt es per Default die volle Breite (eine Spalte pro Zeile).</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wie definierst du in Bootstrap drei gleich breite Spalten nebeneinander?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>&lt;div class="row"&gt;</code> mit drei <code>&lt;div class="col-4"&gt;</code> oder <code>col-md-4</code> für Mobile-First-Verhalten.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Welche Bootstrap-Klassen regeln Abstand und Margin?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>g-0</code> bis <code>g-5</code> auf der <code>row</code> regelt den Gap zwischen Spalten. Für Margin: <code>mt-X</code>, <code>mb-X</code>, <code>my-X</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Welche didaktische Progression haben Aufgabe 7, 8 und 9?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Dieselbe Movie-Profile-Seite drei Mal: 7 = pure HTML, 8 = HTML + eigenes CSS, 9 = HTML + Bootstrap (inkl. Carousel). Du siehst direkt den Trade-off: weniger eigenes CSS, dafür klassen-lastiges HTML.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Welches Bootstrap-JavaScript-Plugin nutzt Aufgabe 9?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Das <code>carousel</code>-Plugin für ein Bilderkarussell — eingebunden via <code>&lt;script src="bootstrap.bundle.min.js"&gt;</code> + <code>data-bs-ride="carousel"</code> + Prev/Next-Buttons mit <code>data-bs-slide</code>.</div>
+      </details>
+    </div>
+  </article>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="testing.html">← 4 · Testing</a>
+<a class="next" href="thymeleaf.html">6 · Thymeleaf →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Übersicht — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<header id="overview">
+  <h1>Fortgeschrittene Informatik</h1>
+  <p class="lead">WDS125 · SCA · WiSe 2025/2026 · DHBW Ravensburg</p>
+</header>
+
+<nav class="chapter-router">
+  <a class="card" href="orga.html"><h3>Organisation</h3></a>
+  <a class="card" href="spring.html"><h3>1 · Spring Grundlagen</h3></a>
+  <a class="card" href="jpa.html"><h3>2 · Spring Data (JPA)</h3></a>
+  <a class="card" href="rest.html"><h3>3 · REST</h3></a>
+  <a class="card" href="testing.html"><h3>4 · Testing</h3></a>
+  <a class="card" href="webdesign.html"><h3>5 · Webdesign</h3></a>
+  <a class="card" href="thymeleaf.html"><h3>6 · Thymeleaf</h3></a>
+  <a class="card" href="forms.html"><h3>7 · Forms</h3></a>
+  <a class="card" href="cheatsheet.html"><h3>Cheatsheet</h3></a>
+  <a class="card" href="quiz.html"><h3>Probekurztest</h3></a>
+  <a class="card" href="claude.html"><h3>Mit Claude lernen</h3></a>
+</nav>
+<nav class="chapter-nav">
+<span></span>
+<a class="next" href="orga.html">Organisation →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

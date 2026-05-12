@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>6 · Thymeleaf — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="thymeleaf" class="chapter">
+  <h2>6 · Thymeleaf</h2>
+
+  <article id="th-was">
+    <h3>6.1 Server-Side vs. Client-Side Rendering</h3>
+    <p>Im Kurs werden drei Render-Modelle gegenübergestellt:</p>
+    <ol>
+      <li><strong>Klassisches Server-Rendering (Thymeleaf):</strong> Server liefert die fertig zusammengebaute HTML-Seite. Schnelle initiale Anzeige, weniger Last im Browser.</li>
+      <li><strong>Single-Page-App (REST + JS-Framework):</strong> Server liefert nur Daten als JSON, der Browser baut die Seite. Entlastet den Server, lädt initial länger.</li>
+      <li><strong>Hybrid:</strong> initiale Seite vom Server, dynamische Teile per JS und REST nachgeladen.</li>
+    </ol>
+    <p><strong>Thymeleaf</strong> ist eine server­seitige Template-Engine, die in Spring Boot Standard ist. Templates sind <em>valides HTML</em> — du kannst sie auch ohne Server im Browser öffnen (Platzhaltertexte werden gerendert).</p>
+  </article>
+
+  <article id="th-syntax">
+    <h3>6.2 Syntax &amp; Expressions</h3>
+    <p>Templates landen unter <code>src/main/resources/templates/</code>, statische Assets unter <code>src/main/resources/static/</code>. Im Template-Tag muss der Namespace stehen:</p>
+<pre><code class="language-xml">&lt;html xmlns:th="http://www.thymeleaf.org"&gt;</code></pre>
+
+    <h4>Expression-Typen</h4>
+    <table>
+      <tr><th>Syntax</th><th>Bedeutung</th><th>Beispiel</th></tr>
+      <tr><td><code>${…}</code></td><td>Variable / OGNL</td><td><code>${movie.title}</code></td></tr>
+      <tr><td><code>*{…}</code></td><td>Selection (innerhalb <code>th:object</code>)</td><td><code>*{title}</code></td></tr>
+      <tr><td><code>@{…}</code></td><td>URL</td><td><code>@{/css/bootstrap.min.css}</code></td></tr>
+      <tr><td><code>#{…}</code></td><td>i18n / messages.properties</td><td><code>#{login.title}</code></td></tr>
+      <tr><td><code>~{…}</code></td><td>Fragment</td><td><code>~{fragments/banner :: banner}</code></td></tr>
+    </table>
+
+    <h4>Wichtige <code>th:</code>-Attribute</h4>
+    <table>
+      <tr><th>Attribut</th><th>Wirkung</th></tr>
+      <tr><td><code>th:text</code></td><td>setzt den Textinhalt</td></tr>
+      <tr><td><code>th:href</code></td><td>setzt das <code>href</code>-Attribut (mit Context-Path)</td></tr>
+      <tr><td><code>th:src</code></td><td>setzt das <code>src</code>-Attribut</td></tr>
+      <tr><td><code>th:if</code> / <code>th:unless</code></td><td>bedingtes Rendering</td></tr>
+      <tr><td><code>th:each</code></td><td>Iteration</td></tr>
+      <tr><td><code>th:object</code> / <code>th:field</code></td><td>Formular-Binding</td></tr>
+      <tr><td><code>th:insert</code> / <code>th:replace</code></td><td>Fragments einbetten</td></tr>
+    </table>
+  </article>
+
+  <article id="th-controller">
+    <h3>6.3 Controller + ModelAndView</h3>
+    <p>Ein Thymeleaf-Controller ist ein normaler <code>@Controller</code>, dessen Methoden den Template-Namen (ohne <code>.html</code>) zurückgeben. Daten gehen über <code>Model</code> oder <code>ModelAndView</code> ins Template.</p>
+
+<pre><code class="language-java">@Slf4j
+@Controller
+public class ThMovieControllerImpl implements ThMovieController {
+
+    private final MovieService movieService;
+
+    public ThMovieControllerImpl(MovieService movieService) {
+        this.movieService = movieService;
+    }
+
+    @Override
+    @GetMapping(value = {"/", "/index.html"})
+    public ModelAndView index() {
+        List&lt;MovieDTO&gt; movies = movieService.getAllMovies();
+
+        ModelAndView mv = new ModelAndView("index");
+        mv.addObject("data", movies);
+        return mv;
+    }
+
+    @Override
+    @GetMapping("/contact")
+    public String contactInfo() { return "contact"; }   // → templates/contact.html
+
+    @Override
+    @GetMapping("/version")
+    public String versionInfo() { return "version"; }   // → templates/version.html
+}</code></pre>
+  </article>
+
+  <article id="th-fragments">
+    <h3>6.4 Fragments (insert / replace)</h3>
+    <p>Wiederkehrende Bestandteile (Banner, Footer, Modals) werden in <strong>Fragments</strong> ausgelagert.</p>
+
+<pre><code class="language-xml">&lt;!-- templates/fragments/banner.html --&gt;
+&lt;!doctype html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;body&gt;
+  &lt;section th:fragment="banner"&gt;
+    &lt;h1&gt;My Movie Database&lt;/h1&gt;
+    &lt;p&gt;Die beste Filmsammlung der DHBW.&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<pre><code class="language-xml">&lt;!-- templates/index.html --&gt;
+&lt;!doctype html&gt;
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;My Movie Database&lt;/title&gt;
+    &lt;link th:href="@{css/bootstrap.min.css}" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main role="main"&gt;
+    &lt;section th:insert="fragments/banner :: banner"&gt;&lt;/section&gt;
+    &lt;div     th:insert="fragments/grid   :: grid"&gt;&lt;/div&gt;
+&lt;/main&gt;
+
+&lt;footer th:insert="fragments/footer :: footer"&gt;&lt;/footer&gt;
+
+&lt;script th:src="@{js/bootstrap.bundle.min.js}"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p><strong>Unterschied:</strong></p>
+    <ul>
+      <li><code>th:insert</code> — packt das Fragment <em>in</em> den umgebenden Tag</li>
+      <li><code>th:replace</code> — <em>ersetzt</em> den umgebenden Tag komplett durch das Fragment</li>
+    </ul>
+  </article>
+
+  <article id="th-iteration">
+    <h3>6.5 Iteration mit th:each</h3>
+<pre><code class="language-xml">&lt;!-- fragments/grid.html — iteriert über die Movie-Liste aus dem Model --&gt;
+&lt;div th:fragment="grid" class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-4 mb-4" th:each="movie : ${data}"&gt;
+      &lt;div class="card"&gt;
+        &lt;img class="card-img-top" th:src="${movie.coverImgUrl}"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h5 class="card-title" th:text="${movie.title}"&gt;Titel&lt;/h5&gt;
+          &lt;p   class="card-text"  th:text="${movie.description}"&gt;…&lt;/p&gt;
+          &lt;p&gt;IMDB: &lt;span th:text="${movie.imdbRating}"&gt;0&lt;/span&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <p><strong>Iter-Status</strong> (zweite Variable): <code>th:each="m, stat : ${data}"</code> gibt <code>stat.index</code>, <code>stat.count</code>, <code>stat.first</code>, <code>stat.last</code>, <code>stat.even</code>, <code>stat.odd</code>.</p>
+  </article>
+
+  <article id="th-aufg10" class="aufgabe">
+    <h3>⚙ Aufgabe 10 — erste Templates</h3>
+    <div class="exercise" data-id="aufg10">
+      <h5>Aufgabenstellung</h5>
+      <p>Lege drei Templates an:</p>
+      <ul>
+        <li><code>templates/contact.html</code> — Kontakt-Seite</li>
+        <li><code>templates/fragments/banner.html</code> — wiederverwendbarer Banner</li>
+        <li><code>templates/fragments/footer.html</code> — wiederverwendbarer Footer</li>
+      </ul>
+      <p>Im <code>contact.html</code> bindest du Banner und Footer per <code>th:insert</code> ein. Schreibe einen Controller-Endpunkt <code>GET /contact</code>, der das Template ausliefert.</p>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+<pre><code class="language-java">@GetMapping("/contact")
+public String contactInfo() { return "contact"; }</code></pre>
+<pre><code class="language-xml">&lt;!doctype html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;&lt;title&gt;Kontakt&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;section th:insert="fragments/banner :: banner"&gt;&lt;/section&gt;
+  &lt;main&gt;
+    &lt;h2&gt;Kontakt&lt;/h2&gt;
+    &lt;p&gt;Email: kontakt@example.com&lt;/p&gt;
+  &lt;/main&gt;
+  &lt;footer th:insert="fragments/footer :: footer"&gt;&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article id="th-aufg11" class="aufgabe">
+    <h3>⚙ Aufgabe 11 — Movie-Grid</h3>
+    <div class="exercise" data-id="aufg11">
+      <h5>Aufgabenstellung</h5>
+      <p>Baue eine Startseite, die alle Filme aus der DB als Bootstrap-Card-Grid anzeigt:</p>
+      <ol>
+        <li><code>ThMovieControllerImpl</code> mit Endpunkt <code>GET /</code>, der alle Movies aus dem <code>MovieService</code> ins Model packt (Key: <code>data</code>) und das Template <code>index</code> rendert.</li>
+        <li><code>fragments/grid.html</code> mit Fragment <code>grid</code>, das per <code>th:each</code> über <code>${data}</code> iteriert und je Movie eine Card rendert (Cover, Titel, Beschreibung, Rating).</li>
+        <li><code>index.html</code> bindet Banner, Grid, Footer per <code>th:insert</code> ein.</li>
+        <li>Zusätzliche Endpoints <code>GET /contact</code> und <code>GET /version</code>.</li>
+      </ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p>Controller siehe §6.3 (komplett aus dem Lösungs-ZIP). Index-Template siehe §6.4. Grid-Fragment siehe §6.5.</p>
+        <p>Der Controller-Aufruf <code>movieService.getAllMovies()</code> liefert bereits <code>List&lt;MovieDTO&gt;</code> — das DTO enthält schon alle Felder, die das Template braucht (kein zusätzliches Mapping nötig).</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="verstaendnis">
+    <h3>🧠 Verständnis-Checks</h3>
+    <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
+    <div class="check">
+      <p class="q">Was bedeuten <code>${…}</code> · <code>*{…}</code> · <code>@{…}</code> · <code>~{…}</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>${var}</code> Variable/OGNL · <code>*{feld}</code> Selection (innerhalb <code>th:object</code>) · <code>@{/url}</code> URL (mit Context-Path) · <code>~{frag :: id}</code> Fragment-Referenz.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q"><code>th:insert</code> vs <code>th:replace</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>th:insert</code> packt das Fragment <em>in</em> den umschließenden Tag (Tag bleibt erhalten). <code>th:replace</code> <em>ersetzt</em> den Tag komplett durch das Fragment.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wie iterierst du über eine Liste und nutzt den Iter-Status?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>th:each="item, stat : ${items}"</code> — <code>stat</code> bietet <code>index, count, size, first, last, even, odd</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wie definierst du ein wiederverwendbares Fragment <code>banner</code> und bindest es ein?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Definition: <code>&lt;section th:fragment="banner"&gt;…&lt;/section&gt;</code>. Einbinden: <code>&lt;section th:insert="~{fragments/banner :: banner}"&gt;&lt;/section&gt;</code>.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wofür der Namespace <code>xmlns:th="http://www.thymeleaf.org"</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Damit der Browser/Validator die <code>th:</code>-Attribute kennt. Templates bleiben so <em>valides HTML</em> — du kannst sie auch ohne Server öffnen, der Browser ignoriert die <code>th:</code>-Attribute einfach.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wann gibst du im Controller <code>String</code> zurück, wann <code>ModelAndView</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>String</code> reicht, wenn du nur den Template-Namen brauchst und Daten via <code>Model</code>-Parameter ergänzt. <code>ModelAndView</code> bündelt Template + Daten in einem Objekt — übersichtlicher, wenn man mehr als eine Variable hat.</div>
+      </details>
+    </div>
+  </article>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="webdesign.html">← 5 · Webdesign</a>
+<a class="next" href="forms.html">7 · Forms →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

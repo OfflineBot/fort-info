@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>1 · Spring Grundlagen — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="#spring-di">1.4 Dependency Injection</a>
+      <a href="#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="spring" class="chapter">
+  <h2>1 · Spring Grundlagen</h2>
+
+  <article id="spring-was">
+    <h3>1.1 Was ist Spring Boot</h3>
+    <p>Spring ist ein offenes Framework zur Erstellung von plattformunabhängigen Web-Anwendungen mit Java. <strong>Spring Boot</strong> setzt auf Spring auf und ergänzt Standardeinstellungen, damit man self-contained, ausführbare JAR-Dateien ohne separaten Anwendungsserver bekommt.</p>
+
+    <h4>Die vier Kernprinzipien</h4>
+    <ul>
+      <li><strong>Convention-over-Configuration</strong> — Best-Practice-Annahmen statt umfangreicher Konfiguration.</li>
+      <li><strong>Modularisierung</strong> — kleine, erweiterbare Kernfunktionen.</li>
+      <li><strong>Schichtenorientierung</strong> — klare Strukturierung von Funktionalität.</li>
+      <li><strong>Dependency Injection</strong> — Objekte bekommen ihre Abhängigkeiten von Spring zugewiesen.</li>
+    </ul>
+  </article>
+
+  <article id="spring-schichten">
+    <h3>1.2 Schichtenmodell</h3>
+    <p>Spring strukturiert eine Web-Anwendung in drei Schichten:</p>
+    <table>
+      <tr><th>Schicht</th><th>Verantwortung</th><th>Spring-Stereotype</th></tr>
+      <tr><td>Presentation Layer</td><td>HTTP-Schnittstelle: nimmt Anfragen entgegen, gibt Antworten zurück</td><td><code>@Controller</code> / <code>@RestController</code></td></tr>
+      <tr><td>Business Layer</td><td>Fachliche Logik, orchestriert Repositories, transformiert Daten</td><td><code>@Service</code></td></tr>
+      <tr><td>Persistence Layer</td><td>Datenzugriff (lesen, schreiben, suchen)</td><td><code>@Repository</code></td></tr>
+    </table>
+    <p>Aufrufrichtung: <em>Controller → Service → Repository</em>. Niemals umgekehrt — der Service kennt keinen Controller, das Repository kennt keinen Service.</p>
+  </article>
+
+  <article id="spring-beans">
+    <h3>1.3 Beans &amp; Stereotypes</h3>
+    <p>Eine <strong>Spring Bean</strong> ist eine Java-Klasse, deren Lebenszyklus (Instanziierung, Konfiguration, Wiring, Zerstörung) vom Spring-Framework verwaltet wird. Beans werden <em>nicht</em> mit <code>new</code> erzeugt, sondern vom IoC-Container.</p>
+
+    <table>
+      <tr><th>Annotation</th><th>Bedeutung</th></tr>
+      <tr><td><code>@Component</code></td><td>generische Bean — Lebenszyklus von Spring verwaltet</td></tr>
+      <tr><td><code>@Service</code></td><td>fachliche Geschäftslogik (semantisches Tag)</td></tr>
+      <tr><td><code>@Repository</code></td><td>Datenzugriff; Spring übersetzt Persistenz-Exceptions automatisch</td></tr>
+      <tr><td><code>@Controller</code></td><td>HTTP-Endpunkt für klassische MVC-Antworten (Templates)</td></tr>
+      <tr><td><code>@RestController</code></td><td><code>@Controller</code> + <code>@ResponseBody</code> — JSON-API</td></tr>
+    </table>
+
+    <h4>Beispiel aus dem Kurs (Aufgabe 1)</h4>
+<pre><code class="language-java">package de.dhbw.ravensburg.wp.mymoviedatabase.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class MovieServiceImpl implements MovieService {
+    @Override
+    public String getName() {
+        return "MovieServiceImpl";
+    }
+}</code></pre>
+  </article>
+
+  <article id="spring-di">
+    <h3>1.4 Dependency Injection (DI)</h3>
+    <p>In Spring werden die Komponenten, von denen eine Bean abhängt, vom Container injiziert — die Bean selbst sucht/erzeugt nichts. Das reduziert Kopplung und erleichtert Tests (Mocks injizieren statt echter Implementierung).</p>
+
+    <h4>Konstruktor-Injektion (vom Kurs bevorzugt)</h4>
+<pre><code class="language-java">@Controller
+public class MovieControllerImpl implements MovieController {
+
+    private MovieService movieService;
+    private ArtistService artistService;
+
+    // Spring injiziert beide Services über den Konstruktor
+    public MovieControllerImpl(MovieService movieService, ArtistService artistService) {
+        this.movieService = movieService;
+        this.artistService = artistService;
+    }
+
+    @Override public String getName()              { return "MovieControllerImpl"; }
+    @Override public String getMovieServiceName()  { return movieService.getName(); }
+    @Override public String getArtistServiceName() { return artistService.getName(); }
+}</code></pre>
+
+    <p><strong>Alternative:</strong> <code>@Autowired</code> auf Feld oder Setter — bei modernem Spring aber unbeliebt, weil Felder dann nicht <code>final</code> sein können und Tests schwerer werden.</p>
+
+    <h4>ManualTestBean — Konzept aus dem Kurs</h4>
+    <p>Im Kurs wird der DI-Effekt mit einer <code>ManualTestBean</code> demonstriert, die per <code>@EventListener(ApplicationReadyEvent.class)</code> beim Start einmalig den Controller aufruft und die Namen der gewireten Beans loggt:</p>
+<pre><code class="language-java">@Component
+@Slf4j
+public class ManualTestBean {
+    // Vorsicht — diese Klasse ist nur für Übungszwecke,
+    // sie sollte nie in einer produktiven Applikation sein.
+
+    MovieController movieController;
+
+    ManualTestBean(MovieController movieController) {
+        this.movieController = movieController;
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void callController() {
+        log.info("Controller: "      + movieController.getName());
+        log.info("MovieService: "    + movieController.getMovieServiceName());
+        log.info("ArtistService: "   + movieController.getArtistServiceName());
+    }
+}</code></pre>
+  </article>
+
+  <article id="spring-aufg1" class="aufgabe">
+    <h3>⚙ Aufgabe 1 — Service &amp; Controller mit DI</h3>
+    <div class="exercise" data-id="aufg1">
+      <h5>Aufgabenstellung</h5>
+      <p>Im Starter-Projekt sind ein <code>MovieService</code> und ein <code>MovieController</code> als Klassen ohne Interface gegeben. Sie sollen so umgebaut werden, dass:</p>
+      <ol>
+        <li>Service und Controller jeweils ein <strong>Interface</strong> + eine <strong>Impl</strong>-Klasse haben.</li>
+        <li>Die Impl-Klassen mit dem korrekten Stereotyp annotiert sind (<code>@Service</code> / <code>@Controller</code>).</li>
+        <li>Ein zusätzlicher <strong><code>ArtistService</code></strong> (mit Impl) angelegt und im Controller per <strong>Konstruktor-Injektion</strong> gewired wird.</li>
+        <li>Die <code>ManualTestBean</code> beim Start den Controller aufruft und alle drei Bean-Namen loggt.</li>
+      </ol>
+      <p>Wichtig: keine <code>new</code>-Aufrufe; alles über DI.</p>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p><strong>Interface:</strong></p>
+<pre><code class="language-java">public interface ArtistService {
+    String getName();
+}</code></pre>
+        <p><strong>Impl:</strong></p>
+<pre><code class="language-java">@Service
+public class ArtistServiceImpl implements ArtistService {
+    @Override public String getName() { return "ArtistServiceImpl"; }
+}</code></pre>
+        <p><strong>Controller</strong> (Konstruktor-DI mit beiden Services) — siehe Codebeispiel oben unter §1.4.</p>
+        <p><strong>Erwartete Log-Ausgabe</strong> nach Start:</p>
+<pre><code class="language-bash">Controller: MovieControllerImpl
+MovieService: MovieServiceImpl
+ArtistService: ArtistServiceImpl</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article class="verstaendnis">
+    <h3>🧠 Verständnis-Checks</h3>
+    <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
+    <div class="check">
+      <p class="q">Welche Stereotype-Annotation für Business-Logik, DB-Zugriff, HTTP-API?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Business-Logik: <code>@Service</code> · DB-Zugriff: <code>@Repository</code> · HTTP-API klassisch: <code>@Controller</code>, REST: <code>@RestController</code>. Funktional sind alle drei <code>@Component</code> + semantischer Marker.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was passiert, wenn ich <code>new MovieServiceImpl()</code> direkt im Controller aufrufe?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Du umgehst Spring komplett: das Objekt ist <em>keine</em> Bean, keine DI funktioniert, eingebettete Abhängigkeiten (Repository) sind <code>null</code>. Du verlierst Testbarkeit und Lifecycle-Management. Niemals tun.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Warum bevorzugt der Kurs Konstruktor-Injection gegenüber <code>@Autowired</code> auf Feldern?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Konstruktor-Injection erlaubt <code>final</code>-Felder (Immutability), macht Abhängigkeiten explizit (man sieht im Konstruktor was die Klasse braucht), und vor allem: in Tests kannst du Mocks direkt per Konstruktor übergeben — ohne Spring-Kontext, ohne Reflection.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was bedeutet <em>Convention over Configuration</em> in Spring Boot?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Spring Boot trifft Best-Practice-Standardannahmen statt zu verlangen, dass du jedes Detail konfigurierst. Beispiel: Templates landen in <code>src/main/resources/templates/</code>, statische Dateien in <code>static/</code> — automatisch, ohne XML.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was macht <code>@EventListener(ApplicationReadyEvent.class)</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Spring ruft die annotierte Methode genau einmal auf, sobald die Anwendung vollständig hochgefahren und alle Beans gewired sind. Im Kurs benutzt das die <code>ManualTestBean</code>, um beim Start einen Controller-Aufruf zu loggen.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was ist der Unterschied zwischen <code>@Component</code> und <code>@Service</code>?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Funktional <em>nichts</em> — beide registrieren die Klasse als Bean. Semantisch: <code>@Service</code> markiert die Klasse als Business-Schicht (lesbarer für andere Entwickler, manche Tools wie Spring AOP nutzen das Tag).</div>
+      </details>
+    </div>
+  </article>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="orga.html">← Organisation</a>
+<a class="next" href="jpa.html">2 · Spring Data (JPA) →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

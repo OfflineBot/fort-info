@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mit Claude lernen — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="forms.html#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="forms.html#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="forms.html#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="forms.html#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="claude-prompt" class="chapter">
+  <h2>Mit Claude lernen — Prompts</h2>
+  <p>Felder oben ausfüllen → der Prompt unten aktualisiert sich live → Button kopieren → in Claude pasten. Kein Nachbearbeiten nötig.</p>
+
+  <!-- 1. LEHRER -->
+  <h3>1. Lehrer-Modus</h3>
+  <div class="prompt-box"
+       data-template="Du bist mein Tutor für DHBW WDS125 &quot;Fortgeschrittene Informatik&quot;. Mein Lernscript: https://sites.offlinebot.xyz/info — bitte einmal lesen. Erkläre mir Sektion {sektion} in eigenen Worten und stelle danach {fragen} Verständnisfragen. Antworte auf Deutsch. Korrigiere meine Antworten konkret und gib mir die richtige Antwort, wenn ich vorbeischieße. Beziehe dich immer auf die MyMovieDatabase-Domain (Movie/Director/Award/MovieCast/Soundtrack), wenn du Beispiele gibst.">
+    <div class="prompt-inputs">
+      <label>Sektion (z.B. „1.3 Beans &amp; Stereotypes" oder „REST")
+        <input data-var="sektion" value="1.3 Beans &amp; Stereotypes">
+      </label>
+      <label>Anzahl Verständnisfragen
+        <input data-var="fragen" type="number" min="1" max="20" value="3">
+      </label>
+    </div>
+    <pre id="prompt-teacher" class="prompt"></pre>
+    <button class="copy-btn" data-target="prompt-teacher">Prompt kopieren</button>
+  </div>
+
+  <!-- 2. QUIZ -->
+  <h3>2. Quiz-Modus (Kurztest-Vorbereitung)</h3>
+  <div class="prompt-box"
+       data-template="Ich habe das Lernscript https://sites.offlinebot.xyz/info durchgearbeitet. Stelle mir {anzahl} zufällige Fragen aus dem Bereich {bereich} — eine nach der anderen, im Stil eines Kurztests (30 min Bearbeitung, Fragen zu Skript &amp; Übungen). Schwierigkeit: {schwierigkeit}. Warte nach jeder Frage auf meine Antwort, bewerte sie (richtig/teilweise/falsch) und gib die Musterlösung. Am Ende eine Auswertung: was ich gut konnte, was ich wiederholen muss.">
+    <div class="prompt-inputs">
+      <label>Anzahl Fragen
+        <input data-var="anzahl" type="number" min="1" max="50" value="10">
+      </label>
+      <label>Bereich
+        <input data-var="bereich" value="quer durch Spring/JPA/REST/Testing/Webdesign/Thymeleaf/Forms">
+      </label>
+      <label>Schwierigkeit (z.B. einfach / mittel / schwer)
+        <input data-var="schwierigkeit" value="mittel">
+      </label>
+    </div>
+    <pre id="prompt-quiz" class="prompt"></pre>
+    <button class="copy-btn" data-target="prompt-quiz">Prompt kopieren</button>
+  </div>
+
+  <!-- 3. REVIEW -->
+  <h3>3. Code-Review-Modus (für Aufgaben)</h3>
+  <div class="prompt-box"
+       data-template="Ich habe Aufgabe {aufgabe} aus dem Kurs (Beschreibung: https://sites.offlinebot.xyz/info) gelöst. Hier mein Code:&#10;&#10;{code}&#10;&#10;Bitte review als wärst du der Dozent: was ist gut, was ist falsch, was würde ein erfahrener Spring-Entwickler anders machen? Achte besonders auf: Stereotypes, Konstruktor-Injection statt @Autowired, korrekte JPA-Beziehungen, REST-Konventionen, DTO/Entity-Trennung. Zeige die korrigierte Version und erkläre Schritt für Schritt.">
+    <div class="prompt-inputs">
+      <label>Aufgabe (z.B. „4 — AwardController")
+        <input data-var="aufgabe" value="4 — AwardController">
+      </label>
+      <label>Mein Code
+        <textarea data-var="code" placeholder="// Code hier reinpasten">// hier deinen Code einfügen</textarea>
+      </label>
+    </div>
+    <pre id="prompt-review" class="prompt"></pre>
+    <button class="copy-btn" data-target="prompt-review">Prompt kopieren</button>
+  </div>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="quiz.html">← Probekurztest</a>
+<span></span>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>

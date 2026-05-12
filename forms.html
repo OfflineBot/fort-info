@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>7 · Forms — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · SCA · DHBW Ravensburg<br>WiSe 25/26</p>
+
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+
+  <nav>
+    <a href="index.html">Übersicht</a>
+    <a href="orga.html#orga">Organisation</a>
+    <details open>
+      <summary>1 · Spring Grundlagen</summary>
+      <a href="spring.html#spring-was">1.1 Was ist Spring Boot</a>
+      <a href="spring.html#spring-schichten">1.2 Schichtenmodell</a>
+      <a href="spring.html#spring-beans">1.3 Beans &amp; Stereotypes</a>
+      <a href="spring.html#spring-di">1.4 Dependency Injection</a>
+      <a href="spring.html#spring-aufg1">⚙ Aufgabe 1 — Service & Controller</a>
+    </details>
+    <details open>
+      <summary>2 · Spring Data (JPA)</summary>
+      <a href="jpa.html#jpa-was">2.1 ORM &amp; JPA-Grundlagen</a>
+      <a href="jpa.html#jpa-entity">2.2 Entity-Mapping</a>
+      <a href="jpa.html#jpa-repo">2.3 JpaRepository &amp; Derived Queries</a>
+      <a href="jpa.html#jpa-jpql">2.4 @Query (JPQL)</a>
+      <a href="jpa.html#jpa-relations">2.5 Beziehungen &amp; Cascade</a>
+      <a href="jpa.html#jpa-tx">2.6 Transaktionen</a>
+      <a href="jpa.html#jpa-aufg2">⚙ Aufgabe 2 — Repository-Methoden</a>
+      <a href="jpa.html#jpa-aufg3">⚙ Aufgabe 3 — Award + 1:n</a>
+    </details>
+    <details open>
+      <summary>3 · REST</summary>
+      <a href="rest.html#rest-was">3.1 REST-Grundlagen &amp; HTTP</a>
+      <a href="rest.html#rest-controller">3.2 @RestController</a>
+      <a href="rest.html#rest-params">3.3 Pfad-/Query-/Body-Parameter</a>
+      <a href="rest.html#rest-status">3.4 Status-Codes</a>
+      <a href="rest.html#rest-dto">3.5 DTOs &amp; MapStruct</a>
+      <a href="rest.html#rest-openapi">3.6 OpenAPI / Swagger</a>
+      <a href="rest.html#rest-aufg4">⚙ Aufgabe 4 — AwardController</a>
+      <a href="rest.html#rest-aufg5">⚙ Aufgabe 5 — DTO + Mapper</a>
+    </details>
+    <details open>
+      <summary>4 · Testing</summary>
+      <a href="testing.html#test-pyramid">4.1 Test-Pyramide</a>
+      <a href="testing.html#test-junit">4.2 JUnit 5 Basics</a>
+      <a href="testing.html#test-doubles">4.3 Test Doubles &amp; Mockito</a>
+      <a href="testing.html#test-mockmvc">4.4 MockMvc &amp; @WebMvcTest</a>
+      <a href="testing.html#test-jsonpath">4.5 JsonPath</a>
+      <a href="testing.html#test-aufg6">⚙ Aufgabe 6 — Controller-Tests</a>
+    </details>
+    <details open>
+      <summary>5 · Webdesign</summary>
+      <a href="webdesign.html#web-html">5.1 HTML-Grundlagen</a>
+      <a href="webdesign.html#web-css">5.2 CSS</a>
+      <a href="webdesign.html#web-bootstrap">5.3 Bootstrap 5</a>
+      <a href="webdesign.html#web-aufg7">⚙ Aufgabe 7 — Pure HTML</a>
+      <a href="webdesign.html#web-aufg8">⚙ Aufgabe 8 — eigenes CSS</a>
+      <a href="webdesign.html#web-aufg9">⚙ Aufgabe 9 — Bootstrap + Carousel</a>
+    </details>
+    <details open>
+      <summary>6 · Thymeleaf</summary>
+      <a href="thymeleaf.html#th-was">6.1 Server- vs. Client-Rendering</a>
+      <a href="thymeleaf.html#th-syntax">6.2 Syntax &amp; Expressions</a>
+      <a href="thymeleaf.html#th-controller">6.3 Controller + ModelAndView</a>
+      <a href="thymeleaf.html#th-fragments">6.4 Fragments (insert/replace)</a>
+      <a href="thymeleaf.html#th-iteration">6.5 Iteration mit th:each</a>
+      <a href="thymeleaf.html#th-aufg10">⚙ Aufgabe 10 — erste Templates</a>
+      <a href="thymeleaf.html#th-aufg11">⚙ Aufgabe 11 — Movie-Grid</a>
+    </details>
+    <details open>
+      <summary>7 · Forms</summary>
+      <a href="#forms-was">7.1 Formulare in Spring + Thymeleaf</a>
+      <a href="#forms-binding">7.2 th:object &amp; th:field</a>
+      <a href="#forms-validation">7.3 Validation (@Valid)</a>
+      <a href="#forms-aufg12">⚙ Aufgabe 12 — Award-Formular</a>
+    </details>
+    <a href="cheatsheet.html#cheatsheet">Cheatsheet</a>
+    <a href="quiz.html#quiz">Probekurztest-Themen</a>
+    <a href="claude.html#claude-prompt">Mit Claude lernen</a>
+  </nav>
+</aside>
+<main>
+<section id="forms" class="chapter">
+  <h2>7 · Forms</h2>
+
+  <article id="forms-was">
+    <h3>7.1 Formulare in Spring + Thymeleaf</h3>
+    <p>Ein Formular hat in Spring drei Akteure:</p>
+    <ol>
+      <li>Eine <strong>Form-Klasse</strong> (DTO) mit den Feldern + Validierungs-Annotationen.</li>
+      <li>Einen <strong>GET-Endpunkt</strong>, der das leere Form-Objekt ins Model legt und das Template rendert.</li>
+      <li>Einen <strong>POST-Endpunkt</strong>, der das ausgefüllte Form mit <code>@Valid</code> entgegennimmt und entweder speichert (Redirect) oder bei Fehlern dasselbe Template erneut rendert.</li>
+    </ol>
+  </article>
+
+  <article id="forms-binding">
+    <h3>7.2 th:object &amp; th:field</h3>
+    <p>Im Template aktiviert <code>th:object</code> die <em>Selection-Expression</em> <code>*{…}</code>, mit der du dann die Felder des Objekts referenzierst. <code>th:field</code> setzt automatisch <code>id</code>, <code>name</code> und <code>value</code>.</p>
+
+<pre><code class="language-xml">&lt;form th:action="@{/awards}" th:object="${awardForm}" method="post"&gt;
+
+  &lt;div class="mb-3"&gt;
+    &lt;label class="form-label" for="academy"&gt;Academy&lt;/label&gt;
+    &lt;input class="form-control" type="text" th:field="*{academy}"&gt;
+  &lt;/div&gt;
+
+  &lt;div class="mb-3"&gt;
+    &lt;label class="form-label" for="category"&gt;Kategorie&lt;/label&gt;
+    &lt;input class="form-control" type="text" th:field="*{category}"
+           th:classappend="${#fields.hasErrors('category')} ? 'is-invalid'"&gt;
+    &lt;div class="invalid-feedback" th:errors="*{category}"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="mb-3"&gt;
+    &lt;label class="form-label" for="celebrationYear"&gt;Jahr&lt;/label&gt;
+    &lt;input class="form-control" type="number" th:field="*{celebrationYear}"&gt;
+  &lt;/div&gt;
+
+  &lt;button type="submit" class="btn btn-primary"&gt;Speichern&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+  </article>
+
+  <article id="forms-validation">
+    <h3>7.3 Validation (@Valid)</h3>
+    <p>Auf der Form-Klasse stehen <strong>Bean-Validation-Annotationen</strong> (Jakarta):</p>
+    <ul>
+      <li><code>@NotNull</code> — darf nicht null sein</li>
+      <li><code>@NotBlank</code> — String, nicht null und nicht nur Whitespace</li>
+      <li><code>@NotEmpty</code> — String/Collection, mind. ein Element</li>
+      <li><code>@Size(min=, max=)</code> — Länge / Größe</li>
+      <li><code>@Min</code> / <code>@Max</code> — Zahlenbereich</li>
+      <li><code>@Email</code> — gültiges E-Mail-Format</li>
+      <li><code>@Pattern(regexp="…")</code> — Regex</li>
+    </ul>
+
+<pre><code class="language-java">@Controller @RequestMapping("/awards")
+public class AwardFormController {
+
+    private final AwardService service;
+    public AwardFormController(AwardService s) { this.service = s; }
+
+    @GetMapping("/neu")
+    public String form(Model model) {
+        model.addAttribute("awardForm", new AwardDTO());
+        return "awards/form";
+    }
+
+    @PostMapping
+    public String save(@Valid @ModelAttribute("awardForm") AwardDTO form,
+                       BindingResult br) {
+        if (br.hasErrors()) return "awards/form";   // mit Fehlern zurück zum Formular
+        service.addAward(form);
+        return "redirect:/awards";                   // PRG-Pattern
+    }
+}</code></pre>
+
+    <p><strong>PRG-Pattern (Post-Redirect-Get):</strong> nach erfolgreichem POST <em>redirect</em> auf eine GET-Seite, damit ein Browser-Refresh nicht den POST wiederholt.</p>
+  </article>
+
+  <article id="forms-aufg12" class="aufgabe">
+    <h3>⚙ Aufgabe 12 — Award-Formular</h3>
+    <div class="exercise" data-id="aufg12">
+      <h5>Aufgabenstellung</h5>
+      <p>Erweitere das Thymeleaf-Projekt aus Aufgabe 11 um eine Awards-Verwaltung:</p>
+      <ol>
+        <li>Neues Template <code>awards.html</code>, das alle Awards listet (Bootstrap-Tabelle).</li>
+        <li>Ein Formular zum Anlegen neuer Awards (Felder <code>academy</code>, <code>category</code>, <code>celebrationYear</code>).</li>
+        <li>Validation: <code>category</code> ist Pflicht (<code>@NotBlank</code>); ohne wird die Seite mit Fehlermeldung neu gerendert.</li>
+        <li>Erfolgreiche POSTs leiten per Redirect auf die Awards-Liste zurück.</li>
+      </ol>
+      <button class="show">Lösung zeigen</button>
+      <div class="solution">
+        <p><strong>Controller</strong> siehe §7.3.</p>
+        <p><strong>Template (awards.html)</strong> — Mix aus Liste, Formular und Fragment-Wiederverwendung:</p>
+<pre><code class="language-xml">&lt;!doctype html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Awards&lt;/title&gt;
+    &lt;link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;section th:insert="fragments/banner :: banner"&gt;&lt;/section&gt;
+
+&lt;main class="container py-4"&gt;
+  &lt;h2&gt;Awards&lt;/h2&gt;
+  &lt;table class="table table-striped"&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Academy&lt;/th&gt;&lt;th&gt;Kategorie&lt;/th&gt;&lt;th&gt;Jahr&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr th:each="a : ${awards}"&gt;
+        &lt;td th:text="${a.academy}"&gt;&lt;/td&gt;
+        &lt;td th:text="${a.category}"&gt;&lt;/td&gt;
+        &lt;td th:text="${a.celebrationYear}"&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;h3 class="mt-4"&gt;Neuen Award anlegen&lt;/h3&gt;
+  &lt;form th:action="@{/awards}" th:object="${awardForm}" method="post"&gt;
+    &lt;!-- siehe Codebeispiel unter §7.2 --&gt;
+  &lt;/form&gt;
+&lt;/main&gt;
+
+&lt;footer th:insert="fragments/footer :: footer"&gt;&lt;/footer&gt;
+&lt;/body&gt;&lt;/html&gt;</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <article class="verstaendnis">
+    <h3>🧠 Verständnis-Checks</h3>
+    <p class="hint">Klick auf „Antwort anzeigen" — schnelles Selbstabfragen ohne Scrollen.</p>
+    <div class="check">
+      <p class="q"><code>@NotNull</code> vs <code>@NotBlank</code> vs <code>@NotEmpty</code> — Unterschied?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>@NotNull</code>: Wert darf nicht <code>null</code> sein (leerer String wäre ok). <code>@NotEmpty</code>: für Strings/Collections — nicht null und nicht leer (whitespace ok). <code>@NotBlank</code>: nur Strings — nicht null, nicht leer, nicht nur Whitespace.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Was passiert, wenn ein Formular die <code>@Valid</code>-Constraints nicht erfüllt?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a">Die Validierung schlägt fehl, der Service wird <em>nicht</em> aufgerufen. <code>BindingResult</code> wird mit den Fehlern befüllt. Best Practice: dasselbe Form-Template wieder rendern, damit der User korrigieren kann.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wo MUSS <code>BindingResult</code> in der Parameterliste stehen?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><strong>Direkt nach</strong> dem mit <code>@Valid</code> annotierten Objekt. Sonst sieht Spring die Bindung als unvollständig und wirft eine Exception.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Erkläre das PRG-Pattern.</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><strong>P</strong>ost-<strong>R</strong>edirect-<strong>G</strong>et: nach erfolgreichem POST gibst du <code>redirect:/path</code> zurück, damit der Browser per GET die nächste Seite holt. Vorteil: ein Refresh wiederholt nicht den POST und verhindert Doppel-Submit.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Wie zeigst du im Template einen Validierungsfehler für das Feld <code>category</code> an?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>&lt;p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"&gt;&lt;/p&gt;</code>. Mit Bootstrap zusätzlich <code>th:classappend="${#fields.hasErrors('category')} ? 'is-invalid'"</code> auf dem Input.</div>
+      </details>
+    </div>
+    <div class="check">
+      <p class="q">Welche Spring-Annotation bindet das POST-Body-Form an dein DTO?</p>
+      <details><summary>Antwort anzeigen</summary>
+        <div class="a"><code>@ModelAttribute("name") FormDTO form</code> — Spring liest die Form-Felder und mappt sie auf die DTO-Properties. Mit <code>@Valid</code> davor wird Bean Validation ausgeführt.</div>
+      </details>
+    </div>
+  </article>
+</section>
+<nav class="chapter-nav">
+<a class="prev" href="thymeleaf.html">← 6 · Thymeleaf</a>
+<a class="next" href="cheatsheet.html">Cheatsheet →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+</body>
+</html>
