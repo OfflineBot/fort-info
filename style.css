@@ -638,6 +638,178 @@ article.typische-fehler .hint {
   line-height: 1.55;
 }
 
+/* Lernkarten / Spaced Repetition */
+.card-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--mantle);
+  border: 1px solid var(--surface0);
+  border-radius: .5rem;
+  padding: .85rem 1rem;
+  margin-bottom: 1rem;
+}
+.card-controls label { color: var(--subtext); font-size: .9rem; }
+.card-controls select, .card-controls input[type="checkbox"] {
+  background: var(--crust);
+  color: var(--text);
+  border: 1px solid var(--surface0);
+  border-radius: .3rem;
+  padding: .35rem .5rem;
+  margin-left: .35rem;
+}
+.card-controls button {
+  background: var(--surface0);
+  color: var(--text);
+  border: none;
+  padding: .4rem .9rem;
+  border-radius: .3rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+.card-controls button:hover { background: var(--surface1); color: var(--mauve); }
+
+.card-flash {
+  background: var(--mantle);
+  border: 1px solid var(--surface0);
+  border-left: 4px solid var(--blue);
+  border-radius: .6rem;
+  padding: 1.5rem 1.75rem;
+  margin: 1rem 0;
+  min-height: 200px;
+}
+.card-flash.card-status-good { border-left-color: var(--green); }
+.card-flash.card-status-weak { border-left-color: var(--red); }
+.card-flash.card-status-new  { border-left-color: var(--blue); }
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .85rem;
+  font-size: .8rem;
+}
+.card-topic {
+  background: var(--surface0);
+  color: var(--mauve);
+  padding: .15rem .55rem;
+  border-radius: .3rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-weight: 600;
+}
+.card-score { color: var(--subtext); font-family: "JetBrains Mono", monospace; }
+.card-q {
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.card-flash details summary {
+  cursor: pointer;
+  color: var(--green);
+  font-weight: 500;
+  list-style: none;
+}
+.card-flash details summary::-webkit-details-marker { display: none; }
+.card-flash details summary::before { content: "▶ "; font-size: .7rem; }
+.card-flash details[open] summary::before { content: "▼ "; }
+.card-a {
+  margin: .75rem 0;
+  padding: .85rem 1.1rem;
+  background: var(--crust);
+  border-left: 2px solid var(--green);
+  border-radius: .3rem;
+  color: var(--text);
+  line-height: 1.55;
+  font-size: .92rem;
+}
+.card-rate {
+  display: flex;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+.card-rate button {
+  flex: 1;
+  padding: .55rem 1rem;
+  border: 1px solid var(--surface0);
+  border-radius: .35rem;
+  background: var(--mantle);
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
+}
+.card-rate .rate-wrong { color: var(--red);   border-left: 3px solid var(--red); }
+.card-rate .rate-ok    { color: var(--peach); border-left: 3px solid var(--peach); }
+.card-rate .rate-good  { color: var(--green); border-left: 3px solid var(--green); }
+.card-rate button:hover { background: var(--surface0); }
+
+.card-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+.card-nav button {
+  background: var(--surface0);
+  color: var(--text);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.card-nav button:hover { background: var(--surface1); color: var(--mauve); }
+#card-counter { color: var(--subtext); font-family: "JetBrains Mono", monospace; }
+
+.card-empty {
+  padding: 3rem;
+  text-align: center;
+  color: var(--subtext);
+  background: var(--mantle);
+  border-radius: .5rem;
+}
+
+/* Topic stats */
+#card-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.topic-stat {
+  background: var(--mantle);
+  border: 1px solid var(--surface0);
+  border-radius: .4rem;
+  padding: .85rem 1rem;
+}
+.topic-stat h4 { margin: 0 0 .5rem; color: var(--blue); font-size: .95rem; }
+.topic-bar {
+  height: 8px;
+  background: var(--surface0);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+}
+.bar-good { background: var(--green); }
+.bar-weak { background: var(--red); }
+.topic-meta { font-size: .75rem; color: var(--subtext); margin-top: .35rem; }
+
+#sidebar a.lernkarten-link {
+  background: var(--crust);
+  color: var(--peach);
+  font-weight: 500;
+  margin-bottom: .35rem;
+  border: 1px solid var(--surface0);
+}
+#sidebar a.lernkarten-link:hover {
+  background: var(--surface0);
+  color: var(--rosewater);
+}
+
 /* Mock exam questions */
 .exam-questions { display: grid; gap: .8rem; margin: 1rem 0; }
 .exam-q {

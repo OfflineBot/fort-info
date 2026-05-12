@@ -29,6 +29,7 @@
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <a href="lernkarten.html" class="lernkarten-link">🃏 Lernkarten</a>
     <div class="chapter-title">3 · REST</div>
     <a href="#rest-was">3.1 REST & HTTP</a>
     <a href="#rest-controller">3.2 @RestController</a>
@@ -67,30 +68,6 @@
       <li><strong>MapStruct:</strong> <code>@Mapper(componentModel = "spring")</code> + <code>@Mapping</code> + <code>@InheritInverseConfiguration</code>.</li>
       <li><strong>Validation:</strong> <code>@Valid @RequestBody</code> aktiviert Bean-Validation auf dem DTO. Constraint-Violation → 400.</li>
     </ul>
-  </article>
-<article class="typische-fehler">
-    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
-    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Status 200 statt 201 nach POST</div>
-      <div class="pitfall-explain">„Erfolgreich angelegt" verlangt 201 Created. <code>@ResponseStatus(HttpStatus.CREATED)</code> auf der POST-Methode setzen.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Entity direkt im Controller-Body</div>
-      <div class="pitfall-explain">Bidirektionale Beziehungen führen zu Endlos-JSON („circular reference"). DTO trennen, MapStruct dazwischen, dann ist die API-Sicht stabil.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>@PathVariable</code> vs. <code>@RequestParam</code> verwechseln</div>
-      <div class="pitfall-explain">URL-Pfad: <code>/awards/<strong>5</strong></code> → PathVariable. Query-String: <code>/awards?<strong>year=2020</strong></code> → RequestParam. Identifikator vs. Filter.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>@Valid</code> vergessen vor <code>@RequestBody</code></div>
-      <div class="pitfall-explain">Ohne <code>@Valid</code> werden Constraints (z.B. <code>@NotBlank</code>) ignoriert — kaputte Daten landen in der DB. Pflicht: <code>@Valid @RequestBody DTO dto</code>.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ MapStruct: vergessen <code>componentModel = "spring"</code></div>
-      <div class="pitfall-explain">Ohne diesen Parameter wird der Mapper nicht als Spring-Bean registriert — du kannst ihn nicht injizieren. <code>@Mapper(componentModel = "spring")</code> ist Pflicht.</div>
-    </div>
   </article>
 <article id="rest-was">
     <h3>3.1 REST-Grundlagen &amp; HTTP</h3>

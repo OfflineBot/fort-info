@@ -29,6 +29,7 @@
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <a href="lernkarten.html" class="lernkarten-link">🃏 Lernkarten</a>
     <div class="chapter-title">5 · Webdesign</div>
     <a href="#web-html">5.1 HTML-Grundlagen</a>
     <a href="#web-css">5.2 CSS</a>
@@ -64,26 +65,6 @@
       <li><strong>Bootstrap CSS-Klassen</strong> für Spacing (<code>mt-3</code>, <code>g-3</code>), Tabellen (<code>table-striped</code>), Bilder (<code>img-fluid</code>).</li>
       <li><strong>Carousel:</strong> <code>.carousel.slide</code> + <code>data-bs-ride="carousel"</code> + Prev/Next-Buttons mit <code>data-bs-target</code>.</li>
     </ul>
-  </article>
-<article class="typische-fehler">
-    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
-    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ CSS inline statt extern</div>
-      <div class="pitfall-explain">Inline-Style ist die schlechteste Variante (kein Caching, schwer zu pflegen). Externe Datei via <code>&lt;link rel="stylesheet"&gt;</code> ist Standard.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Bootstrap <code>col</code> ohne <code>row</code></div>
-      <div class="pitfall-explain">Spalten brauchen einen <code>row</code>-Wrapper — sonst stimmt der Gutter nicht und die Spalten überlappen. Immer: <code>container &gt; row &gt; col</code>.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Carousel ohne <code>data-bs-ride="carousel"</code></div>
-      <div class="pitfall-explain">Ohne dieses Attribut startet die Slideshow nicht automatisch. Außerdem brauchen die Buttons das passende <code>data-bs-target</code> auf die Carousel-ID.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>col-md-4</code> falsch verstehen</div>
-      <div class="pitfall-explain">„md-4" heißt: ab Tablet (≥ 768 px) 4 von 12 Spalten. Drunter (Mobile) volle Breite. Nicht: „auf Mobile auch 4 Spalten breit".</div>
-    </div>
   </article>
 <article id="web-html">
     <h3>5.1 HTML-Grundlagen</h3>

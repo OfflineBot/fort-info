@@ -29,6 +29,7 @@
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <a href="lernkarten.html" class="lernkarten-link">🃏 Lernkarten</a>
     <div class="chapter-title">6 · Thymeleaf</div>
     <a href="#th-was">6.1 Server vs. Client Rendering</a>
     <a href="#th-syntax">6.2 Syntax & Expressions</a>
@@ -65,30 +66,6 @@
       <li><strong>Fragments:</strong> <code>th:fragment="name"</code> definiert · <code>th:insert="~{datei :: name}"</code> bindet ein.</li>
       <li><strong>Controller:</strong> Rückgabe = Template-Name (ohne <code>.html</code>). <code>Model</code> oder <code>ModelAndView</code> für Daten.</li>
     </ul>
-  </article>
-<article class="typische-fehler">
-    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
-    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>th:insert</code> vs <code>th:replace</code> verwechseln</div>
-      <div class="pitfall-explain"><code>insert</code> packt das Fragment <em>in</em> den Tag (Tag bleibt). <code>replace</code> ersetzt den Tag komplett. Bei wrapping-Containern (z.B. <code>&lt;section&gt;</code>) macht das einen DOM-Unterschied.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Namespace <code>xmlns:th</code> vergessen</div>
-      <div class="pitfall-explain">Ohne Namespace im <code>&lt;html&gt;</code>-Tag bleiben die <code>th:</code>-Attribute als unbekannte HTML-Attribute stehen — Browser zeigt nichts, Thymeleaf rendert nicht.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>${var}</code> innerhalb <code>th:object</code> statt <code>*{var}</code></div>
-      <div class="pitfall-explain">Geht zwar oft, ist aber unklar und macht Form-Binding kaputt. Innerhalb <code>th:object</code> immer Selection-Expression <code>*{feld}</code> verwenden.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ URL ohne <code>@{…}</code></div>
-      <div class="pitfall-explain"><code>th:href="/users"</code> hardcodiert ohne Context-Path — schlägt fehl, sobald die App unter <code>/myapp/</code> deployt wird. Immer <code>th:href="@{/users}"</code>.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Template-Pfad mit <code>.html</code>-Endung</div>
-      <div class="pitfall-explain">Im Controller <code>return "index.html"</code> — falsch. Thymeleaf erwartet nur den Namen ohne Endung: <code>return "index"</code>.</div>
-    </div>
   </article>
 <article id="th-was">
     <h3>6.1 Server-Side vs. Client-Side Rendering</h3>

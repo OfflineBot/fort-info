@@ -29,6 +29,7 @@
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <a href="lernkarten.html" class="lernkarten-link">🃏 Lernkarten</a>
     <div class="chapter-title">4 · Testing</div>
     <a href="#test-pyramid">4.1 Test-Pyramide</a>
     <a href="#test-junit">4.2 JUnit 5 Basics</a>
@@ -68,34 +69,6 @@
       <li><strong>JsonPath:</strong> <code>$</code>=root · <code>$[0]</code>=erstes Array-Element · <code>$.field</code> · <code>$[0].nested[1].x</code> · <code>$.*</code>=alle Kinder.</li>
       <li><strong>Constraint-Violation:</strong> kein <code>when()</code> nötig — Service wird nie aufgerufen. <code>verify(service, never())</code> beweist es.</li>
     </ul>
-  </article>
-<article class="typische-fehler">
-    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
-    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Mock-Bean ohne <code>when()</code> aufrufen</div>
-      <div class="pitfall-explain">Mockito gibt dann den Default zurück: <code>null</code>, <code>0</code>, oder leere Liste — egal welche Logik der echte Service hat. Pro Test alle nötigen Stubs aufsetzen.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ JsonPath: <code>$.title</code> auf einer Array-Antwort</div>
-      <div class="pitfall-explain">Bei Liste musst du den Index angeben: <code>$[0].title</code>. <code>$.title</code> auf einer Liste matcht nichts.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Long-IDs als JSON-Asserts ohne <code>.intValue()</code></div>
-      <div class="pitfall-explain">Jackson serialisiert kleine Long als <code>int</code>. <code>jsonPath("$.id", is(1L))</code> schlägt fehl — du brauchst <code>is(1)</code> oder <code>is(movie.getId().intValue())</code>.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Constraint-Violation-Test mit <code>when()</code></div>
-      <div class="pitfall-explain">Bei <code>@Valid</code>-Verletzung passiert der Service-Call gar nicht. <code>when(...)</code> ist sinnlos. Statt dessen: <code>verify(service, never())</code> nach dem Mock-Aufruf.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>@WebMvcTest</code> mit <code>@Autowired</code>-Service</div>
-      <div class="pitfall-explain">Services werden nicht geladen. <code>@MockBean</code> ist Pflicht für jede Service-Abhängigkeit, sonst wirft der Test „No qualifying bean".</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Test-Klassen-Naming verletzt</div>
-      <div class="pitfall-explain">Folien-Konvention: <code>X</code>-Test heißt <code>XTest</code> (ohne Underscore, Test als Suffix). Test-Methoden mit <code>should</code> + Verhalten beginnen — sonst Punktabzug bei Code-Review.</div>
-    </div>
   </article>
 <article id="test-pyramid">
     <h3>4.1 Test-Pyramide</h3>

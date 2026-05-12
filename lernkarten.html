@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Lernkarten — Fortgeschrittene Informatik</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/java.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/css.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/bash.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/sql.min.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<aside id="sidebar">
+  <h2>Fortgeschrittene<br>Informatik</h2>
+  <p class="sub">WDS125 · DHBW Ravensburg</p>
+  <div class="progress-box">
+    <div class="progress-label">Fortschritt</div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-text"><span id="progress-done">0</span>/<span id="progress-total">0</span> Aufgaben</div>
+    <button id="reset-btn" class="reset">Fortschritt zurücksetzen</button>
+  </div>
+  <nav>
+    <a href="index.html" class="back">← Übersicht</a>
+    <a href="resources.html" class="resources-link">📥 Ressourcen</a>
+    <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <div class="chapter-title">Lernkarten</div>
+    <a href="#card-app">Modus</a>
+    <a href="#card-stats">Stand</a>
+  </nav>
+</aside>
+<main>
+<header id="overview">
+  <h1>🃏 Lernkarten</h1>
+  <p class="lead">54 Karten quer durch alle Themen. Spaced Repetition: Karten, die du mit „Falsch" / „Naja" bewertest, kommen häufiger.</p>
+</header>
+
+<section id="card-app" class="chapter">
+  <div class="card-controls">
+    <label>Filter Thema:
+      <select id="card-topic">
+        <option value="">alle</option>
+        <option value="Spring">Spring</option>
+        <option value="JPA">JPA</option>
+        <option value="REST">REST</option>
+        <option value="Testing">Testing</option>
+        <option value="Webdesign">Webdesign</option>
+        <option value="Thymeleaf">Thymeleaf</option>
+        <option value="Forms">Forms</option>
+      </select>
+    </label>
+    <label class="card-only-weak">
+      <input type="checkbox" id="card-only-weak"> nur schwache zeigen
+    </label>
+    <button id="card-shuffle">↺ Mischen</button>
+  </div>
+
+  <div id="card-container"></div>
+
+  <div class="card-nav">
+    <button id="card-prev">←</button>
+    <span id="card-counter">0 / 0</span>
+    <button id="card-next">→</button>
+  </div>
+</section>
+
+<section id="card-stats" class="chapter">
+  <h2>Lernstand</h2>
+  <div id="card-stats-grid"></div>
+  <button id="card-reset" class="reset" style="margin-top:1rem;max-width:280px">Lernkarten-Score zurücksetzen</button>
+</section>
+
+<nav class="chapter-nav">
+<a class="prev" href="quiz.html">← Probekurztest</a>
+<a class="next" href="claude.html">Mit Claude lernen →</a>
+</nav>
+<footer class="page-footer"><p>Online: <a href="https://sites.offlinebot.xyz/info">sites.offlinebot.xyz/info</a></p></footer>
+</main>
+<script id="cards-data" type="application/json">[{"topic": "Spring", "q": "Welche Stereotype-Annotation für Business-Logik, DB-Zugriff, HTTP-API?", "a": "Business-Logik: <code>@Service</code> · DB-Zugriff: <code>@Repository</code> · HTTP-API klassisch: <code>@Controller</code>, REST: <code>@RestController</code>. Funktional sind alle drei <code>@Component</code> + semantischer Marker."}, {"topic": "Spring", "q": "Was passiert, wenn ich <code>new MovieServiceImpl()</code> direkt im Controller aufrufe?", "a": "Du umgehst Spring komplett: das Objekt ist <em>keine</em> Bean, keine DI funktioniert, eingebettete Abhängigkeiten (Repository) sind <code>null</code>. Du verlierst Testbarkeit und Lifecycle-Management. Niemals tun."}, {"topic": "Spring", "q": "Warum bevorzugt der Kurs Konstruktor-Injection gegenüber <code>@Autowired</code> auf Feldern?", "a": "Konstruktor-Injection erlaubt <code>final</code>-Felder (Immutability), macht Abhängigkeiten explizit (man sieht im Konstruktor was die Klasse braucht), und vor allem: in Tests kannst du Mocks direkt per Konstruktor übergeben — ohne Spring-Kontext, ohne Reflection."}, {"topic": "Spring", "q": "Was bedeutet <em>Convention over Configuration</em> in Spring Boot?", "a": "Spring Boot trifft Best-Practice-Standardannahmen statt zu verlangen, dass du jedes Detail konfigurierst. Beispiel: Templates landen in <code>src/main/resources/templates/</code>, statische Dateien in <code>static/</code> — automatisch, ohne XML."}, {"topic": "Spring", "q": "Was macht <code>@EventListener(ApplicationReadyEvent.class)</code>?", "a": "Spring ruft die annotierte Methode genau einmal auf, sobald die Anwendung vollständig hochgefahren und alle Beans gewired sind. Im Kurs benutzt das die <code>ManualTestBean</code>, um beim Start einen Controller-Aufruf zu loggen."}, {"topic": "Spring", "q": "Was ist der Unterschied zwischen <code>@Component</code> und <code>@Service</code>?", "a": "Funktional <em>nichts</em> — beide registrieren die Klasse als Bean. Semantisch: <code>@Service</code> markiert die Klasse als Business-Schicht (lesbarer für andere Entwickler, manche Tools wie Spring AOP nutzen das Tag)."}, {"topic": "JPA", "q": "Welche zwei Annotationen brauchst du minimal, damit eine Klasse zur JPA-Entity wird?", "a": "<code>@Entity</code> auf der Klasse + <code>@Id</code> auf einem Feld. Ohne Primary Key wirft Hibernate beim Start einen Fehler."}, {"topic": "JPA", "q": "Was bewirkt <code>@GeneratedValue</code>?", "a": "Die DB (bzw. Hibernate) erzeugt den Wert automatisch — typischerweise via Auto-Increment oder Sequenz. Du musst die ID nie selbst setzen; sie ist nach <code>save()</code> verfügbar."}, {"topic": "JPA", "q": "Bei <code>Movie</code> ↔ <code>Director</code> (ein Film hat einen Director, ein Director hat viele Filme): welche Annotation auf welcher Seite?", "a": "Auf <code>Movie</code>: <code>@ManyToOne</code> (viele Filme zeigen auf einen Director) mit <code>@JoinColumn(name=\"director_id\")</code>. Auf <code>Director</code> (falls bidirektional): <code>@OneToMany(mappedBy=\"director\")</code>."}, {"topic": "JPA", "q": "Was macht <code>mappedBy</code>?", "a": "Es markiert die <em>inverse</em> Seite einer bidirektionalen Beziehung. Der Wert ist der Feldname der <em>owning</em> Seite (mit der <code>@JoinColumn</code>). Ohne <code>mappedBy</code> würde JPA <em>zwei</em> Beziehungstabellen anlegen statt einer."}, {"topic": "JPA", "q": "Bei <code>cascade = CascadeType.ALL</code>: was passiert, wenn ich einen <code>Movie</code> lösche, der einen Director referenziert?", "a": "Der Director wird <em>mitgelöscht</em>. Das ist im Kurs für Übungen pragmatisch, in Produktion aber meist falsch — andere Filme könnten denselben Director referenzieren. Bewusste Wahl pro Beziehung empfohlen."}, {"topic": "JPA", "q": "Schreibe eine Derived Query, die alle Filme mit IMDB-Rating &gt; 7 sortiert nach Premiere absteigend findet.", "a": "<code>List&lt;Movie&gt; findByImdbRatingGreaterThanOrderByPremiereDateDesc(double rating);</code> — Spring Data leitet die Query allein aus dem Methodennamen ab."}, {"topic": "JPA", "q": "In <code>@Query(\"SELECT m FROM Movie m WHERE m.title = :t\")</code>: ist <em>Movie</em> eine Tabelle oder eine Klasse?", "a": "Eine <strong>Klasse</strong> (Java-Entity-Name). JPQL operiert auf dem Object-Modell, nicht auf SQL-Tabellen. Felder wie <code>m.title</code> sind Java-Feldnamen, nicht Spaltennamen."}, {"topic": "JPA", "q": "Was bedeutet <em>Persistence Context</em>?", "a": "Der Cache der verwalteten Entities innerhalb einer Transaktion. Solange ein Objekt im Persistence Context lebt, schreibt JPA jede Änderung beim Commit automatisch zurück — ohne dass du <code>save()</code> aufrufen musst."}, {"topic": "REST", "q": "Welche HTTP-Methode für: Anlegen / Lesen / Komplett-Update / Teil-Update / Löschen?", "a": "POST (anlegen), GET (lesen), PUT (komplett-Update / Ersetzen), PATCH (Teil-Update), DELETE (löschen). PUT &amp; DELETE sind idempotent, POST &amp; PATCH nicht."}, {"topic": "REST", "q": "Status 200 vs 201 vs 204 — wann was?", "a": "<strong>200 OK</strong>: Erfolg mit Antwortbody (typisch GET, PUT). <strong>201 Created</strong>: Ressource neu angelegt (POST). <strong>204 No Content</strong>: Erfolg ohne Body (oft DELETE)."}, {"topic": "REST", "q": "Status 400 vs 404 vs 401 vs 403?", "a": "<strong>400</strong>: Anfrage ungültig (Validierungsfehler, kaputtes JSON). <strong>404</strong>: Ressource existiert nicht. <strong>401</strong>: nicht eingeloggt. <strong>403</strong>: eingeloggt, aber keine Berechtigung."}, {"topic": "REST", "q": "<code>@PathVariable</code> vs <code>@RequestParam</code> — wann was?", "a": "<code>@PathVariable</code>: Teil der URL (<code>/awards/<strong>5</strong></code>) — identifiziert eine konkrete Ressource. <code>@RequestParam</code>: Query-String (<code>/awards?<strong>year=2020</strong></code>) — Filter, Sortierung, Pagination."}, {"topic": "REST", "q": "Warum trennt man DTO von Entity?", "a": "API-Stabilität (Entity-Refactor bricht den Contract nicht), Verstecken sensitiver Felder (z.B. Passwort-Hash), und vermeiden von Endlos-Loops bei bidirektionalen Beziehungen während JSON-Serialisierung."}, {"topic": "REST", "q": "Was macht <code>@InheritInverseConfiguration</code> in MapStruct?", "a": "Spiegelt die im Forward-Mapping definierten <code>@Mapping</code>-Regeln automatisch um (z.B. <code>celebrationYear → yearAwarded</code>), sodass du das umgekehrte Mapping nicht doppelt schreiben musst."}, {"topic": "REST", "q": "Unterschied zwischen <code>@ResponseStatus(HttpStatus.CREATED)</code> und <code>ResponseEntity.status(201).body(x)</code>?", "a": "<code>@ResponseStatus</code> setzt den Status statisch pro Methode. <code>ResponseEntity</code> ist dynamisch — du kannst Status, Header und Body abhängig vom Ergebnis setzen (z.B. 200 vs 404 in derselben Methode)."}, {"topic": "Testing", "q": "Was sagt die Best-Practice-Konvention im Kurs zur Benennung von Testklassen?", "a": "Testklasse beginnt mit dem Namen der zu testenden Klasse und endet auf <code>Test</code>: z.B. <code>MovieControllerImplTest</code>, <code>AwardControllerImplTest</code>."}, {"topic": "Testing", "q": "Wie sollen Testmethoden laut Folie heißen?", "a": "Mit Präfix <code>should</code> + dem zu testenden Verhalten — sowohl Erfolgs- als auch Fehlerfall: <code>shouldSuccessfullyLogin</code>, <code>shouldNotLoginBecauseWrongPassword</code>, <code>shouldNotLoginBecauseEmptyPassword</code>."}, {"topic": "Testing", "q": "Wo liegt der Test-Ordner und wie soll seine Struktur aussehen?", "a": "<code>src/test/</code>. Die Package-Struktur muss <strong>identisch</strong> zu <code>src/main/</code> sein — sonst funktioniert die DI von Spring beim Laden der Test-Beans nicht zuverlässig."}, {"topic": "Testing", "q": "Erkläre die drei Test-Arten der Pyramide kurz.", "a": "<strong>Unit-Test</strong>: einzelne Methode/Klasse isoliert. <strong>Integrationstest</strong>: Zusammenspiel mehrerer Komponenten (z.B. Controller→Service→Repo). <strong>Systemtest</strong>: gesamte Anwendung inkl. nicht-funktionaler Anforderungen, möglichst nahe am Produktivsystem."}, {"topic": "Testing", "q": "Was ist die zentrale Herausforderung bei Unit-Tests in Spring, die Test-Doubles lösen?", "a": "Klassen haben Abhängigkeiten zu anderen (Controller→Service→Repo). Um eine Methode <em>isoliert</em> zu testen, ersetzt man die Abhängigkeit durch ein Test-Double — die echte Implementierung wird nicht aufgerufen."}, {"topic": "Testing", "q": "Erkläre Fake vs. Mock vs. Stub gemäß Kurs.", "a": "<strong>Fake</strong>: eigenständig geschriebene Alternativ-Implementierung mit reduzierter Komplexität (aufwändig). <strong>Mock</strong>: automatisch generiert, Standard-Rückgaben, Fokus auf <em>Aufruf-Verhalten</em>. <strong>Stub</strong>: semi-automatisch, angepasstes Antwortverhalten, Fokus auf <em>Zustand/Ergebnis</em>."}, {"topic": "Testing", "q": "Banking-Beispiel: was prüft ein Stub vs. ein Mock bei einer Überweisung?", "a": "<strong>Stub</strong> bildet das Konto-Antwortverhalten nach (Stand 100€ → Transaktion → Stand 80€) und prüft den Endzustand. <strong>Mock</strong> prüft <em>nur</em>, ob der Transaktionsbefehl korrekt an den Bankserver geschickt wurde — nicht den Kontostand."}, {"topic": "Testing", "q": "Welche Annotation verwandelt eine Klasse im Spring-Test in einen Mock?", "a": "<code>@MockBean</code> auf dem Feld. Spring ersetzt damit die echte Bean im Test-Kontext durch eine Mockito-Mock-Implementierung — alle Methoden geben Defaults zurück, bis du sie mit <code>when().thenReturn()</code> stubbst."}, {"topic": "Testing", "q": "Was startet <code>@WebMvcTest(controllers = X.class)</code>?", "a": "Nur den MVC-Layer (Controller + ControllerAdvice + Filters) für die genannte Klasse. Kein Service-, Repository- oder DB-Bean wird geladen — alle Service-Abhängigkeiten musst du per <code>@MockBean</code> mocken. Ergebnis: schnelle Tests."}, {"topic": "Testing", "q": "Was ersetzt MockMvc gegenüber Postman?", "a": "Postman ist manuelles HTTP-Aufrufen. MockMvc simuliert HTTP-Requests <em>im Test</em> ohne echten Server zu starten — du kannst URL, Methode, Header, Body steuern und Status, Headers, JSON-Body assertieren."}, {"topic": "Testing", "q": "Schreibe ein Stub für: <code>movieService.getMovieById(1L)</code> soll <code>movie_1</code> zurückgeben.", "a": "<code>when(movieService.getMovieById(1L)).thenReturn(movie_1);</code>"}, {"topic": "Testing", "q": "Was prüft <code>verify(movieService, never()).addMovie(any())</code> und wann ist das relevant?", "a": "Es prüft, dass <code>addMovie</code> <em>nicht</em> aufgerufen wurde. Relevant z.B. bei Constraint-Violation-Tests: wenn der Validator vor dem Controller schlägt, darf der Service gar nicht erst angefasst werden."}, {"topic": "Testing", "q": "Warum hat dieser Test <em>kein</em> <code>when()</code>?<br><pre><code class=\"language-java\">movie_1.setTrailerUrl(null);\nmockMvc.perform(post(\"/api/v1/movies\")\n  .contentType(APPLICATION_JSON)\n  .content(objectMapper.writeValueAsString(movie_1)))\n  .andExpect(status().isBadRequest());</code></pre>", "a": "Weil die <code>@Valid</code>-Constraint-Violation <em>vor</em> dem Controller geworfen wird — der Service wird nicht aufgerufen, also gibt es nichts zu stubben. Stattdessen prüft man am Ende per <code>verify(service, never())…</code>."}, {"topic": "Testing", "q": "JsonPath: wie liest du das <code>academy</code>-Feld des ersten Awards des ersten Movies?", "a": "<code>$[0].awards[0].academy</code>. Bei einer einzelnen Movie-Antwort entsprechend <code>$.awards[0].academy</code>."}, {"topic": "Testing", "q": "Welche zwei JUnit-Lifecycle-Annotationen werden im Kurs für Setup empfohlen, und wofür?", "a": "<code>@BeforeAll</code> (statisch, einmal pro Testklasse) für teures Setup; <code>@BeforeEach</code> (vor jeder Testmethode) für frische Test-Objekte, damit kein Test den anderen beeinflusst."}, {"topic": "Webdesign", "q": "Welche drei Möglichkeiten gibt es, CSS einzubinden — und welche ist Standard?", "a": "Inline-Style, <code>&lt;style&gt;</code> im Head, oder <code>&lt;link rel=\"stylesheet\" href=\"…\"&gt;</code> auf eine externe Datei. Letzteres ist Standard (Wiederverwendung, Caching, Trennung von HTML &amp; CSS)."}, {"topic": "Webdesign", "q": "Was bedeutet <code>col-md-4</code> in Bootstrap?", "a": "Ab dem Breakpoint <code>md</code> (≥ 768 px) nimmt das Element <strong>4 von 12 Grid-Spalten</strong> ein. Drunter (Mobile) füllt es per Default die volle Breite (eine Spalte pro Zeile)."}, {"topic": "Webdesign", "q": "Wie definierst du in Bootstrap drei gleich breite Spalten nebeneinander?", "a": "<code>&lt;div class=\"row\"&gt;</code> mit drei <code>&lt;div class=\"col-4\"&gt;</code> oder <code>col-md-4</code> für Mobile-First-Verhalten."}, {"topic": "Webdesign", "q": "Welche Bootstrap-Klassen regeln Abstand und Margin?", "a": "<code>g-0</code> bis <code>g-5</code> auf der <code>row</code> regelt den Gap zwischen Spalten. Für Margin: <code>mt-X</code>, <code>mb-X</code>, <code>my-X</code>."}, {"topic": "Webdesign", "q": "Welche didaktische Progression haben Aufgabe 7, 8 und 9?", "a": "Dieselbe Movie-Profile-Seite drei Mal: 7 = pure HTML, 8 = HTML + eigenes CSS, 9 = HTML + Bootstrap (inkl. Carousel). Du siehst direkt den Trade-off: weniger eigenes CSS, dafür klassen-lastiges HTML."}, {"topic": "Webdesign", "q": "Welches Bootstrap-JavaScript-Plugin nutzt Aufgabe 9?", "a": "Das <code>carousel</code>-Plugin für ein Bilderkarussell — eingebunden via <code>&lt;script src=\"bootstrap.bundle.min.js\"&gt;</code> + <code>data-bs-ride=\"carousel\"</code> + Prev/Next-Buttons mit <code>data-bs-slide</code>."}, {"topic": "Thymeleaf", "q": "Was bedeuten <code>${…}</code> · <code>*{…}</code> · <code>@{…}</code> · <code>~{…}</code>?", "a": "<code>${var}</code> Variable/OGNL · <code>*{feld}</code> Selection (innerhalb <code>th:object</code>) · <code>@{/url}</code> URL (mit Context-Path) · <code>~{frag :: id}</code> Fragment-Referenz."}, {"topic": "Thymeleaf", "q": "<code>th:insert</code> vs <code>th:replace</code>?", "a": "<code>th:insert</code> packt das Fragment <em>in</em> den umschließenden Tag (Tag bleibt erhalten). <code>th:replace</code> <em>ersetzt</em> den Tag komplett durch das Fragment."}, {"topic": "Thymeleaf", "q": "Wie iterierst du über eine Liste und nutzt den Iter-Status?", "a": "<code>th:each=\"item, stat : ${items}\"</code> — <code>stat</code> bietet <code>index, count, size, first, last, even, odd</code>."}, {"topic": "Thymeleaf", "q": "Wie definierst du ein wiederverwendbares Fragment <code>banner</code> und bindest es ein?", "a": "Definition: <code>&lt;section th:fragment=\"banner\"&gt;…&lt;/section&gt;</code>. Einbinden: <code>&lt;section th:insert=\"~{fragments/banner :: banner}\"&gt;&lt;/section&gt;</code>."}, {"topic": "Thymeleaf", "q": "Wofür der Namespace <code>xmlns:th=\"http://www.thymeleaf.org\"</code>?", "a": "Damit der Browser/Validator die <code>th:</code>-Attribute kennt. Templates bleiben so <em>valides HTML</em> — du kannst sie auch ohne Server öffnen, der Browser ignoriert die <code>th:</code>-Attribute einfach."}, {"topic": "Thymeleaf", "q": "Wann gibst du im Controller <code>String</code> zurück, wann <code>ModelAndView</code>?", "a": "<code>String</code> reicht, wenn du nur den Template-Namen brauchst und Daten via <code>Model</code>-Parameter ergänzt. <code>ModelAndView</code> bündelt Template + Daten in einem Objekt — übersichtlicher, wenn man mehr als eine Variable hat."}, {"topic": "Forms", "q": "<code>@NotNull</code> vs <code>@NotBlank</code> vs <code>@NotEmpty</code> — Unterschied?", "a": "<code>@NotNull</code>: Wert darf nicht <code>null</code> sein (leerer String wäre ok). <code>@NotEmpty</code>: für Strings/Collections — nicht null und nicht leer (whitespace ok). <code>@NotBlank</code>: nur Strings — nicht null, nicht leer, nicht nur Whitespace."}, {"topic": "Forms", "q": "Was passiert, wenn ein Formular die <code>@Valid</code>-Constraints nicht erfüllt?", "a": "Die Validierung schlägt fehl, der Service wird <em>nicht</em> aufgerufen. <code>BindingResult</code> wird mit den Fehlern befüllt. Best Practice: dasselbe Form-Template wieder rendern, damit der User korrigieren kann."}, {"topic": "Forms", "q": "Wo MUSS <code>BindingResult</code> in der Parameterliste stehen?", "a": "<strong>Direkt nach</strong> dem mit <code>@Valid</code> annotierten Objekt. Sonst sieht Spring die Bindung als unvollständig und wirft eine Exception."}, {"topic": "Forms", "q": "Erkläre das PRG-Pattern.", "a": "<strong>P</strong>ost-<strong>R</strong>edirect-<strong>G</strong>et: nach erfolgreichem POST gibst du <code>redirect:/path</code> zurück, damit der Browser per GET die nächste Seite holt. Vorteil: ein Refresh wiederholt nicht den POST und verhindert Doppel-Submit."}, {"topic": "Forms", "q": "Wie zeigst du im Template einen Validierungsfehler für das Feld <code>category</code> an?", "a": "<code>&lt;p th:if=\"${#fields.hasErrors('category')}\" th:errors=\"*{category}\"&gt;&lt;/p&gt;</code>. Mit Bootstrap zusätzlich <code>th:classappend=\"${#fields.hasErrors('category')} ? 'is-invalid'\"</code> auf dem Input."}, {"topic": "Forms", "q": "Welche Spring-Annotation bindet das POST-Body-Form an dein DTO?", "a": "<code>@ModelAttribute(\"name\") FormDTO form</code> — Spring liest die Form-Felder und mappt sie auf die DTO-Properties. Mit <code>@Valid</code> davor wird Bean Validation ausgeführt."}]</script>
+<script>
+(function() {
+  const CARDS = JSON.parse(document.getElementById("cards-data").textContent);
+  const STORE = "fortinfo-cards";
+  const $ = id => document.getElementById(id);
+
+  function loadScores() {
+    try { return JSON.parse(localStorage.getItem(STORE) || "{}"); }
+    catch { return {}; }
+  }
+  function saveScores(s) { localStorage.setItem(STORE, JSON.stringify(s)); }
+
+  // Score model: per card key (topic|q.substr) → {wrong, ok, good, lastSeen}
+  function keyOf(c) { return c.topic + "|" + c.q.replace(/<[^>]+>/g, "").substr(0, 60); }
+
+  let order = [];
+  let pos = 0;
+
+  function priority(scores, c) {
+    const s = scores[keyOf(c)] || {wrong:0, ok:0, good:0, lastSeen:0};
+    // Higher priority = wrong > ok > good. Recency: recent = lower priority.
+    let p = s.wrong * 10 + s.ok * 3;
+    if (s.good > 0) p -= s.good * 2;
+    if (s.lastSeen && Date.now() - s.lastSeen < 60000) p -= 5;
+    return p;
+  }
+
+  function buildOrder() {
+    const topic = $("card-topic").value;
+    const onlyWeak = $("card-only-weak").checked;
+    const scores = loadScores();
+    let pool = CARDS.filter(c => !topic || c.topic === topic);
+    if (onlyWeak) {
+      pool = pool.filter(c => {
+        const s = scores[keyOf(c)];
+        return !s || s.wrong > s.good;
+      });
+    }
+    // Sort by priority desc with random tiebreak
+    pool.sort((a, b) => {
+      const d = priority(scores, b) - priority(scores, a);
+      return d !== 0 ? d : Math.random() - 0.5;
+    });
+    order = pool;
+    pos = 0;
+    render();
+  }
+
+  function shuffle() {
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    pos = 0;
+    render();
+  }
+
+  function rate(value) {
+    if (!order[pos]) return;
+    const scores = loadScores();
+    const k = keyOf(order[pos]);
+    const s = scores[k] || {wrong:0, ok:0, good:0, lastSeen:0};
+    if (value === "wrong") s.wrong++;
+    else if (value === "ok") s.ok++;
+    else s.good++;
+    s.lastSeen = Date.now();
+    scores[k] = s;
+    saveScores(scores);
+    pos = Math.min(pos + 1, order.length - 1);
+    render();
+    renderStats();
+  }
+
+  function render() {
+    const c = order[pos];
+    const cont = $("card-container");
+    if (!c) {
+      cont.innerHTML = '<div class="card-empty">Keine Karten in der Auswahl.</div>';
+      $("card-counter").textContent = "0 / 0";
+      return;
+    }
+    const scores = loadScores();
+    const s = scores[keyOf(c)] || {wrong:0, ok:0, good:0};
+    const status = s.good > s.wrong ? "good" : s.wrong > 0 ? "weak" : "new";
+    cont.innerHTML = `
+      <div class="card-flash card-status-${status}">
+        <div class="card-meta">
+          <span class="card-topic">${c.topic}</span>
+          <span class="card-score">✗ ${s.wrong} · ~ ${s.ok} · ✓ ${s.good}</span>
+        </div>
+        <div class="card-q">${c.q}</div>
+        <details>
+          <summary>Antwort anzeigen</summary>
+          <div class="card-a">${c.a}</div>
+          <div class="card-rate">
+            <button data-rate="wrong" class="rate-wrong">✗ Falsch</button>
+            <button data-rate="ok"    class="rate-ok">~ Naja</button>
+            <button data-rate="good"  class="rate-good">✓ Richtig</button>
+          </div>
+        </details>
+      </div>`;
+    cont.querySelectorAll("[data-rate]").forEach(b =>
+      b.addEventListener("click", () => rate(b.dataset.rate)));
+    $("card-counter").textContent = (pos + 1) + " / " + order.length;
+  }
+
+  function renderStats() {
+    const scores = loadScores();
+    const buckets = {};
+    CARDS.forEach(c => {
+      buckets[c.topic] = buckets[c.topic] || {total:0, good:0, weak:0};
+      buckets[c.topic].total++;
+      const s = scores[keyOf(c)];
+      if (s) {
+        if (s.good > s.wrong) buckets[c.topic].good++;
+        else if (s.wrong > 0) buckets[c.topic].weak++;
+      }
+    });
+    const html = Object.entries(buckets).map(([t, b]) => `
+      <div class="topic-stat">
+        <h4>${t}</h4>
+        <div class="topic-bar">
+          <div class="bar-good"  style="width:${100*b.good/b.total}%"  title="${b.good} sicher"></div>
+          <div class="bar-weak"  style="width:${100*b.weak/b.total}%"  title="${b.weak} schwach"></div>
+        </div>
+        <div class="topic-meta">${b.good}/${b.total} sicher · ${b.weak} schwach</div>
+      </div>`).join("");
+    $("card-stats-grid").innerHTML = html;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $("card-topic").addEventListener("change", buildOrder);
+    $("card-only-weak").addEventListener("change", buildOrder);
+    $("card-shuffle").addEventListener("click", shuffle);
+    $("card-prev").addEventListener("click", () => { pos = Math.max(0, pos-1); render(); });
+    $("card-next").addEventListener("click", () => { pos = Math.min(order.length-1, pos+1); render(); });
+    $("card-reset").addEventListener("click", () => {
+      if (confirm("Lernkarten-Score zurücksetzen?")) {
+        localStorage.removeItem(STORE);
+        buildOrder();
+        renderStats();
+      }
+    });
+    buildOrder();
+    renderStats();
+  });
+})();
+</script>
+</body>
+</html>

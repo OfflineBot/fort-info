@@ -29,6 +29,7 @@
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <a href="lernkarten.html" class="lernkarten-link">🃏 Lernkarten</a>
     <div class="chapter-title">7 · Forms</div>
     <a href="#forms-was">7.1 Formulare</a>
     <a href="#forms-binding">7.2 th:object & th:field</a>
@@ -63,30 +64,6 @@
       <li><strong>Conditionals:</strong> <code>th:if</code> für Anzeigen/Verstecken · Ternary <code>${cond ? 'x' : 'y'}</code> für Werte/Klassen.</li>
       <li><strong>Fehler im Template:</strong> <code>#fields.hasErrors('feld')</code> + <code>th:errors="*{feld}"</code>.</li>
     </ul>
-  </article>
-<article class="typische-fehler">
-    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
-    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>BindingResult</code> falsch positioniert</div>
-      <div class="pitfall-explain">Muss <strong>direkt</strong> nach dem mit <code>@Valid</code> annotierten Objekt stehen. Andere Reihenfolge → Spring wirft <code>MethodArgumentNotValidException</code> + 400.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Validation greift nicht</div>
-      <div class="pitfall-explain"><code>@Valid</code> auf dem Controller-Parameter vergessen → Constraints werden ignoriert. Außerdem auf der DTO-Klasse Felder mit <code>@NotBlank</code> etc. annotieren — sonst gibt es nichts zu validieren.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>@NotBlank</code> auf Nicht-String</div>
-      <div class="pitfall-explain"><code>@NotBlank</code> funktioniert nur für <code>String</code>. Für Integer / Long: <code>@NotNull</code>. Für Collections: <code>@NotEmpty</code>. Verwechslung gibt Compile-Time-Fehler.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ PRG-Pattern weglassen</div>
-      <div class="pitfall-explain">Nach erfolgreichem POST direkt das Formular wieder rendern — Browser-Refresh wiederholt den POST (Doppel-Submit). Lösung: <code>return "redirect:/path"</code>.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Ternary-Operator außerhalb <code>${…}</code></div>
-      <div class="pitfall-explain"><code>th:text="${age &gt; 18} ? &#39;adult&#39; : &#39;student&#39;"</code> — falsch. Korrekt: <code>th:text="${(age &gt; 18) ? &#39;adult&#39; : &#39;student&#39;}"</code>. Der Ternary muss <em>innerhalb</em> der Expression-Klammern stehen.</div>
-    </div>
   </article>
 <article id="forms-was">
     <h3>7.1 Formulare in Spring + Thymeleaf</h3>

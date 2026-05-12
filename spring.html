@@ -29,6 +29,7 @@
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <a href="lernkarten.html" class="lernkarten-link">🃏 Lernkarten</a>
     <div class="chapter-title">1 · Spring Grundlagen</div>
     <a href="#spring-was">1.1 Was ist Spring Boot</a>
     <a href="#spring-schichten">1.2 Schichtenmodell</a>
@@ -63,26 +64,6 @@
       <li><strong>DI:</strong> Konstruktor-Injection bevorzugt — final-Felder, test-freundlich, explizite Pflicht-Abhängigkeiten.</li>
       <li><strong>Bean ≠ <code>new</code>:</strong> niemals selbst instanziieren — Spring verwaltet den Lebenszyklus.</li>
     </ul>
-  </article>
-<article class="typische-fehler">
-    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
-    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Bean direkt mit <code>new</code> erzeugen</div>
-      <div class="pitfall-explain">Außerhalb des Spring-Containers ist es <em>keine</em> Bean — DI funktioniert nicht, Repository ist null, Tests umgehen die Klasse. Immer per Konstruktor injizieren lassen.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>@Autowired</code> auf Feld statt Konstruktor</div>
-      <div class="pitfall-explain">Felder können dann nicht <code>final</code> sein, Tests brauchen Reflection oder Spring-Kontext. Konstruktor-Injection ist seit Spring 3.5 die empfohlene Variante.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Forgotten <code>@Service</code> / <code>@Controller</code></div>
-      <div class="pitfall-explain">Ohne Stereotype-Annotation findet der Component-Scan die Klasse nicht — Spring kennt sie nicht, DI an anderen Stellen schlägt mit „No qualifying bean of type ..." fehl.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Falsche Schichten-Reihenfolge</div>
-      <div class="pitfall-explain">Service ruft Controller — niemals. Aufrufrichtung ist <em>immer</em> Controller → Service → Repository. Sonst zirkuläre Abhängigkeit + Verlust der Testbarkeit.</div>
-    </div>
   </article>
 <article id="spring-was">
     <h3>1.1 Was ist Spring Boot</h3>

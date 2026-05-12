@@ -29,6 +29,7 @@
     <a href="index.html" class="back">← Übersicht</a>
     <a href="resources.html" class="resources-link">📥 Ressourcen</a>
     <a href="glossar.html" class="glossar-link">📖 Glossar</a>
+    <a href="lernkarten.html" class="lernkarten-link">🃏 Lernkarten</a>
     <div class="chapter-title">2 · Spring Data (JPA)</div>
     <a href="#jpa-was">2.1 ORM & JPA</a>
     <a href="#jpa-entity">2.2 Entity-Mapping</a>
@@ -67,30 +68,6 @@
       <li><strong>JPQL ≠ SQL:</strong> auf Klassennamen + Feldnamen, nicht Tabellen + Spalten. <code>SELECT m FROM Movie m WHERE m.title = :t</code>.</li>
       <li><strong>@Transactional:</strong> bündelt DB-Calls. Pflicht für Lazy-Loading-Auflösung. Nur von <em>außerhalb</em> der Bean aufrufbar.</li>
     </ul>
-  </article>
-<article class="typische-fehler">
-    <h3>⚠ Typische Fehler / Klausur-Stolperfallen</h3>
-    <p class="hint">Die Punkte, an denen die meisten in der Klausur Federn lassen.</p>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>@OneToMany</code> ohne <code>mappedBy</code> bei bidirektionaler Beziehung</div>
-      <div class="pitfall-explain">JPA legt dann zwei Join-Tabellen an statt einer. Auf der inversen Seite immer <code>mappedBy = "feldname"</code> setzen — Wert ist der Java-Feldname der owning side.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>cascade = CascadeType.ALL</code> blind setzen</div>
-      <div class="pitfall-explain">Beim <code>delete(movie)</code> löschst du dann auch den Director — andere Filme verlieren ihre Beziehung. Bewusst pro Beziehung wählen: oft nur <code>PERSIST</code> + <code>MERGE</code>.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ JPQL mit Tabellennamen statt Klassennamen</div>
-      <div class="pitfall-explain"><code>SELECT * FROM movies</code> ist SQL, nicht JPQL. Korrekt: <code>SELECT m FROM Movie m</code> — Klassenname + Alias. Felder als <code>m.title</code>, nicht <code>title_column</code>.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ Lazy-Beziehung außerhalb Transaktion zugreifen</div>
-      <div class="pitfall-explain"><code>LazyInitializationException</code> bei der Serialisierung. Lösung: Service-Methode mit <code>@Transactional</code> annotieren — solange offen ist, kann Hibernate nachladen.</div>
-    </div>
-    <div class="pitfall">
-      <div class="pitfall-title">⚠ <code>@Transactional</code> intern aufrufen</div>
-      <div class="pitfall-explain">Methode A in derselben Bean ruft Methode B mit <code>@Transactional</code> auf — die Annotation greift NICHT, weil Spring sie nur bei <em>externen</em> Aufrufen über den Proxy abfängt.</div>
-    </div>
   </article>
 <article id="jpa-was">
     <h3>2.1 ORM &amp; JPA-Grundlagen</h3>
